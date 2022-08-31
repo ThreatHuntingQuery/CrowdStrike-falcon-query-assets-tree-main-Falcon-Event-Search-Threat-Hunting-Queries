@@ -1,4 +1,13 @@
 | eval HashAlgorithm=case(
+	HashAlgorithm_decimal="0",  "No hashing algorithm, 
+	HashAlgorithm_decimal="2",  "MAC keyed-hash algorithm", 
+	HashAlgorithm_decimal="3",  "MD2 hashing algorithm", 
+	HashAlgorithm_decimal="4",  "MD4 hashing algorithm", 
+	HashAlgorithm_decimal="5",  "MD5 hashing algorithm", 
+	HashAlgorithm_decimal="6",  "SHA hashing algorithm", 
+	HashAlgorithm_decimal="7",  "SHA-256 hashing algorithm"
+	HashAlgorithm_decimal="8",  "SHA-384 hashing algorithm"
+	HashAlgorithm_decimal="9",  "SHA-512 hashing algorithm", 
 	HashAlgorithm_decimal="32773",  "MAC keyed-hash algorithm", 
 	HashAlgorithm_decimal="32769",  "MD2 hashing algorithm", 
 	HashAlgorithm_decimal="32770",  "MD4 hashing algorithm", 
