@@ -1,0 +1,9 @@
+| eval SourceEndpointHostNameResolutionMethod=case(
+	SourceEndpointHostNameResolutionMethod_decimal="0",  "RAW_PACKET_DATA", 
+	SourceEndpointHostNameResolutionMethod_decimal="1",  "TRAFFIC_CACHE", 
+	SourceEndpointHostNameResolutionMethod_decimal="2",  "KERBEROS_TICKET_CACHE", 
+	SourceEndpointHostNameResolutionMethod_decimal="3",  "REVERSE_LOOKUP", 
+	SourceEndpointHostNameResolutionMethod_decimal="4",  "FORWARD_LOOKUP", 
+	SourceEndpointHostNameResolutionMethod_decimal="5",  "NETBIOS_LOOKUP", 
+	SourceEndpointHostNameResolutionMethod_decimal="6",  "DOMAIN_CONTROLLER"
+		)

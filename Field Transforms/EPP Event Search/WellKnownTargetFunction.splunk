@@ -1,0 +1,8 @@
+| eval WellKnownTargetFunction=case(
+	WellKnownTargetFunction_decimal="0",  "This address is not a well-known function.", 
+	WellKnownTargetFunction_decimal="1",  "Address matches LoadLibraryA address.", 
+	WellKnownTargetFunction_decimal="2",  "Address matches LoadLibraryW address.", 
+	WellKnownTargetFunction_decimal="3",  "Address matches GlobalGetAtomNameA address.", 
+	WellKnownTargetFunction_decimal="4",  "Address matches GlobalGetAtomNameW address.",
+	WellKnownTargetFunction_decimal="5",  "Address matches RtlDispatchApc address."
+	)

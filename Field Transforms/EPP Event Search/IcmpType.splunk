@@ -1,0 +1,13 @@
+| eval IcmpType=case(
+	IcmpType_decimal="0",  "ECHO_REPLY", 
+	IcmpType_decimal="3",  "DESTINATION_UNREACHABLE", 
+	IcmpType_decimal="4",  "SOURCE_QUENCH", 
+	IcmpType_decimal="5",  "REDIRECT", 
+	IcmpType_decimal="8",  "ECHO", 
+	IcmpType_decimal="11", "TIME_EXCEEDED", 
+	IcmpType_decimal="12", "PARAMETER_PROBLEM", 
+	IcmpType_decimal="13", "TIMESTAMP", 
+	IcmpType_decimal="14", "TIMESTAMP_REPLY", 
+	IcmpType_decimal="15", "INFORMATION_REQUEST", 
+	IcmpType_decimal="16", "INFORMATION_REPLY" 
+	)

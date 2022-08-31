@@ -1,0 +1,9 @@
+| eval ConnectionCipher=case(
+	ConnectionCipher_decimal="26115",  "CALG_3DES", 
+	ConnectionCipher_decimal="26126",  "CALG_AES_128", 
+	ConnectionCipher_decimal="26128",  "CALG_AES_256", 
+	ConnectionCipher_decimal="26113",  "CALG_DES", 
+	ConnectionCipher_decimal="26114",  "CALG_RC2", 
+	ConnectionCipher_decimal="26625",  "CALG_RC4", 
+	ConnectionCipher_decimal="0",      "N0_ENCRYPTION"
+	)

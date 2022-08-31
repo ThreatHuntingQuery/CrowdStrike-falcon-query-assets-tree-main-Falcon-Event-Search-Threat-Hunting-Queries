@@ -1,0 +1,8 @@
+| eval AsepValueType=case(
+	AsepValueType_decimal="0",  "unknown", 
+	AsepValueType_decimal="1",  "cmd_line", 
+	AsepValueType_decimal="2",  "dll_path", 
+	AsepValueType_decimal="3",  "dll_name", 
+	AsepValueType_decimal="4",  "app_name", 
+	AsepValueType_decimal="5",  "guid"
+	)

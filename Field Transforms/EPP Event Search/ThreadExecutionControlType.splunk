@@ -1,0 +1,13 @@
+| eval ThreadExecutionControlType=case(
+	ThreadExecutionControlType_decimal="0",   "THREAD_INJECT", 
+	ThreadExecutionControlType_decimal="1",   "THREAD_INJECT_MASQUERADE", 
+	ThreadExecutionControlType_decimal="2",   "THREAD_HIJACK", 
+	ThreadExecutionControlType_decimal="3",   "PROCESS_HOLLOWING", 
+	ThreadExecutionControlType_decimal="4",   "WINDOWS_HOOK",
+	ThreadExecutionControlType_decimal="5",   "PROCESS_OVERWRITE_HOLLOWING",
+	ThreadExecutionControlType_decimal="6",   "REMOTE_APC",
+	ThreadExecutionControlType_decimal="7",   "REMOTE_ATOM_BOMB", 
+	ThreadExecutionControlType_decimal="8",   "PROCESS_HOLLOWING_APC", 
+	ThreadExecutionControlType_decimal="9",   "SET_WINDOW_LONG", 
+	ThreadExecutionControlType_decimal="10",  "SET_PROP"
+	)

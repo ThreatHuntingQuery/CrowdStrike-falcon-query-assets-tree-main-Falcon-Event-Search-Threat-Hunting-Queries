@@ -1,0 +1,16 @@
+| eval FileAttributes=case(
+	FileAttributes_decimal="1",     "FILE_ATTRIBUTE_READONLY", 
+	FileAttributes_decimal="2",     "FILE_ATTRIBUTE_HIDDEN", 
+	FileAttributes_decimal="4",     "FILE_ATTRIBUTE_SYSTEM", 
+	FileAttributes_decimal="16",    "FILE_ATTRIBUTE_DIRECTORY", 
+	FileAttributes_decimal="32",    "FILE_ATTRIBUTE_ARCHIVE", 
+	FileAttributes_decimal="64",    "FILE_ATTRIBUTE_DEVICE", 
+	FileAttributes_decimal="128",   "FILE_ATTRIBUTE_NORMAL", 
+	FileAttributes_decimal="256",   "FILE_ATTRIBUTE_TEMPORARY", 
+	FileAttributes_decimal="512",   "FILE_ATTRIBUTE_SPARSE_FILE", 
+	FileAttributes_decimal="1024",  "FILE_ATTRIBUTE_REPARSE_POINT", 
+	FileAttributes_decimal="2048",  "FILE_ATTRIBUTE_COMPRESSED", 
+	FileAttributes_decimal="4096",  "FILE_ATTRIBUTE_OFFLINE",
+	FileAttributes_decimal="8192",  "FILE_ATTRIBUTE_NOT_CONTENT_INDEXED",
+	FileAttributes_decimal="16384", "FILE_ATTRIBUTE_ENCRYPTED"
+	)

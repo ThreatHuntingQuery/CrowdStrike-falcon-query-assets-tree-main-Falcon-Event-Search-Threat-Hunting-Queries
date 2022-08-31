@@ -1,0 +1,10 @@
+| eval PosixFileType=case(
+	PosixFileType_decimal="0",  "No type", 
+	PosixFileType_decimal="1",  "Regular file", 
+	PosixFileType_decimal="2",  "Directory", 
+	PosixFileType_decimal="3",  "Block special file", 
+	PosixFileType_decimal="4",  "Character special file", 
+	PosixFileType_decimal="5",  "Symbolic Link", 
+	PosixFileType_decimal="6",  "Socket", 
+	PosixFileType_decimal="7",  "FIFO special file (names pipe)"
+	)

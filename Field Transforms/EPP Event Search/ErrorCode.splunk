@@ -1,0 +1,23 @@
+| eval ErrorCode=case(
+	ErrorCode_decimal="5",          "Access is denied",
+    ErrorCode_decimal="1060",       "The specified service does not exist as an installed service",
+    ErrorCode_decimal="1115",       "A system shutdown is in progress",
+    ErrorCode_decimal="1351",       "Configuration information could not be read from the domain controller, either because the machine is unavailable, or access has been denied",
+    ErrorCode_decimal="1355",       "The specified domain either does not exist or could not be contacted",
+    ErrorCode_decimal="2147500033", "Not implemented",
+    ErrorCode_decimal="2147500034", "No such interface supported",
+    ErrorCode_decimal="2147500035", "Pointer that is not valid",
+    ErrorCode_decimal="2147500036", "Operation aborted",
+    ErrorCode_decimal="2147500037", "Unspecified failure",
+    ErrorCode_decimal="2147549183", "Unexpected failure",
+    ErrorCode_decimal="2147942402", "AMSI Registration",
+    ErrorCode_decimal="2147942405", "General access denied error",
+    ErrorCode_decimal="2147942406", "The handle is invalid",
+    ErrorCode_decimal="2147942414", "Failed to allocate necessary memory",
+    ErrorCode_decimal="2147942487", "One or more arguments are not valid",
+    ErrorCode_decimal="2147943568", "Element not found",
+    ErrorCode_decimal="2147946601", "The instance name passed was not recognized as valid by a WMI data provider",
+    ErrorCode_decimal="2147947423", "The group or resource is not in the correct state to perform the requested operation",
+    ErrorCode_decimal="3221225524", "A performance library returned invalid data in the form of a bad property type. This is a non-fatal performance library error, but may indicate other problems, such as missing performance counter classes in WMI",
+    ErrorCode_decimal="3221225547", "An attempt was made to access a thread that has begun termination"
+	)

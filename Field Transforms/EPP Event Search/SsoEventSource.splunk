@@ -1,0 +1,6 @@
+| eval SsoEventSource=case(
+	SsoEventSource_decimal="1",    "Azure", 
+	SsoEventSource_decimal="2",    "OKTA", 
+	SsoEventSource_decimal="100",  "ADFS", 
+	SsoEventSource_decimal="101",  "Ping Federate"
+	)

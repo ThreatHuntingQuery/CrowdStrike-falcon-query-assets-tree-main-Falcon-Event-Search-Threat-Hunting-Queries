@@ -1,0 +1,5 @@
+| eval FileWrittenFlags = case(
+    FileWrittenFlags_decimal = 0, "Hash is valid",
+    FileWrittenFlags_decimal = 1, "Hash failed",
+    FIleWrittenFlags_decimal = 2, "Hash aborted, too large"
+)

@@ -1,0 +1,14 @@
+| eval LogonType=case(
+	LogonType_decimal="2",  "Interactive", 
+	LogonType_decimal="3",  "Network", 
+	LogonType_decimal="4",  "Batch", 
+	LogonType_decimal="5",  "Service", 
+	LogonType_decimal="6",  "Proxy", 
+	LogonType_decimal="7",  "Unlock", 
+	LogonType_decimal="8",  "Network Cleartext", 
+	LogonType_decimal="9",  "New Credentials", 
+	LogonType_decimal="10", "Remote Interactive", 
+	LogonType_decimal="11", "Cached Interactive", 
+	LogonType_decimal="12", "Cached Remote Interactive", 
+	LogonType_decimal="13", "Cached Unlock"
+	)

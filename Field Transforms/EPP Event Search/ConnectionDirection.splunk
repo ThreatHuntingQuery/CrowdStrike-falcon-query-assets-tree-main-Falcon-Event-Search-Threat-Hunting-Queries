@@ -1,0 +1,6 @@
+| eval ConnectionDirection=case(
+	ConnectionDirection_decimal="0", "Outbound",
+	ConnectionDirection_decimal="1", "Inbound",
+	ConnectionDirection_decimal="2", "Neither",
+	ConnectionDirection_decimal="3", "Both"
+	)

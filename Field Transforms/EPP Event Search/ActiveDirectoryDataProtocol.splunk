@@ -1,0 +1,5 @@
+| eval ActiveDirectoryDataProtocol=case(
+	ActiveDirectoryDataProtocol_decimal=0, "LDAP", 
+	ActiveDirectoryDataProtocol_decimal=1, "DCE RPC",
+	ActiveDirectoryDataProtocol_decimal=2, "RDP"
+)

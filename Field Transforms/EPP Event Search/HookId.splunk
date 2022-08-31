@@ -1,0 +1,17 @@
+| eval HookId=case(
+	HookId_decimal="0",   "WH_JOURNALRECORD", 
+	HookId_decimal="1",   "WH_JOURNALPLAYBACK", 
+	HookId_decimal="2",   "WH_KEYBOARD", 
+	HookId_decimal="3",   "WH_GETMESSAGE", 
+	HookId_decimal="4",   "WH_CALLWNDPROC",
+	HookId_decimal="5",   "WH_CBT", 
+	HookId_decimal="6",   "WH_SYSMSGFILTER", 
+	HookId_decimal="7",   "WH_MOUSE", 
+	HookId_decimal="8",   "WH_HARDWARE", 
+	HookId_decimal="9",   "WH_DEBUG",
+	HookId_decimal="10",  "WH_SHELL", 
+	HookId_decimal="11",  "WH_FOREGROUNDIDLE", 
+	HookId_decimal="12",  "WH_CALLWNDPROCRET", 
+	HookId_decimal="13",  "WH_KEYBOARD_LL", 
+	HookId_decimal="14",  "WH_MOUSE_LL"
+	)

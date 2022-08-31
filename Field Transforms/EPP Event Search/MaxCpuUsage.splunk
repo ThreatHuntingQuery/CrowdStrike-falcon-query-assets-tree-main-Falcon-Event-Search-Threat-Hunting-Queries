@@ -1,0 +1,3 @@
+// Transform MaxCpuUsage_decimal to MaxCpuUsage
+| eval MaxCpuUsage = MaxCpuUsage_decimal + "%"
+

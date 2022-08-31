@@ -1,0 +1,5 @@
+| eval NamedPipeOperationType=case(
+	NamedPipeOperationType_decimal="1",  "CREATE", 
+	NamedPipeOperationType_decimal="2",  "OPEN", 
+	NamedPipeOperationType_decimal="3",  "IMPERSONATE"
+	)

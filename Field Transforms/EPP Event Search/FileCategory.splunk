@@ -1,0 +1,12 @@
+| eval FileCategory=case(
+	FileCategory_decimal="0",  "Other",
+	FileCategory_decimal="1",  "Archives", 
+	FileCategory_decimal="2",  "Office Documents", 
+	FileCategory_decimal="3",  "Multimedia Files", 
+	FileCategory_decimal="4",  "Design Files", 
+	FileCategory_decimal="5",  "Source Code", 
+	FileCategory_decimal="6",  "Executable Files", 
+	FileCategory_decimal="7",  "Virtual Machine Files", 
+	FileCategory_decimal="8",  "Email Files", 
+	FileCategory_decimal="9",  "Data and Logs"
+	)

@@ -1,0 +1,7 @@
+| eval ZoneIdentifier=case(
+	ZoneIdentifier_decimal="0",  "Local machine", 
+	ZoneIdentifier_decimal="1",  "Local intranet", 
+	ZoneIdentifier_decimal="2",  "Trusted sites", 
+	ZoneIdentifier_decimal="3",  "Internet", 
+	ZoneIdentifier_decimal="4",  "Restricted sites"
+	)

@@ -1,0 +1,4 @@
+| eval MappedFromUserMode=case(
+	MappedFromUserMode_decimal="0",  "Kernel", 
+	MappedFromUserMode_decimal="1",  "User"
+	)

@@ -1,0 +1,4 @@
+| eval DualRequest=case(
+	DualRequest_decimal="1",  "Yes", 
+	DualRequest_decimal="0",  "No"
+	)

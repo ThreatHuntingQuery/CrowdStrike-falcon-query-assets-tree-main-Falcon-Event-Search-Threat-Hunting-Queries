@@ -1,0 +1,5 @@
+| eval RuleAction=case(
+	RuleAction_decimal="0",  "Invalid", 
+	RuleAction_decimal="1",  "Allow", 
+	RuleAction_decimal="2",  "Deny"
+	)

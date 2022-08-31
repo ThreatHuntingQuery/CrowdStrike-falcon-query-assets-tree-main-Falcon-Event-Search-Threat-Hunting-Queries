@@ -1,0 +1,4 @@
+| eval IsOnNetwork=case(
+	IsOnNetwork_decimal="1",  "Yes", 
+	IsOnNetwork_decimal="2",  "No", 
+	)

@@ -1,0 +1,14 @@
+| eval RegType=case(
+	RegType_decimal="0",  "REG_NONE",
+	RegType_decimal="1",  "REG_SZ", 
+	RegType_decimal="2",  "REG_EXPAND_SZ", 
+	RegType_decimal="3",  "REG_BINARY", 
+	RegType_decimal="4",  "REG_DWORD", 
+	RegType_decimal="5",  "REG_DWORD_BIG_ENDIAN", 
+	RegType_decimal="6",  "REG_LINK", 
+	RegType_decimal="7",  "REG_MULTI_SZ", 
+	RegType_decimal="8",  "REG_RESOURCE_LIST", 
+	RegType_decimal="9",  "REG_FULL_RESOURCE_DESCRIPTOR", 
+	RegType_decimal="10", "REG_RESOURCE_REQUIREMENTS_LIST", 
+	RegType_decimal="11", "REG_QWORD"
+	)

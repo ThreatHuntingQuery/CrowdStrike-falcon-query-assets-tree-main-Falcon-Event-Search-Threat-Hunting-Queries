@@ -1,0 +1,4 @@
+| eval NetworkContainmentState=case(
+	NetworkContainmentState_decimal="0",  "Not Contained", 
+	NetworkContainmentState_decimal="1",  "Contained" 
+	)

@@ -1,0 +1,5 @@
+| eval LdapSearchScope=case(
+	LdapSearchScope_decimal="0",  "BASE_OBJECT", 
+	LdapSearchScope_decimal="1",  "SINGLE_LEVEL", 
+	LdapSearchScope_decimal="2",  "WHOLE_SUBTREE" 
+	)

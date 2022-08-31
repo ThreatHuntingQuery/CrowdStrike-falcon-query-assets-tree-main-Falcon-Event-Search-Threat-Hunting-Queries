@@ -1,0 +1,6 @@
+| eval CpuVendor=case(
+	CpuVendor_decimal="0",  "Intel Processor", 
+	CpuVendor_decimal="1",  "AMD Processor", 
+	CpuVendor_decimal="2",  "Apple Processor", 
+	CpuVendor_decimal="3",  "ARM64 Processor"
+	)

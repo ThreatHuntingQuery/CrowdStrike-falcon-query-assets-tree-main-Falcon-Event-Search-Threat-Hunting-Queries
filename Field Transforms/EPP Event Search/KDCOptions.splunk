@@ -1,0 +1,18 @@
+| eval KDCOptions_hex = tostring(KDCOptions_decimal,"hex")
+| eval KDCOptions=case(
+	KDCOptions_decimal="1073741824", "Forwardable",
+	KDCOptions_decimal="536870912",  "Forwarded",
+	KDCOptions_decimal="268435456",  "Proxiable",
+	KDCOptions_decimal="134217728",  "Proxy",
+	KDCOptions_decimal="67108864",   "Allow_Postdate",
+	KDCOptions_decimal="33554432",   "Postdated",
+	KDCOptions_decimal="8388608",    "Renewable",
+	KDCOptions_decimal="131072",     "CNAME_IN_ADDL_TKT",
+	KDCOptions_decimal="65536",      "Canonicalize",
+	KDCOptions_decimal="32768",      "Request_Anonymous",
+	KDCOptions_decimal="32",         "Disable_Transited_Check",
+	KDCOptions_decimal="16",         "Renewable_OK",
+	KDCOptions_decimal="8",          "ENC_TKT_IN_SKEY",
+	KDCOptions_decimal="2",          "Renew",
+	KDCOptions_decimal="1",          "Validate"
+	)

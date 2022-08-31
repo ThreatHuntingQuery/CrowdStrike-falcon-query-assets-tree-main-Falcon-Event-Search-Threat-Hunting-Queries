@@ -1,0 +1,7 @@
+| eval ExclusionSource=case(
+	ExclusionSource_decimal="1",  "PPDM_PROCESS_EXCLUSION",
+	ExclusionSource_decimal="2",  "PPDM_TREE_EXCLUSION", 
+	ExclusionSource_decimal="4",  "LEGACY_SBDM_EXCLUSION", 
+	ExclusionSource_decimal="5",  "ALLOWED_BY_ENGINE", 
+	ExclusionSource_decimal="6",  "CUSTOMER_EXCLUSION", 
+	)

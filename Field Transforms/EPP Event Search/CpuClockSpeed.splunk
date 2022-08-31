@@ -1,0 +1,1 @@
+| eval CpuClockSpeed_decimal=round(CpuClockSpeed_decimal/1000,1)

@@ -1,0 +1,6 @@
+| eval ObjectType=case(
+	ObjectType_decimal="1",  "FILE", 
+	ObjectType_decimal="2",  "FOLDER", 
+	ObjectType_decimal="3",  "VALUE", 
+	ObjectType_decimal="4",  "KEY"
+	)

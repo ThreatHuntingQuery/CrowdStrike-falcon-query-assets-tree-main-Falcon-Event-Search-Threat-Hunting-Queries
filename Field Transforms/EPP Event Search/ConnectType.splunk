@@ -1,0 +1,15 @@
+| eval ConnectType=case(
+	ConnectType_decimal="0",  "CONNECT_INVALID", 
+	ConnectType_decimal="1",  "CONNECT_DIRECT", 
+	ConnectType_decimal="2",  "CONNECT_WPAD", 
+	ConnectType_decimal="3",  "CONNECT_IE_AUTOPROXY", 
+	ConnectType_decimal="4",  "CONNECT_IE_PROXY", 
+	ConnectType_decimal="5",  "CONNECT_SIMPLESTORE_AUTOCONFIG", 
+	ConnectType_decimal="6",  "CONNECT_CACHE_PROXY", 
+	ConnectType_decimal="7",  "CONNECT_PERSISTED_PROXY", 
+	ConnectType_decimal="8",  "CONNECT_APP_PROXY", 
+	ConnectType_decimal="9",  "CONNECT_DIRECT_DNS_BYPASS", 
+	ConnectType_decimal="10", "CONNECT_CACHE_PROXYFORURL_WPAD", 
+	ConnectType_decimal="11", "CONNECT_CACHE_PROXYFORURL_PACURL", 
+	ConnectType_decimal="12", "CONNECT_CACHE_PROXYFORURL_IE_PACURL"
+	)

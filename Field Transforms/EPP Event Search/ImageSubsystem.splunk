@@ -1,0 +1,8 @@
+| eval ImageSubsystem=case(
+	ImageSubsystem_decimal=0,  "UNKNOWN",
+	ImageSubsystem_decimal=1,  "NATIVE",
+	ImageSubsystem_decimal=2,  "WINDOWS_GUI",
+	ImageSubsystem_decimal=3,  "WINDOWS_CUI",
+	ImageSubsystem_decimal=7,  "POSIX_CUI",
+	ImageSubsystem_decimal=256,"WSL"
+	)

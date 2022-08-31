@@ -1,0 +1,9 @@
+| eval ObjectAccessOperationType=case(
+	ObjectAccessOperationType_decimal="1",   "CREATE", 
+	ObjectAccessOperationType_decimal="2",   "WRITE", 
+	ObjectAccessOperationType_decimal="3",   "DELETE", 
+	ObjectAccessOperationType_decimal="4",   "SET", 
+	ObjectAccessOperationType_decimal="5",   "RENAME",
+	ObjectAccessOperationType_decimal="6",   "ATTRIBUTES_CHANGED",
+	ObjectAccessOperationType_decimal="7",   "PERMISSIONS_CHANGED"
+	)

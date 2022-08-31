@@ -1,0 +1,15 @@
+| eval AuthFailureErrorCode=case(
+	AuthenticationFailureMsErrorCode_decimal="3221225506",  "STATUS_ACCESS_DENIED", 
+	AuthenticationFailureMsErrorCode_decimal="3221225578",  "STATUS_WRONG_PASSWORD", 
+	AuthenticationFailureMsErrorCode_decimal="3221225581",  "STATUS_LOGON_FAILURE", 
+	AuthenticationFailureMsErrorCode_decimal="3221225572",  "STATUS_NO_SUCH_USER", 
+	AuthenticationFailureMsErrorCode_decimal="3221225582",  "STATUS_ACCOUNT_RESTRICTION", 
+	AuthenticationFailureMsErrorCode_decimal="3221225583",  "STATUS_INVALID_LOGON_HOURS", 
+	AuthenticationFailureMsErrorCode_decimal="3221225584",  "STATUS_INVALID_WORKSTATION", 
+	AuthenticationFailureMsErrorCode_decimal="3221225585",  "STATUS_PASSWORD_EXPIRED", 
+	AuthenticationFailureMsErrorCode_decimal="3221225586",  "STATUS_ACCOUNT_DISABLED", 
+	AuthenticationFailureMsErrorCode_decimal="3221225813",  "STATUS_LOGON_NOT_GRANTED", 
+	AuthenticationFailureMsErrorCode_decimal="3221225819",  "STATUS_LOGON_TYPE_NOT_GRANTED", 
+	AuthenticationFailureMsErrorCode_decimal="3221225875",  "STATUS_ACCOUNT_EXPIRED",
+	AuthenticationFailureMsErrorCode_decimal="3221226036",  "STATUS_ACCOUNT_LOCKED_OUT"
+	)

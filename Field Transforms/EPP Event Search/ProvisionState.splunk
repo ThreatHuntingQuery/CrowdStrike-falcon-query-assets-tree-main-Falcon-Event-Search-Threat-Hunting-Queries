@@ -1,0 +1,4 @@
+| eval ProvisionState=case(
+	ProvisionState_decimal="0",  "SENSOR_NOT_PROVISIONED", 
+	ProvisionState_decimal="1",  "SENSOR_PROVISIONED"
+	)

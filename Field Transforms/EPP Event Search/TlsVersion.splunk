@@ -1,0 +1,6 @@
+| eval TlsVersion=case(
+	TlsVersion_decimal="0",  "v1.0", 
+	TlsVersion_decimal="1",  "v1.1", 
+	TlsVersion_decimal="2",  "v1.2", 
+	TlsVersion_decimal="3",  "v1.3"
+	)

@@ -1,0 +1,6 @@
+| eval ConnectionHash=case(
+	ConnectionHash_decimal="32771",  "MD5", 
+	ConnectionHash_decimal="32772",  "SHA", 
+	ConnectionHash_decimal="32780",  "SHA-256", 
+	ConnectionHash_decimal="32781",  "SHA-384" 
+	)

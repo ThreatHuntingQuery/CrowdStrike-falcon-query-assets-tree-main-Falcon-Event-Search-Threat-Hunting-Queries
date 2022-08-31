@@ -1,0 +1,4 @@
+| eval UserIsAdmin=case(
+	UserIsAdmin_decimal="0",  "No", 
+	UserIsAdmin_decimal="1",  "Yes"
+	)

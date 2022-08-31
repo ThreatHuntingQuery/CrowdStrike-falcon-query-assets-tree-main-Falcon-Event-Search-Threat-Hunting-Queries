@@ -1,0 +1,8 @@
+| eval CreateProcessType=case(
+	CreateProcessType_decimal="0",  "Unavailable", 
+	CreateProcessType_decimal="1",  "Unknown", 
+	CreateProcessType_decimal="2",  "NTCreateProcess", 
+	CreateProcessType_decimal="3",  "CreateProcess", 
+	CreateProcessType_decimal="4",  "ShellExecute", 
+	CreateProcessType_decimal="5",  "CRT System" 
+	)

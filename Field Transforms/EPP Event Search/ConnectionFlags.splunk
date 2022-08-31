@@ -1,0 +1,6 @@
+| eval ConnectionFlags=case(
+	ConnectionFlags_decimal="1",  "RAW_SOCKET", 
+	ConnectionFlags_decimal="2",  "PROMISCUOUS_MODE_SIO_RCVALL", 
+	ConnectionFlags_decimal="3",  "PROMISCUOUS_MODE_SIO_RCVALL_IGMPMCAST", 
+	ConnectionFlags_decimal="4",  "PROMISCUOUS_MODE_SIO_RCVALL_MCAST" 
+	)

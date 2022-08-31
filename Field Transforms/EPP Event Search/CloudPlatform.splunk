@@ -1,0 +1,5 @@
+| eval CloudPlatform=case(
+	CloudPlatform_decimal="1",  "Amazon Web Services", 
+	CloudPlatform_decimal="2",  "Microsoft Azure Cloud Platform", 
+	CloudPlatform_decimal="3",  "Google Cloud Platform"
+	)

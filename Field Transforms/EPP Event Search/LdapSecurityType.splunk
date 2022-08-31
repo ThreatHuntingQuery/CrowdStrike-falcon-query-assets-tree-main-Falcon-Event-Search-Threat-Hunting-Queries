@@ -1,0 +1,6 @@
+| eval LdapSecurityType=case(
+	LdapSecurityType_decimal="0", "None", 
+	LdapSecurityType_decimal="1", "TLS", 
+	LdapSecurityType_decimal="2", "SASL Integrity", 
+	LdapSecurityType_decimal="3", "SASL Confidentiality"
+	)

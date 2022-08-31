@@ -1,0 +1,10 @@
+| eval MachOSubType=case(
+	MachOSubType_decimal="0",  "UNKNOWN",
+	MachOSubType_decimal="1",  "EXECUTABLE64", 
+	MachOSubType_decimal="2",  "DYLIB64", 
+	MachOSubType_decimal="3",  "BUNDLE64", 
+	MachOSubType_decimal="4",  "KEXT64", 
+	MachOSubType_decimal="5",  "EXECUTABLE32", 
+	MachOSubType_decimal="6",  "DYLIB32", 
+	MachOSubType_decimal="7",  "BUNDLE32" 
+	)

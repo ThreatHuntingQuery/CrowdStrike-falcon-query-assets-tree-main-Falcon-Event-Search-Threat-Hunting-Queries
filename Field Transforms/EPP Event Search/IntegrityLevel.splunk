@@ -1,0 +1,11 @@
+| eval IntegrityLevel=case(
+	IntegrityLevel_decimal == 0,      									"Untrusted",
+	IntegrityLevel_decimal == 4096,   									"Low",
+	IntegrityLevel_decimal == 8192,   									"Medium",
+	IntegrityLevel_decimal == 12288,  									"High",
+	IntegrityLevel_decimal == 16384,  									"System",
+	IntegrityLevel_decimal == 20480,  									"Protected",
+	IntegrityLevel_decimal > 4096  AND IntegrityLevel_decimal < 8192,   "Low Plus",
+	IntegrityLevel_decimal > 8192  AND IntegrityLevel_decimal < 12288,  "Medium Plus",
+	IntegrityLevel_decimal > 12288 AND IntegrityLevel_decimal < 16384,  "High Plus"
+)

@@ -1,0 +1,3 @@
+|  eval IsAndroidAppContainerized = case(
+    IsAndroidAppContainerized_decimal = 0, "No",
+    IsAndroidAppContainerized_decimal = 1, "Yes")

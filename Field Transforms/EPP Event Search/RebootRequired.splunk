@@ -1,0 +1,4 @@
+| eval RebootRequired=case(
+	RebootRequired_decimal="0",  "No", 
+	RebootRequired_decimal="1",  "Yes"
+	)

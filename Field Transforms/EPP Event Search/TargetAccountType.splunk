@@ -1,0 +1,4 @@
+| eval TargetAccountType=case(
+	TargetAccountType_decimal="0",  "User", 
+	TargetAccountType_decimal="1",  "Computer"
+	)

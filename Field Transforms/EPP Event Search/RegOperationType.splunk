@@ -1,0 +1,13 @@
+| eval RegOperationType=case(
+	RegOperationType_decimal="1",   "REG_SET_VALUE_KEY", 
+	RegOperationType_decimal="2",   "REG_DELETE_VALUE_KEY", 
+	RegOperationType_decimal="3",   "REG_CREATE_KEY", 
+	RegOperationType_decimal="4",   "REG_DELETE_KEY", 
+	RegOperationType_decimal="5",   "REG_SET_KEY_SECURITY", 
+	RegOperationType_decimal="6",   "REG_LOAD_KEY", 
+	RegOperationType_decimal="7",   "REG_RENAME_KEY", 
+	RegOperationType_decimal="8",   "REG_OPEN_KEY", 
+	RegOperationType_decimal="9",   "REG_QUERY_NAME_KEY", 
+	RegOperationType_decimal="101", "REG_SET_VALUE_KEY_ANTI_TAMPER", 
+	RegOperationType_decimal="102", "REG_DELETE_VALUE_KEY_ANTI_TAMPER"
+	)

@@ -1,0 +1,5 @@
+| eval TokenType=case(
+	TokenType_decimal="0",  "Invalid Token", 
+	TokenType_decimal="1",  "Primary Token", 
+	TokenType_decimal="2",  "Impersonation Token" 
+	)

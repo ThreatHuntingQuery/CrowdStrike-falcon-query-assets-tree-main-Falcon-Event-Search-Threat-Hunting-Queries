@@ -1,0 +1,10 @@
+| eval AsepFlags=case(
+	AsepFlags_decimal="1",  "GLOBAL", 
+	AsepFlags_decimal="2",  "PRIVILEGED", 
+	AsepFlags_decimal="3",  "GLOBAL_PRIVILEGED", 
+	AsepFlags_decimal="4",  "NEEDS_SOURCE_SIGNED", 
+	AsepFlags_decimal="8",  "NEEDS_TARGET_SIGNED", 
+	AsepFlags_decimal="16", "NEEDS_SOURCE_MS_SIGNED", 
+	AsepFlags_decimal="32", "NEEDS_TARGET_MS_SIGNED", 
+	AsepFlags_decimal="64", "SUSPICIOUS" 
+	)

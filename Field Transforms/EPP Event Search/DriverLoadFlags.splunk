@@ -1,0 +1,5 @@
+| eval DriverLoadFlags=case(
+	DriverLoadFlags_decimal="0",  "NONE", 
+	DriverLoadFlags_decimal="1",  "DRIVER_RUNDOWN", 
+	DriverLoadFlags_decimal="2",  "DRIVER_RUNDOWN_BOOT_ONLY"
+	)

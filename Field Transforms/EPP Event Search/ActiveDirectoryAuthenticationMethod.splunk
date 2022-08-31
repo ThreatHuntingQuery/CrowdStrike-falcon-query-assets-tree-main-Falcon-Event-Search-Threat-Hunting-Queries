@@ -1,0 +1,8 @@
+| eval ActiveDirectoryAuthenticationMethod=case(
+	ActiveDirectoryAuthenticationMethod_decimal="0",  "KERBEROS", 
+	ActiveDirectoryAuthenticationMethod_decimal="1",  "NTLM_V1", 
+	ActiveDirectoryAuthenticationMethod_decimal="2",  "NTLM_V2", 
+	ActiveDirectoryAuthenticationMethod_decimal="3",  "SIMPLE_BIND", 
+	ActiveDirectoryAuthenticationMethod_decimal="4",  "NO_AUTHENTICATION",
+	ActiveDirectoryAuthenticationMethod_decimal="5",  "UNKNOWN_NTLM",
+	)

@@ -1,0 +1,8 @@
+// Transform to convert SourceEndpointNetworkType decimal to human-readable value.
+| case {
+        SourceEndpointNetworkType = "0x1"  | SourceEndpointNetworkType := "INTERNAL" ;
+        SourceEndpointNetworkType = "0X2"  | SourceEndpointNetworkType := "VPN" ;
+        SourceEndpointNetworkType = "0x4"  | SourceEndpointNetworkType := "WIRELESS" ;
+        SourceEndpointNetworkType = "0X8"  | SourceEndpointNetworkType := "NAT" ;
+        SourceEndpointNetworkType = "0x10" | SourceEndpointNetworkType := "PUBLIC" ;
+        * }

@@ -1,0 +1,11 @@
+| eval TcpConnectErrorCode=case(
+	TcpConnectErrorCode_decimal="0",    "TCP_CON_SUCCESS", 
+	TcpConnectErrorCode_decimal="92",   "TCP_CON_NO_PROTO_ERROR", 
+	TcpConnectErrorCode_decimal="101",  "TCP_CON_NET_UNREACH_ERROR", 
+	TcpConnectErrorCode_decimal="102",  "TCP_CON_NET_RESET_ERROR", 
+	TcpConnectErrorCode_decimal="103",  "TCP_CON_CONN_ABORTED_ERROR", 
+	TcpConnectErrorCode_decimal="106",  "TCP_CON_IS_CONN_ERROR", 
+	TcpConnectErrorCode_decimal="110",  "TCP_CON_TIMED_OUT_ERROR", 
+	TcpConnectErrorCode_decimal="111",  "TCP_CON_REFUSED_ERROR", 
+	TcpConnectErrorCode_decimal="113",  "TCP_CON_HOST_UNREACH_ERROR"
+	)

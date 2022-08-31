@@ -1,0 +1,7 @@
+| eval NetworkProfile=case(
+	NetworkProfile_decimal="0",   "Invalid", 
+	NetworkProfile_decimal="1",   "Domain", 
+	NetworkProfile_decimal="2",   "Public", 
+	NetworkProfile_decimal="4",   "Private", 
+	NetworkProfile_decimal="255", "Any"
+	)

@@ -1,0 +1,4 @@
+| eval ConnectionExchange=case(
+	ConnectionExchange="41984",  "CALG_RSA_KEYX",
+	ConnectionExchange="43522",  "CALG_DH_EPHEM"
+	)

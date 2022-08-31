@@ -1,0 +1,8 @@
+| eval FileMode=case(
+	FileMode_decimal="1",  "CreateNew", 
+	FileMode_decimal="2",  "Create", 
+	FileMode_decimal="3",  "Open", 
+	FileMode_decimal="4",  "OpenOrCreate",
+	FileMode_decimal="5",  "Truncate", 
+	FileMode_decimal="6",  "Append" 
+	)

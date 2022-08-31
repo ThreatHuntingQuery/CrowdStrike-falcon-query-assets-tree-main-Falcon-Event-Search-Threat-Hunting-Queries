@@ -1,0 +1,5 @@
+| eval ProductType=case(
+	ProductType="1",  "Workstation", 
+	ProductType="2",  "Domain Controller", 
+	ProductType="3",  "Server"
+	)

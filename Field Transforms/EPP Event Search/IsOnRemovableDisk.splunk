@@ -1,0 +1,4 @@
+| eval IsOnRemovableDisk=case(
+	IsOnRemovableDisk_decimal="0",  "No", 
+	IsOnRemovableDisk_decimal="1",  "Yes"
+	)

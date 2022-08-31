@@ -1,0 +1,4 @@
+| eval EfiSupported=case(
+	EfiSupported_decimal="0",  "No",
+	EfiSupported_decimal="1",  "Yes"
+	)

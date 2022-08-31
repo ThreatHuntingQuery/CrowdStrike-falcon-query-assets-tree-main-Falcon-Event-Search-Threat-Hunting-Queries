@@ -1,0 +1,14 @@
+| eval KerberosAnomaly=case(
+	KerberosAnomaly_decimal="1",  "MISSING_LOGON_SERVER_IN_REQUEST_TICKET", 
+	KerberosAnomaly_decimal="2",  "DEFAULT_PASSWORD_LAST_SET_VALUE_IN_REQUEST_TICKET", 
+	KerberosAnomaly_decimal="3",  "UNEXPECTED_SID_IN_REQUEST_TICKET", 
+	KerberosAnomaly_decimal="4",  "UNEXPECTED_PRIMARY_GROUP_ID_IN_REQUEST_TICKET", 
+	KerberosAnomaly_decimal="5",  "UNEXPECTED_GROUPS_ID_IN_REQUEST_TICKET", 
+	KerberosAnomaly_decimal="6",  "UNEXPECTED_RESOURCE_GROUPS_ID_IN_REQUEST_TICKET", 
+	KerberosAnomaly_decimal="7",  "UNEXPECTED_EXTRAS_SID_IN_REQUEST_TICKET", 
+	KerberosAnomaly_decimal="8",  "RC4_PAC", 
+	KerberosAnomaly_decimal="9",  "PACLESS_TICKET_GENERATION", 
+	KerberosAnomaly_decimal="10", "AP_REQ_MISSING_AUTHENTICATOR_CHECKSUM", 
+	KerberosAnomaly_decimal="11", "AP_REQ_ZERO_FILLED_BIND_IN_AUTHENTICATOR_CHECKSUM", 
+	KerberosAnomaly_decimal="12", "UNEXPECTED_HOSTNAME_IN_SERVICE_ACCESS_REQUEST"
+	)

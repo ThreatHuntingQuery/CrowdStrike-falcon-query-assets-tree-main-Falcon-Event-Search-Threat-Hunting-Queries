@@ -1,0 +1,4 @@
+| eval ExclusionType=case(
+	ExclusionType_decimal="1",  "BEHAVIORAL_IOA", 
+	ExclusionType_decimal="2",  "HASH_BASED_IOC"
+	)

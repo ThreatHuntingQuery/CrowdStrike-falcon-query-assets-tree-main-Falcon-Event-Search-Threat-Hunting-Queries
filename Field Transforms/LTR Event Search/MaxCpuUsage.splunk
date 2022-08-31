@@ -1,0 +1,2 @@
+// Transform MaxCpuUsage to MaxCpuReadable
+| MaxCpuUsage := format("%s%%", field=MaxCpuUsage)

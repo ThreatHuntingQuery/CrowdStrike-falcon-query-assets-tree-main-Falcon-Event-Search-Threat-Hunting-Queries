@@ -1,0 +1,10 @@
+| eval ServiceCurrentState=case(
+	ServiceCurrentState_decimal="0",  "UNABLE_TO_QUERY_SERVICE_STATE", 
+	ServiceCurrentState_decimal="1",  "SERVICE_STOPPED", 
+	ServiceCurrentState_decimal="2",  "SERVICE_START_PENDING", 
+	ServiceCurrentState_decimal="3",  "SERVICE_STOP_PENDING", 
+	ServiceCurrentState_decimal="4",  "SERVICE_RUNNING", 
+	ServiceCurrentState_decimal="5",  "SERVICE_CONTINUE_PENDING", 
+	ServiceCurrentState_decimal="6",  "SERVICE_PAUSE_PENDING",
+	ServiceCurrentState_decimal="7",  "SERVICE_PAUSED"
+	)

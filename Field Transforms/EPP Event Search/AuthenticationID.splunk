@@ -1,0 +1,7 @@
+| eval AuthenticationId=case(
+	AuthenticationId_decimal="0",    "Invalid Luid", 
+	AuthenticationId_decimal="996",  "Network Service", 
+	AuthenticationId_decimal="997",  "Local Service", 
+	AuthenticationId_decimal="999",  "System", 
+	AuthenticationId_decimal="1000", "Reserved Luid Max" 
+	)

@@ -1,0 +1,5 @@
+| eval DnsResponseType=case(
+	DnsResponseType_decimal="0",  "UNKNOWN",
+	DnsResponseType_decimal="1",  "CACHE",
+	DnsResponseType_decimal="2",  "WIRE"
+	)

@@ -1,0 +1,14 @@
+| eval ShowWindowFlags=case(
+	ShowWindowFlags_decimal="0",  "Hide Window",
+	ShowWindowFlags_decimal="1",  "Normal",
+	ShowWindowFlags_decimal="2",  "Minimized Activated",
+	ShowWindowFlags_decimal="3",  "Maximized Activated",
+	ShowWindowFlags_decimal="4",  "Not Activated",
+	ShowWindowFlags_decimal="5",  "Activated",
+	ShowWindowFlags_decimal="6",  "Minimized",
+	ShowWindowFlags_decimal="7",  "Minimized Not Activated",
+	ShowWindowFlags_decimal="8",  "Not Activated",
+	ShowWindowFlags_decimal="9",  "Restored",
+	ShowWindowFlags_decimal="10", "Default",
+	ShowWindowFlags_decimal="11", "Forced Minimized"
+	)

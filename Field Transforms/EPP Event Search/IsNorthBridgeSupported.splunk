@@ -1,0 +1,4 @@
+| eval IsNorthBridgeSupported=case(
+	IsNorthBridgeSupported_decimal="0",  "No",
+	IsNorthBridgeSupported_decimal="1",  "Yes"
+	)

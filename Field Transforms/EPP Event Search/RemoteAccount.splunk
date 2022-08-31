@@ -1,0 +1,4 @@
+| eval RemoteAccount=case(
+	RemoteAccount_decimal="0",  "No", 
+	RemoteAccount_decimal="1",  "Yes" 
+	)

@@ -1,0 +1,11 @@
+| eval SourceEndpointIpReputation=case(
+	SourceEndpointIpReputation_decimal="0",   "NONE",
+	SourceEndpointIpReputation_decimal="1",   "ANONYMOUS_ACTIVE",
+	SourceEndpointIpReputation_decimal="2",   "ANONYMOUS_SUSPECT",
+	SourceEndpointIpReputation_decimal="4",   "ANONYMOUS_INACTIVE",
+	SourceEndpointIpReputation_decimal="8",   "ANONYMOUS_PRIVATE",
+	SourceEndpointIpReputation_decimal="16",  "ASSOCIATED_WITH_DICTIONARY_ATTACK",
+	SourceEndpointIpReputation_decimal="32",  "ASSOCIATED_WITH_DDOS_ATTACK",
+	SourceEndpointIpReputation_decimal="64",  "ASSOCIATED_WITH_SPAM",
+	SourceEndpointIpReputation_decimal="128", "HOSTING_FACILITY"
+	)

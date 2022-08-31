@@ -1,0 +1,7 @@
+| eval NamedPipeImpersonationType=case(
+	NamedPipeImpersonationType_decimal="0",  "UNKOWN",
+	NamedPipeImpersonationType_decimal="1",  "USER_TO_USER",
+	NamedPipeImpersonationType_decimal="2",  "USER_TO_SERVICE",
+	NamedPipeImpersonationType_decimal="3",  "USER_TO_SYSTEM",
+	NamedPipeImpersonationType_decimal="4",  "SERVICE"
+	)

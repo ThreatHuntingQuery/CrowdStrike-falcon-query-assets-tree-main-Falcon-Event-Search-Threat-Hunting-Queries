@@ -1,0 +1,5 @@
+| eval NtlmAvFlags=case(
+	NtlmAvFlags_decimal="1",  "CONSTRAINED_AUTHENTICATION", 
+	NtlmAvFlags_decimal="2",  "MESSAGE_INTEGRITY",  
+	NtlmAvFlags_decimal="4",  "UNTRUSTED_SPN_SOURCE"
+	)
