@@ -4,7 +4,7 @@ Welcome to the Falcon Query Assets GitHub page. Here, we will publish useful que
 
 ## Contents
 
-Event field transforms for telemetry in Event Search (FQL) and Falcon Long Term Repository (HQL) language.
+- Event field transforms for telemetry in Event Search (FQL) and Falcon Long Term Repository (HQL) language.
 
 ## Errors
 
