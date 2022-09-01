@@ -4,5 +4,5 @@ These transforms can be viewed here or git cloned locally. If ususing local file
 
 Example
 
-![SublimeText3 with Splunk Syntax v1.1.0](images/example-highlight.png)
+![SublimeText3 with Splunk Syntax v1.1.0](../images/example-highlight.png)
 
