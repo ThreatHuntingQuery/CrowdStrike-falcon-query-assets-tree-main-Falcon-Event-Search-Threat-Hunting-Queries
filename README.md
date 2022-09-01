@@ -1,6 +1,6 @@
 ## Welcome
 
-Welcome to the Falcon Query Assets GitHub page. Here, we will publish useful queries, transforms, and tips that help CrowdStrike customers write custom hutning syntax and better leverage the Falcon telemetry stream.
+Welcome to the Falcon Query Assets GitHub page. Here, we will publish useful queries, transforms, and tips that help CrowdStrike customers write custom hunting syntax and better leverage the Falcon telemetry stream.
 
 ## Contents
 
