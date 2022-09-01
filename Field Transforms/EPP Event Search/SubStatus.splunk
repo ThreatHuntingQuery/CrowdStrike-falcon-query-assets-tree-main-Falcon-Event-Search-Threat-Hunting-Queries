@@ -1,0 +1,25 @@
+| eval SubStatus_hex=tostring(SubStatus_decimal,"hex")
+| eval SubStatus=case(
+	SubStatus_decimal=0,          "Status OK.",
+	SubStatus_decimal=3221225572, "User logon with misspelled or bad user account",
+	SubStatus_decimal=3221225578, "User logon with misspelled or bad password",
+	SubStatus_decimal=3221225581, "The cause is either a bad username or authentication information",
+	SubStatus_decimal=3221225582, "Indicates a referenced user name and authentication information are valid" ,
+	SubStatus_decimal=3221225583, "User logon outside authorized hours",
+	SubStatus_decimal=3221225584, "User logon from unauthorized workstation",
+	SubStatus_decimal=3221225585, "User logon with expired password",
+	SubStatus_decimal=3221225586, "User logon to account disabled by administrator",
+	SubStatus_decimal=3221225692, "Indicates the Sam Server was in the wrong state to perform the desired operation.",
+	SubStatus_decimal=3221225779, "Clocks between DC and other computer too far out of sync",
+	SubStatus_decimal=3221225819, "The user has not been granted the requested logon type (also called the logon right) at this machine",
+	SubStatus_decimal=3221225868, "The logon request failed because the trust relationship between the primary domain and the trusted domain faile" ,
+	SubStatus_decimal=3221225874, "An attempt was made to logon" ,
+	SubStatus_decimal=3221225566, "There are currently no logon servers available to service the logon request.",
+	SubStatus_decimal=3221225875, "User logon with expired account",
+	SubStatus_decimal=3221226020, "User is required to change password at next logon",
+	SubStatus_decimal=3221226021, "Evidently a bug in Windows and not a risk",
+	SubStatus_decimal=3221226036, "User logon with account locked",
+	SubStatus_decimal=3221226222, "Failure Reason: An Error occurred during Logon",
+	SubStatus_decimal=3221226515, "Logon Failure: The machine you are logging on to is protected by an authentication firewall. The specified account is not allowed to authenticate to the machine." 
+	)
+
