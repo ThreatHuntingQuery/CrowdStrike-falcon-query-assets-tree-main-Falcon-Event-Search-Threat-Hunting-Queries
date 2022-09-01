@@ -1,7 +1,0 @@
-// Transform to convert UserFlags decimal to human-readable value.
-| case {
-        UserFlags = "16384"  | UserFlags := "LOGON_OPTIMIZED" ;
-        UserFlags = "32768"  | UserFlags := "LOGON_WINLOGON ;
-        UserFlags = "65536"  | UserFlags := "LOGON_PKINIT ;
-        UserFlags = "131072" | UserFlags := "LOGON_NOT_OPTIMIZED" ;
-        * }

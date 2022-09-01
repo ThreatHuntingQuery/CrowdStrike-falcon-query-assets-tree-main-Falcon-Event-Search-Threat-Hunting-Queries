@@ -1,6 +1,0 @@
-| eval UserFlags=case(
-	UserFlags_decimal="16384",  "LOGON_OPTIMIZED", 
-	UserFlags_decimal="32768",  "LOGON_WINLOGON", 
-	UserFlags_decimal="65536",  "LOGON_PKINIT", 
-	UserFlags_decimal="131072", "LOGON_NOT_OPTIMIZED"
-	)
