@@ -1,6 +1,6 @@
 ## Usage
 
-These transforms can be viewed here or git cloned locally. If ususing local files, several IDEs (VsCode, SublimeText, etc.) have syntax highlighting pacakges available for file with the `.splunk` extension. 
+These transforms can be viewed here or git cloned locally. If ususing local files, several IDEs (VSCode, SublimeText, etc.) have syntax highlighting pacakges available for files with the `.splunk` extension. We're working on highlighting for `.humio` files.
 
 Example
 
