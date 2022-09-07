@@ -16,4 +16,4 @@ This page will be perpetually under construction.
 
 ## Major Release Log :shipit:
 
-2022-09-07 - Git made public. First release of 85+ field transforms for Event Search and Falcon Long Term Repository.
+2022-09-07 - Git made public. First release of 85+ field transforms for Event Search and Falcon Long Term Repository. Published list of helpful lookup tables for Falcon Event Search. 

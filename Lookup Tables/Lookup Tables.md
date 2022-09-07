@@ -22,6 +22,8 @@ cloud_instance_types.csv
 cloud_providers.csv
 cloud_regions.csv
 detect_patterns.csv
+group_info.csv
+grouprid_wingroup.csv
 LogonType.csv
 managedassets.csv
 patterndisposition.csv
