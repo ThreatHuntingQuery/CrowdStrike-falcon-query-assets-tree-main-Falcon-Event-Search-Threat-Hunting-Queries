@@ -2,11 +2,11 @@
 
 To view lookup table, example:
 
-	`| inputlookup aid_master.csv`
+	| inputlookup aid_master.csv
 
 To merge data into query from lookup table, example:
 
-	`| lookup local=true aid_master aid OUTPUT Version, MachineDomain, AgentVersion`
+	| lookup local=true aid_master aid OUTPUT Version, MachineDomain, AgentVersion
 
 ```
 aid_master.csv
