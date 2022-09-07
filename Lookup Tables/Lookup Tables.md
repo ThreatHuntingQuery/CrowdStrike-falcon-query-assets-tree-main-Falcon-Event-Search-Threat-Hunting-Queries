@@ -6,6 +6,7 @@ To view lookup table, example:
 
 To merge data into query from lookup table, example:
 
+	[...]
 	| lookup local=true aid_master aid OUTPUT Version, MachineDomain, AgentVersion
 
 ```
