@@ -1,4 +1,4 @@
-// Transform to convert CurrentField decimal to human-readable value.
+// Transform to convert KerberosAnomaly decimal to human-readable value.
 | case {
         KerberosAnomaly = "0x00000001"   | KerberosAnomaly := "MISSING_LOGON_SERVER_IN_REQUEST_TICKET" ;
         KerberosAnomaly = "0x00000002"   | KerberosAnomaly := "DEFAULT_PASSWORD_LAST_SET_VALUE_IN_REQUEST_TICKET" ;
