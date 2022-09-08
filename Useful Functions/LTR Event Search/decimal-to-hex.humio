@@ -1,1 +1,2 @@
-hex-conversion.humio
+// Convert decimal value of Status to hex value.
+| Status_hex := format(field=Status, "%x")

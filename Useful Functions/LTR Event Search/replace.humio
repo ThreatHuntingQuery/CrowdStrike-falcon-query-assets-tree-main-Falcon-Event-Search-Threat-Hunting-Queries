@@ -1,1 +1,3 @@
-replace.humio
+// Replace the decimal value of UserIsAdmin with human-readable values.
+| replace(field=UserIsAdmin, regex="1", with="True")
+| replace(field=UserIsAdmin, regex="0", with="False")
