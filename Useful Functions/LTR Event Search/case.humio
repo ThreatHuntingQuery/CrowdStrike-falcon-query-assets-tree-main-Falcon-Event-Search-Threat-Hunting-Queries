@@ -1,0 +1,11 @@
+\\ Destructive case statement.
+| case {
+		UserIsAdmin=1 | UserIsAdmin := "True" ;
+     	UserIsAdmin=0 | UserIsAdmin := "False" ;
+  * }
+
+\\ Non-destructive case statment.
+| case {
+		UserIsAdmin=1 | isAdmin := "True" ;
+     	UserIsAdmin=0 | isAdmin := "False" ;
+  * }

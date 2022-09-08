@@ -1,0 +1,4 @@
+\\ Get GeoIP data for specific field
+| ipLocation(field=aip)
+\\ Optionally, generate a world view heat map
+| worldMap(lat=aip.lat, lon=aip.lon, magnitude=count(aid))
