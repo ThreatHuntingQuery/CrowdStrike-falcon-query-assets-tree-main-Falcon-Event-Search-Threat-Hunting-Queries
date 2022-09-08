@@ -1,5 +1,4 @@
 // Transform to convert HashAlgorithm decimal to human-readable value.
-
 | case {
         HashAlgorithm = "0"     | HashAlgorithm := "No hashing algorithm";
         HashAlgorithm = "2"     | HashAlgorithm := "MAC keyed-hash algorithm" ;
