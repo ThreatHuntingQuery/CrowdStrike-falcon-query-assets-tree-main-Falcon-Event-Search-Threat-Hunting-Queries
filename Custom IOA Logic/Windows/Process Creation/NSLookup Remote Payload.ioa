@@ -1,0 +1,16 @@
+Referece: https://twitter.com/Alh4zr3d/status/1566489367232651264
+
+Rule Type: Process Creation
+
+Action To Take: <choose>
+
+Severity: <choose>
+
+GRANDPARENT IMAGE FILENAME: .*
+GRANDPARENT COMMAND LINE: .*
+
+PARENT IMAGE FILENAME: .*\\powershell\.exe
+PARENT COMMAND LINE: .*
+
+IMAGE FILENAME: .*\\nslookup\.exe
+COMMAND LINE: .*\s+\-q\=txt\s+.*

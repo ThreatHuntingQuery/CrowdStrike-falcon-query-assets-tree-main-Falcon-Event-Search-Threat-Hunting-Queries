@@ -1,0 +1,3 @@
+#event_simpleName=ProcessRollup2 ParentBaseFileName=powershell.exe ImageFileName=/.*\\nslookup\.exe/
+| CommandLine=/.*\s+\-q\=txt\s+.*/
+| table([aid, UserSid, ParentBaseFileName, ImageFileName, CommandLine])
