@@ -1,8 +1,8 @@
 | eval NewField=case(
-	SourceEndpointNetworkType_decimal="0x1",  "INTERNAL", 
-	SourceEndpointNetworkType_decimal="0x2",  "VPN", 
-	SourceEndpointNetworkType_decimal="0x4",  "WIRELESS", 
-	SourceEndpointNetworkType_decimal="0x8",  "NAT", 
-	SourceEndpointNetworkType_decimal="0x10", "PUBLIC" 
+	SourceEndpointNetworkType_decimal="1",  "INTERNAL", 
+	SourceEndpointNetworkType_decimal="2",  "VPN", 
+	SourceEndpointNetworkType_decimal="4",  "WIRELESS", 
+	SourceEndpointNetworkType_decimal="8",  "NAT", 
+	SourceEndpointNetworkType_decimal="16", "PUBLIC" 
 	
 	)
