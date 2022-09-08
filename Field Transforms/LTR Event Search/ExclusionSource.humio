@@ -1,4 +1,4 @@
-/ Transform to convert ExclusionSource decimal to human-readable value.
+// Transform to convert ExclusionSource decimal to human-readable value.
 | case {
         ExclusionSource = "1"  | ExclusionSource := "PPDM_PROCESS_EXCLUSION" ;
         ExclusionSource = "2"  | ExclusionSource := "PPDM_TREE_EXCLUSION" ;
