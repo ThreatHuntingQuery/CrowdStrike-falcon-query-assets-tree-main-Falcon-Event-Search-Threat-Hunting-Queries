@@ -1,5 +1,5 @@
 #event_simpleName=ProcessRollup2 event_platform=Lin
 | CommandLine=/.*\s+\/etc\/passwd\s+.*/
-| table([timestamp, aid, UserSid_readable, ParentBaseFileName, ImageFileName, CommandLine])
+| table([timestamp, aid, UID, ParentBaseFileName, ImageFileName, CommandLine])
 | sort(field=timestamp, order=asc)
 | timestamp := formatTime("%Y-%m-%d %H:%M:%S", field=timestamp, locale=en_US, timezone=Z)
