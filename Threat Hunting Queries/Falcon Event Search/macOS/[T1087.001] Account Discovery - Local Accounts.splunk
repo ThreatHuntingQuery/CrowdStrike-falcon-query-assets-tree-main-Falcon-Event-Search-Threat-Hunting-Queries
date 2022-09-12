@@ -1,0 +1,4 @@
+event_platform=mac event_simpleName=ProcessRollup2 FileName IN (dscl)
+| regex CommandLine=".*(read|list).*"
+| table _time, aid, ComputerName, UserPrincipal, UID_decimal, ParentBaseFileName, FileName, CommandLine
+| sort + _time

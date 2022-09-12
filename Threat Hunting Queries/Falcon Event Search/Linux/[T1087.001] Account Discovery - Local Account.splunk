@@ -1,0 +1,4 @@
+event_platform=lin event_simpleName=ProcessRollup2 
+| regex CommandLine=".*\s+\/etc\/passwd\s+.*"
+| table _time, aid, ComputerName, UserName, UserSid_readable, ParentBaseFileName, FileName, CommandLine
+| sort + _time

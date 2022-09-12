@@ -1,0 +1,4 @@
+event_platform=win event_simpleName=ProcessRollup2 FileName IN (net.exe, net1.exe)
+| regex CommandLine=".*\s+(groups|user|localgroup)\s+.*"
+| table _time, aid, ComputerName, UserName, UserSid_readable, ParentBaseFileName, FileName, CommandLine
+| sort + _time

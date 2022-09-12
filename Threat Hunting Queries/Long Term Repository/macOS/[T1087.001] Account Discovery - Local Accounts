@@ -1,0 +1,5 @@
+#event_simpleName=ProcessRollup2 event_platform=Mac ImageFileName=/.*\/dscl/
+| CommandLine=/.*(read|list).*/
+| table([timestamp, aid, UID, ParentBaseFileName, ImageFileName, CommandLine])
+| sort(field=timestamp, order=asc)
+| timestamp := formatTime("%Y-%m-%d %H:%M:%S", field=timestamp, locale=en_US, timezone=Z)
