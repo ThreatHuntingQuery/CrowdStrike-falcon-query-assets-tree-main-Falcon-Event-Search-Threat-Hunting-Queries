@@ -17,6 +17,8 @@ This page will be perpetually under construction.
 
 ## Major Release Log :shipit:
 
+- 2022-09-12 - Added hunting logic for T1087.001. 
+
 - 2022-09-08 - Added useful search functions. Added hunting and Custom IOA logic for NSLOOKUP loading a remote text file payload. 
 
 - 2022-09-07 - Git made public. First release of 85+ field transforms for Event Search and Falcon Long Term Repository. Published list of helpful lookup tables for Falcon Event Search. 

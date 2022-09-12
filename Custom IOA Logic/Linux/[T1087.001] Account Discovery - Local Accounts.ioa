@@ -1,0 +1,16 @@
+Referece: https://attack.mitre.org/techniques/T1087/001/
+
+Rule Type: Process Creation
+
+Action To Take: <choose>
+
+Severity: <choose>
+
+GRANDPARENT IMAGE FILENAME: .*
+GRANDPARENT COMMAND LINE: .*
+
+PARENT IMAGE FILENAME: .*
+PARENT COMMAND LINE: .*
+
+IMAGE FILENAME: .*
+COMMAND LINE: .*\s+\/etc\/passwd\s+.*
