@@ -12,5 +12,5 @@ GRANDPARENT COMMAND LINE: .*
 PARENT IMAGE FILENAME: .*
 PARENT COMMAND LINE: .*
 
-IMAGE FILENAME: .*\\net1?\.exe
-COMMAND LINE: .*\s+(groups|user|localgroup)\s+.*
+IMAGE FILENAME: .*\/dscl
+COMMAND LINE: .*(read|list).*
