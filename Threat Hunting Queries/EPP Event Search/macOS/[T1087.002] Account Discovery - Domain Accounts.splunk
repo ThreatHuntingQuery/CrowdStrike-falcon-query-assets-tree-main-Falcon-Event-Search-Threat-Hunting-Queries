@@ -1,0 +1,4 @@
+event_platform=mac event_simpleName=ProcessRollup2 FileName IN (dscacheutil)
+| regex CommandLine=".*\s+\-q\s+.+group.*"
+| table _time, aid, ComputerName, UserSid_readable, UserName, ParentBaseFileName, FileName, CommandLine
+| sort + _time

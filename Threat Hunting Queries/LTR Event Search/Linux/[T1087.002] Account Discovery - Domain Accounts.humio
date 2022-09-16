@@ -1,0 +1,4 @@
+#event_simpleName=ProcessRollup2 event_platform=Lin ImageFileName=/.*\/ldapsearch/i
+| table([timestamp, aid, UserSid, ParentBaseFileName, ImageFileName, CommandLine])
+| sort(field=timestamp, order=asc)
+| timestamp := formatTime("%Y-%m-%d %H:%M:%S", field=timestamp, locale=en_US, timezone=Z) 

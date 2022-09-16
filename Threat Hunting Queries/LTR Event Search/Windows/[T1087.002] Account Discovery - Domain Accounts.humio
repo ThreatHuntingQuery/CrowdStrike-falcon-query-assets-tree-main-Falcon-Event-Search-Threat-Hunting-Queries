@@ -1,0 +1,5 @@
+#event_simpleName=ProcessRollup2 event_platform=Win ImageFileName=/net1?\.exe/
+| CommandLine=/.*\s+(user|group|)\s+.+\/domain.*/
+| table([timestamp, aid, UserSid, ParentBaseFileName, ImageFileName, CommandLine])
+| sort(field=timestamp, order=asc)
+| timestamp := formatTime("%Y-%m-%d %H:%M:%S", field=timestamp, locale=en_US, timezone=Z) 
