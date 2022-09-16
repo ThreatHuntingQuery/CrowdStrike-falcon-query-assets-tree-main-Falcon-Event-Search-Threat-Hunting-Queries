@@ -17,6 +17,8 @@ This page will be perpetually under construction.
 
 ## Major Release Log :shipit:
 
+- 2022-09-16 - Added hunting logic for Microsoft Teams Unsecured Credentials Issue [T1552.001]
+
 - 2022-09-12 - Added hunting logic for T1087.001. 
 
 - 2022-09-08 - Added useful search functions. Added hunting and Custom IOA logic for NSLOOKUP loading a remote text file payload. 
