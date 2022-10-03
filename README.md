@@ -17,6 +17,8 @@ This page will be perpetually under construction.
 
 ## Major Release Log :shipit:
 
+- 2022-10-03 - Added hunting logic for ProxyNotShell [T1505.003]
+
 - 2022-09-16 - Added hunting logic for Microsoft Teams Unsecured Credentials Issue [T1552.001]
 
 - 2022-09-12 - Added hunting logic for T1087.001. 
