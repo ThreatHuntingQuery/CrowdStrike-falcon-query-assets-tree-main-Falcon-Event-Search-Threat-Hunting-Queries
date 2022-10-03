@@ -4,6 +4,7 @@ Welcome to the Falcon Query Assets GitHub page. Here, we will publish useful que
 
 ## Contents :bookmark_tabs:	
 
+- LogScale [Hunting Guide](https://github.com/CrowdStrike/falcon-query-assets/wiki/Hunting-&-Investigation)
 - Event field transforms for telemetry in Event Search (FQL) and Falcon Long Term Repository (HQL) language.
 - Useful lookup tables for Event Search.
 
