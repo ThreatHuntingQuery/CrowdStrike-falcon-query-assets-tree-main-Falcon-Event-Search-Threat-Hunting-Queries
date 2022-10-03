@@ -1,5 +1,5 @@
 // Get GeoIP data for RDP user logins and place on world map with magnitude.
 #event_simpleName=UserLogon LogonType=10 RemoteAddressIP4=* 
-| RemoteAddressIP4 != /(192\.168\..*|10\..*|127\.0\.0\.1)/
+| !cidr(RemoteAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"])
 | ipLocation(field=RemoteAddressIP4)
 | worldMap(lat=RemoteAddressIP4.lat, lon=RemoteAddressIP4.lon, magnitude=count(aid))
