@@ -16,5 +16,5 @@
         HashAlgorithm = "32772" | HashAlgorithm := "SHA hashing algorithm" ;
         HashAlgorithm = "32780" | HashAlgorithm := "SHA-256 hashing algorithm" ;
         HashAlgorithm = "32781" | HashAlgorithm := "SHA-384 hashing algorithm" ;
-        HashAlgorithm = "32782" | HahsAlgorithm := "SHA-512 hashing algorithm" ;
+        HashAlgorithm = "32782" | HashAlgorithm := "SHA-512 hashing algorithm" ;
         * }
