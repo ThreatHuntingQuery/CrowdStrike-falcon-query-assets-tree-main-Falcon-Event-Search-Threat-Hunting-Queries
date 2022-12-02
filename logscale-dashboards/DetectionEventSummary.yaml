@@ -4,7 +4,7 @@ timeSelector: {}
 sharedTimeInterval:
   enabled: true
   isLive: false
-  start: 30d
+  start: 7d
 widgets:
   26dea3a4-6341-4666-b1c0-e622de62ca74:
     x: 0
@@ -16,7 +16,7 @@ widgets:
       | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
       | PatternDispositionDescription=/(?<preventStatus>^(Prevention|Detection))(\,|\/).*/i
       | groupBy("preventStatus")
-    start: '2022-11-30T14:32:22.078Z'
+    start: 7d
     width: 4
     options:
       xAxisTitle: Action
@@ -79,7 +79,7 @@ widgets:
       | rename("maxSev",as="Max Severity")
       | table(["Username", "Max Severity", "Detection Count"])
     visualization: table-view
-    start: '2022-11-30T14:14:48.156Z'
+    start: 7d 
     width: 4
     title: Top Users with Endpoint Detections
     type: query
@@ -92,7 +92,7 @@ widgets:
       | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
       | PatternDispositionDescription=/(?<preventStatus>^(Prevention|Detection))(\,|\/).*/i
       | sankey(source="preventStatus",target="SeverityName", weight=count(DetectId, distinct=true))
-    start: '2022-11-30T14:46:25.654Z'
+    start: 7d
     width: 5
     options:
       series: {}
@@ -117,7 +117,7 @@ widgets:
       | table(["Domain", "Total Detections"])
 
     visualization: table-view
-    start: '2022-11-30T14:32:22.078Z'
+    start: 7d
     width: 4
     title: Top Machine Domains with Endpoint Detections
     type: query
@@ -134,7 +134,7 @@ widgets:
       | rename("_count",as="Detection Count")
       | table(["Subnet (/24)", "Detection Count"])
     visualization: table-view
-    start: '2022-11-30T14:49:58.292Z'
+    start: 7d
     width: 4
     title: Top Subnets with Endpoint Detections
     type: query
@@ -185,7 +185,7 @@ widgets:
       //| groupBy([preventStatus, PatternDispositionDescription])
       | count(DetectId)
 
-    start: '2022-11-30T14:37:46.135Z'
+    start: 7d
     width: 3
     options:
       background-color: '#FF7E00'
@@ -224,7 +224,7 @@ widgets:
       | rename("maxSev", as="Severity")
       | table(["Agent ID", "Detect UUID", "Endpoint", "Severity", "Detection Weight", "Host Management UI Link", "Host Search Link", "Falcon UI Link", "Real Time Response Link"])
     visualization: table-view
-    start: '2022-11-01T13:45:54.814Z'
+    start: 7d
     width: 12
     title: Top Endpoint Detections by Severity Weight
     type: query
@@ -266,7 +266,7 @@ widgets:
     description: Detection count by maximum severity.
     height: 4
     queryString: |-
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent"
+      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
       | groupBy([DetectId], function=(max(Severity, as=Severity)))
       | groupBy([Severity], function=(count(DetectId, as="Total Detections")))
       | NumberSeverity:=Severity
@@ -294,7 +294,8 @@ widgets:
         Critical:
           color: '#FC3896'
       legendLabelOverflow: truncate
-      legend: true
+      legend: false
+      maxLegendRows: 1
       withLegendTitle: false
     visualization: pie-chart
     title: Detections by Max Severity
