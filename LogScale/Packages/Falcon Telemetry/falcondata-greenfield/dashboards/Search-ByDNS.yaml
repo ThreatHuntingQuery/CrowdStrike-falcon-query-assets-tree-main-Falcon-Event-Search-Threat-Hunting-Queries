@@ -1,0 +1,213 @@
+name: Search - By DNS
+updateFrequency: never
+timeSelector: {}
+sharedTimeInterval:
+  enabled: true
+  isLive: false
+  start: 7d
+widgets:
+  3c0a32a0-e8aa-46c3-a9fb-5c28856871df:
+    x: 0
+    y: 16
+    height: 4
+    queryString: |-
+      /*
+       * This query provices details of specific processes that resolve a
+       * specific domain ('DomainName', parameterized by '?DomainName') and that are
+       * run from a specific agent ID ('aid', parameterized '?aid') or ComputerName (?ComputerName).
+       * This query will only return results if either ?DomainName and ?aid / ?ComputerName is specified.
+       */
+      #event_simpleName="ProcessRollup2"
+      | test(?DomainName != "*")
+      | aid=?aid
+      | case {
+          test(?aid == "*") | test(?ComputerName == "*") | runQuery:=false;
+          * | runQuery:=true;
+        }
+      | test(runQuery == true)
+      | drop(runQuery)
+      | join(
+          { #event_simpleName="DnsRequest" },
+          field=TargetProcessId, key=ContextProcessId, 
+          include=[DomainName]
+        )
+      | $"falcondata/enrich:ComputerName"()
+      // Remove entries that have no domain name or process start time.
+      | DomainName = * AND ProcessStartTime = *
+      | ComputerName = ?ComputerName
+      // Make the process start time human-readable.
+      | ProcessStartTime := ProcessStartTime*1000
+      | ProcessStartTime := formatTime(field=ProcessStartTime, format="%Y/%m/%d %H:%M:%S")
+      // Present the results.
+      | select([ProcessStartTime, pid, DomainName, ComputerName, aid, ImageFileName, MD5HashData, SHA256HashData])
+    visualization: table-view
+    start: 24h
+    width: 12
+    title: Process and Domain Details
+    type: query
+  note-1659965336171-0:
+    x: 0
+    y: 7
+    height: 2
+    text: |-
+      # Domain Lookup and Process Details
+
+      Enter `DomainName` above to narrow the search. You can filter results by `aid` or `ComputerName`.
+    width: 12
+    title: Workflow Note
+    type: note
+  1698c80a-994a-4055-a4ef-cf517d0f0727:
+    x: 0
+    y: 2
+    height: 5
+    queryString: |-
+      /*
+       * This query gives a summary of the domain(s) ('DomainName'
+       * parameterized by '?DomainName')
+       * It can also give a summary of all the hosts that a specific
+       */
+
+      #event_simpleName="DnsRequest"
+      | DomainName=?DomainName
+      | $"falcondata/enrich:ComputerName"()
+      | groupBy(DomainName, function=[
+          { selectLast([ContextTimeStamp, ComputerName]) | rename(ContextTimeStamp, as=LastLookup) | rename(ComputerName, as=LastLookupBy) },
+          { select([ContextTimeStamp, ComputerName]) | head(1) | rename(ContextTimeStamp, as=FirstLookup) | rename(ComputerName, as=FirstLookupBy) | drop(@timestamp) },
+          { count(ComputerName, as=NumberOfHosts, distinct=true) }
+        ], limit=max)
+      | LastLookup := LastLookup * 1000
+      | FirstLookup := FirstLookup * 1000
+      | LastLookup := formatTime(field=LastLookup, format="%Y/%m/%d %H:%M:%S")
+      | FirstLookup := formatTime(field=FirstLookup, format="%Y/%m/%d %H:%M:%S")
+      | table([DomainName, NumberOfHosts, FirstLookup, FirstLookupBy, LastLookup, LastLookupBy], limit=200, sortby=NumberOfHosts)
+      | rename(NumberOfHosts, as="Total Hosts")
+    visualization: table-view
+    start: 24h
+    width: 6
+    title: Domain Lookup Summary
+    type: query
+  note-1660037716765-0:
+    x: 0
+    y: 0
+    height: 2
+    text: |
+      # Domain Lookup Summary
+
+      Displays top domains. Enter `DomainName` above to narrow the search.
+    width: 6
+    title: Workflow Note
+    type: note
+  note-1660039427242-0:
+    x: 6
+    y: 0
+    height: 2
+    text: |-
+      # Domain Lookups by Host
+
+      Displays top hosts hitting the domains. Enter `DomainName` above to narrow the search.
+    width: 6
+    title: Workflow Note
+    type: note
+  d76a30c5-c826-4e59-9e66-7fc025c922fb:
+    x: 0
+    y: 9
+    description: Shows all lookups for a given domain name/pattern
+    height: 5
+    queryString: |
+      #event_simpleName=DnsRequest
+      | test(?DomainName != "*")
+      | $"falcondata/enrich:ComputerName"()
+      | DomainName = ?DomainName
+      | ComputerName = ?ComputerName DomainName = ?DomainName
+      | groupBy([DomainName, ComputerName], function=[
+        { count(ContextTimeStamp, as="Total Lookups", distinct=true) },
+        { selectLast(ContextTimeStamp) | rename(ContextTimeStamp, as=LastLookup) },
+        { select(ContextTimeStamp) | head(1) | rename(ContextTimeStamp, as=FirstLookup) }
+      ])
+      | sort(ComputerName, limit=20000)
+      | LastLookup := LastLookup*1000
+      | FirstLookup := FirstLookup*1000
+      | LastLookup := formatTime(field=LastLookup, format="%Y/%m/%d %H:%M:%S")
+      | FirstLookup := formatTime(field=FirstLookup, format="%Y/%m/%d %H:%M:%S")
+      | table([DomainName, "Total Lookups", ComputerName, FirstLookup, LastLookup], limit=200, sortby="Total Lookups")
+    visualization: table-view
+    start: 24h
+    width: 7
+    title: Lookup Details
+    type: query
+  c255b964-ba0a-49ca-a0cb-86a18e368451:
+    x: 9
+    y: 2
+    height: 5
+    queryString: |
+      /**
+       * This lists the distinct hosts ('ComputerName') that resolve a specific
+       * domain ('DomainName', parametrized by '?DomainName') and how many requests
+       * they made.
+       */
+      #event_simpleName="DnsRequest"
+      | $"falcondata/enrich:ComputerName"()
+      | DomainName=?DomainName
+      | groupBy([ComputerName, DomainName], limit=max)
+      | top(ComputerName, sum=_count, as="Total Lookups")
+    visualization: table-view
+    start: 24h
+    width: 3
+    title: Domain Lookups by Host
+    type: query
+  56b1dcbc-8082-4f11-87c5-f950ecaa30b0:
+    x: 7
+    y: 9
+    height: 5
+    queryString: |
+      /**
+       * This counts the number of distinct hosts ('ComputerName') that
+       * resolved a specific domain ('DomainName', parametrized by '?DomainName').
+       * This query will only return results if ?DomainName is specified.
+       */
+      #event_simpleName=DnsRequest
+      | test(?DomainName != "*")
+      | aid=?aid
+      | $"falcondata/enrich:ComputerName"()
+      | ComputerName=?ComputerName
+      | count(ComputerName, distinct=true)
+    start: 1d
+    width: 5
+    options:
+      ct: []
+      default: {}
+    visualization: single-value
+    title: Number of Hosts hitting the domain
+    type: query
+  5b09d3a4-e827-4950-8480-3882f62dc03b:
+    x: 6
+    y: 2
+    height: 5
+    queryString: |-
+      /**
+       * This lists the distinct hosts ('ComputerName') that resolve a specific
+       * domain ('DomainName', parametrized by '?DomainName') and how many requests
+       * they made.
+       */
+      #event_simpleName=DnsRequest
+      | $"falcondata/enrich:ComputerName"()
+      | DomainName = ?DomainName
+      | groupBy([ComputerName, DomainName], limit=max)
+      | top(ComputerName, sum=_count, as="Total Lookups")
+    visualization: bar-chart
+    start: 24h
+    width: 3
+    title: Domain Lookups by Host
+    type: query
+  faa9ea76-337a-49b9-bf45-8269785f052c:
+    x: 0
+    y: 14
+    height: 2
+    text: |
+      # Process and Domain Details
+
+      Enter `DomainName` and `ComputerName` above to narrow the search. The `aid` input can also be used instead of `ComputerName`.
+    width: 12
+    title: Workflow Note
+    type: note
+$schema: https://schemas.humio.com/dashboard/v0.4.0

@@ -1,0 +1,36 @@
+name: Logins - Windows LogonType
+visualization:
+  options:
+    series: {}
+    showDataPoints: true
+    connect-points: false
+    p: l
+    imputation: none
+  type: time-chart
+$schema: https://schemas.humio.com/query/v0.1.0
+timeInterval:
+  isLive: false
+  start: 7d
+queryString: |-
+  // Search for UserLogon events from Windows. Also add a UserName input box.
+  #event_simpleName=UserLogon event_platform=Win ?UserName
+
+  // Map the LogonTypes to readable names.
+  | case {
+          LogonType = "0"  | LogonType := "System" ;
+          LogonType = "2"  | LogonType := "Interactive" ;
+          LogonType = "3"  | LogonType := "Network" ;
+          LogonType = "4"  | LogonType := "Batch" ;
+          LogonType = "5"  | LogonType := "Service" ;
+          LogonType = "7"  | LogonType := "Unlock" ;
+          LogonType = "8"  | LogonType := "Network Cleartext" ;
+          LogonType = "9"  | LogonType := "New Credentials" ;
+          LogonType = "10" | LogonType := "Remote Interactive" ;
+          LogonType = "11" | LogonType := "Cached Interactive" ;
+          LogonType = "12" | LogonType := "Cached Remote Interactive" ;
+          LogonType = "13" | LogonType := "Cached Unlock" ;
+          * ;
+    }
+
+  // Create a time chart of the LogonTypes.
+  | timeChart(LogonType, function=count(aid))
