@@ -60,7 +60,7 @@ groupBy(ComputerName, function=[collect([UserName, DomainName]), selectLast(@tim
 
 ## Assign or create a dynamic field
 
-The documentation lists a few different methods. By far, the easiest way is to use the := shorthand. The field before := will be assigned the value of whatever is after it. This can be other fields, functions, strings, etc. For example, if bytes already has a byte count and you'd like to convert that to megabytes:
+The documentation lists a few different methods. By far, the easiest way is to use the `:=` shorthand. The field before `:=` will be assigned the value of whatever is after it. This can be other fields, functions, strings, etc. For example, if bytes already has a byte count and you'd like to convert that to megabytes:
 
 ```
 megabytes := bytes * 0.000001
