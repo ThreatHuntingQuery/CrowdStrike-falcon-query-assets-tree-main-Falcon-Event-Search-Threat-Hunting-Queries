@@ -2,7 +2,7 @@ name: FileVantage - Alerts
 updateFrequency: never
 timeSelector: {}
 sharedTimeInterval:
-  enabled: false
+  enabled: true
   isLive: false
   start: 7d
 widgets:

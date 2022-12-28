@@ -47,7 +47,7 @@ widgets:
       | FileName = ?FileName
       | $"falcondata/enrich:ComputerName"()
       | ShortCommandLine:=format("%.64s...", field=CommandLine)
-      | groupBy([aid, TargetProcessId], function=collect([ComputerName, ImageFileName, ShortCommandLine]), limit=max)
+      | groupBy([aid, TargetProcessId], function=collect([ComputerName, ImageFileName, ShortCommandLine], limit=10000), limit=max)
     visualization: table-view
     start: 1d
     width: 12

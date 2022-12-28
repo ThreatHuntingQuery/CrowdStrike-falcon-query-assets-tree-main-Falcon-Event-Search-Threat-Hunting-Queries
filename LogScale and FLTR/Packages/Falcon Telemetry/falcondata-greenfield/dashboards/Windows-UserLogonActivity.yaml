@@ -11,22 +11,8 @@ widgets:
     height: 4
     queryString: |-
       #event_simpleName=UserLogon event_platform=Win
-      | case {
-              LogonType = "0"  | LogonType := "System" ;
-              LogonType = "2"  | LogonType := "Interactive" ;
-              LogonType = "3"  | LogonType := "Network" ;
-              LogonType = "4"  | LogonType := "Batch" ;
-              LogonType = "5"  | LogonType := "Service" ;
-              LogonType = "7"  | LogonType := "Unlock" ;
-              LogonType = "8"  | LogonType := "Network Cleartext" ;
-              LogonType = "9"  | LogonType := "New Credentials" ;
-              LogonType = "10" | LogonType := "Remote Interactive" ;
-              LogonType = "11" | LogonType := "Cached Interactive" ;
-              LogonType = "12" | LogonType := "Cached Remote Interactive" ;
-              LogonType = "13" | LogonType := "Cached Unlock" ;
-
-              * }
-      | timeChart(LogonType, function=count(UserSid))
+      | $"falcondata/enrich:LogonTypeName"()
+      | timeChart(LogonTypeName, function=count(UserSid))
     start: 7d
     width: 6
     options:
@@ -51,32 +37,20 @@ widgets:
       | ?UserIsAdmin ?UserName ?LogonType
       | passwordAge := (now()-(PasswordLastSet*1000))/1000/60/60/24
       | passwordAgeDays := round("passwordAge")
+      | $"falcondata/enrich:LogonTypeName"()
       | case {
-              LogonType = "0"  | LogonType := "System" ;
-              LogonType = "2"  | LogonType := "Interactive" ;
-              LogonType = "3"  | LogonType := "Network" ;
-              LogonType = "4"  | LogonType := "Batch" ;
-              LogonType = "5"  | LogonType := "Service" ;
-              LogonType = "7"  | LogonType := "Unlock" ;
-              LogonType = "8"  | LogonType := "Network Cleartext" ;
-              LogonType = "9"  | LogonType := "New Credentials" ;
-              LogonType = "10" | LogonType := "Remote Interactive" ;
-              LogonType = "11" | LogonType := "Cached Interactive" ;
-              LogonType = "12" | LogonType := "Cached Remote Interactive" ;
-              LogonType = "13" | LogonType := "Cached Unlock" ;
-
-              * }
+          UserIsAdmin = "0"  | UserIsAdmin := "No" ;
+          UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;
+          * ; 
+        }
       | case {
-              UserIsAdmin = "0"  | UserIsAdmin := "No" ;
-              UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;
-              * }
-      | case {
-              RemoteAccount = "0"  | RemoteAccount := "No" ;
-              RemoteAccount = "1"  | RemoteAccount := "Yes" ;
-              * }
+          RemoteAccount = "0"  | RemoteAccount := "No" ;
+          RemoteAccount = "1"  | RemoteAccount := "Yes" ;
+          * ;
+        }
       | LogonTime := LogonTime*1000
       | LogonTime := formatTime("%Y-%m-%d %H:%M:%S", field=LogonTime, locale=en_US, timezone=Z)
-      | select([LogonTime, ComputerName, UserName, passwordAgeDays, UserSid, LogonType, LogonDomain, LogonServer, RemoteAccount, UserIsAdmin])
+      | select([LogonTime, ComputerName, UserName, passwordAgeDays, UserSid, LogonTypeName, LogonDomain, LogonServer, RemoteAccount, UserIsAdmin])
     visualization: table-view
     start: 7d
     width: 12
@@ -92,30 +66,17 @@ widgets:
       | ?UserIsAdmin ?UserName ?LogonType
       | passwordAge := (now()-(PasswordLastSet*1000))/1000/60/60/24
       | passwordAgeDays := round("passwordAge")
+      | $"falcondata/enrich:LogonTypeName"()
       | case {
-              LogonType = "0"  | LogonType := "System" ;
-              LogonType = "2"  | LogonType := "Interactive" ;
-              LogonType = "3"  | LogonType := "Network" ;
-              LogonType = "4"  | LogonType := "Batch" ;
-              LogonType = "5"  | LogonType := "Service" ;
-              LogonType = "7"  | LogonType := "Unlock" ;
-              LogonType = "8"  | LogonType := "Network Cleartext" ;
-              LogonType = "9"  | LogonType := "New Credentials" ;
-              LogonType = "10" | LogonType := "Remote Interactive" ;
-              LogonType = "11" | LogonType := "Cached Interactive" ;
-              LogonType = "12" | LogonType := "Cached Remote Interactive" ;
-              LogonType = "13" | LogonType := "Cached Unlock" ;
-
-              * }
+          UserIsAdmin = "0"  | UserIsAdmin := "No" ;
+          UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;
+          * ; 
+        }
       | case {
-              UserIsAdmin = "0"  | UserIsAdmin := "No" ;
-              UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;
-              * }
-      | case {
-              RemoteAccount = "0"  | RemoteAccount := "No" ;
-              RemoteAccount = "1"  | RemoteAccount := "Yes" ;
-              * }
-
+          RemoteAccount = "0"  | RemoteAccount := "No" ;
+          RemoteAccount = "1"  | RemoteAccount := "Yes" ;
+          * ;
+        }
       | avg("passwordAgeDays", as=passwordAgeDays)
       | round("passwordAgeDays")
     start: 7d
@@ -154,7 +115,7 @@ widgets:
       | !cidr(RemoteAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "127.0.0.0/8", "169.254.0.0/16", "0.0.0.0/32"])
       | ?UserIsAdmin ?UserName
       | ipLocation(RemoteAddressIP4)
-      | worldMap(lat=RemoteAddressIP4.lat, lon=RemoteAddressIP4.lon, magnitude=count(aid))
+      | worldMap(ip=RemoteAddressIP4, magnitude=count(aid))
     start: 7d
     width: 6
     options:
@@ -182,7 +143,7 @@ widgets:
     queryString: |-
       #event_simpleName=UserLogon event_platform=Win UserSid=/^S\-1\-5\-21\-.*/
       | lowercase("UserName")
-      | groupby([UserSid], function=([count(UserName, distinct=true), collect(UserName)]), limit=max)
+      | groupby([UserSid], function=([count(UserName, distinct=true), collect(UserName, limit=10000)]), limit=max)
       | _count > 1
       | count(UserSid)
     start: 7d
@@ -220,29 +181,17 @@ widgets:
       | ?UserIsAdmin ?UserName ?LogonType
       | passwordAge := (now()-(PasswordLastSet*1000))/1000/60/60/24
       | passwordAgeDays := round("passwordAge")
+      | $"falcondata/enrich:LogonTypeName"()
       | case {
-              LogonType = "0"  | LogonType := "System" ;
-              LogonType = "2"  | LogonType := "Interactive" ;
-              LogonType = "3"  | LogonType := "Network" ;
-              LogonType = "4"  | LogonType := "Batch" ;
-              LogonType = "5"  | LogonType := "Service" ;
-              LogonType = "7"  | LogonType := "Unlock" ;
-              LogonType = "8"  | LogonType := "Network Cleartext" ;
-              LogonType = "9"  | LogonType := "New Credentials" ;
-              LogonType = "10" | LogonType := "Remote Interactive" ;
-              LogonType = "11" | LogonType := "Cached Interactive" ;
-              LogonType = "12" | LogonType := "Cached Remote Interactive" ;
-              LogonType = "13" | LogonType := "Cached Unlock" ;
-
-              * }
+          UserIsAdmin = "0"  | UserIsAdmin := "No" ;
+          UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;
+          * ; 
+        }
       | case {
-              UserIsAdmin = "0"  | UserIsAdmin := "No" ;
-              UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;
-              * }
-      | case {
-              RemoteAccount = "0"  | RemoteAccount := "No" ;
-              RemoteAccount = "1"  | RemoteAccount := "Yes" ;
-              * }
+          RemoteAccount = "0"  | RemoteAccount := "No" ;
+          RemoteAccount = "1"  | RemoteAccount := "Yes" ;
+          * ;
+        }
       | passwordAgeDays > 365
       | count(UserSid, distinct=true)
     start: 7d
@@ -261,7 +210,7 @@ widgets:
       | !cidr(RemoteAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "127.0.0.0/8", "169.254.0.0/16", "0.0.0.0/32"])
       | ?UserIsAdmin ?UserName
       | ipLocation(aip)
-      | worldMap(lat=aip.lat, lon=aip.lon, magnitude=count(aid))
+      | worldMap(ip=aip, magnitude=count(aid))
     start: 7d
     width: 6
     options:

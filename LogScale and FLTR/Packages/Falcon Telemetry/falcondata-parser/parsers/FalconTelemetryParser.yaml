@@ -1,5 +1,97 @@
-name: FDR_and_DataConnector
+name: Falcon Telemetry Parser
 tests:
+- '{"eid":118,"UserIp":"10.20.12.35","CustomerIdString":"5ddb0407bef249c19c7a975f17979a1f","EventType":"Event_ExternalApiEvent","OperationName":"validateEntitlementsHmac","UTCTimestamp":1622049663110,"Success":false,"ExternalApiType":"Event_AuthActivityAuditEvent","Nonce":1,"ServiceName":"CrowdStrike
+  Authentication","UserId":"Customer","AgentIdString":"","cid":"5ddb0407bef249c19c7a975f17979a1f"}'
+- '{"eid":118,"UserIp":"10.20.12.35","CustomerIdString":"5ddb0407bef249c19c7a975f17979a1f","EventType":"Event_ExternalApiEvent","OperationName":"validateEntitlementsHmac","UTCTimestamp":1622049663110,"Success":false,"ExternalAPIType":"Event_AuthActivityAuditEvent","Nonce":1,"ServiceName":"CrowdStrike
+  Authentication","UserId":"Customer","AgentIdString":"","cid":"5ddb0407bef249c19c7a975f17979a1f","timestamp":"2021-05-26T17:21:03Z"}'
+- '{"_time":"1661920103.599", "MAC":"OS X 10.10", "discoverer_aid":"68f6edab45340721a1f393bacfd713d4",
+  "FirstDiscoveredDate":"1661920103.599", "cid":"18dbf2fd5a8bba1fa5efd409ef6c36cc","event_platform":"MAC"}'
+- '{"AccountType":"Local User","LastLoggedOnHost":"CP-DKF-SDF","LocalAdminAccess":"Yes","LogonInfo":"Local
+  User Logon","LogonTime":"1661920103.599","LogonType":"Terminal Server","PasswordLastSet":"1661920003.599","UserIsAdmin":"1","UserLogonFlags_decimal":"6","UserName":"ADMINISTRATOR","_time":"1661920103.599","cid":"18dbf2fd5a8bba1fa5efd409ef6c36cc","event_platform":"Win"}'
+- '{"FileName":"zyx.dll","FileVersion":"9.9.9999.9","ProductName":"PRODUCT","ProductVersion":"101","SHA256HashData":"asdads7d8asd8sd8asd","_time":"1661920103.599","cid":"18dbf2fd5a8bba1fa5efd409ef6c36cc","detectionCount":"0.0","event_platform":"Win"}'
+- |-
+  {
+  "GatewayIP":"",
+  "GatewayMAC":"",
+  "InterfaceAlias":"xyz7",
+  "InterfaceDescription":"",
+  "LocalAddressIP4":"192.168.0.1",
+  "MAC":"01-02-03-04-05-06",
+  "MACPrefix":"1A-1B-1C",
+  "_time":"1661920103.599",
+  "aid":"68f6edab45340721a1f393bacfd713d4",
+  "cid":"18dbf2fd5a8bba1fa5efd409ef6c36cc"
+  }
+- |-
+  {
+  "AgentLoadFlags":"0",
+  "AgentLocalTime":"1661502401",
+  "AgentTimeOffset":"341.111",
+  "AgentVersion":"6.42.15610.0",
+  "BiosManufacturer":"Abc",
+  "BiosVersion":"1.2.Abc",
+  "ChassisType":"Other",
+  "City":"Boardman",
+  "ComputerName":"A-B-C",
+  "ConfigBuild":"1.0",
+  "ConfigIDBuild":"12345",
+  "Continent":"North America",
+  "Country":"United States",
+  "FalconGroupingTags":"none",
+  "FirstSeen":"1661920103.599",
+  "HostHiddenStatus":"Visible",
+  "MachineDomain":"none",
+  "OU":"none",
+  "PointerSize":"8",
+  "ProductType":"3",
+  "SensorGroupingTags":"none",
+  "ServicePackMajor":"0",
+  "SiteName":"none",
+  "SystemManufacturer":"Abc",
+  "SystemProductName":"Xyz",
+  "Time":"1661920103.599",
+  "Timezone":"America/Los_Angeles",
+  "Version":"Windows",
+  "aid":"bdf69a9eb48505fda141b74bc687b445",
+  "aip":"1.2.3.4",
+  "cid":"f88bc7441088d72827f09aaadb9b7ca5",
+  "event_platform":"Win"
+  }
+- |-
+  {
+  "AgentLoadFlags":"0",
+  "AgentLocalTime":"1661502401",
+  "AgentTimeOffset":"341.111",
+  "AgentVersion":"6.42.15610.0",
+  "BiosManufacturer":"Abc",
+  "BiosVersion":"1.2.Abc",
+  "ChassisType":"Other",
+  "City":"Boardman",
+  "ComputerName":"A-B-C",
+  "ConfigBuild":"1.0",
+  "ConfigIDBuild":"12345",
+  "Continent":"North America",
+  "Country":"United States",
+  "FalconGroupingTags":"none",
+  "FirstSeen":"1661920103.599",
+  "HostHiddenStatus":"Visible",
+  "MachineDomain":"none",
+  "OU":"none",
+  "PointerSize":"8",
+  "ProductType":"3",
+  "SensorGroupingTags":"none",
+  "ServicePackMajor":"0",
+  "SiteName":"none",
+  "SystemManufacturer":"Abc",
+  "SystemProductName":"Xyz",
+  "Time":"1661920103.599",
+  "Timezone":"America/Los_Angeles",
+  "Version":"Windows",
+  "aid":"bdf69a9eb48505fda141b74bc687b445",
+  "aip":"1.2.3.4",
+  "cid":"f88bc7441088d72827f09aaadb9b7ca5",
+  "event_platform":"Win"
+  }
 - |-
   {
   "@path": "b764a096bdb2bd2019b07520d212d763dd3034ee/fdrv2/aidmaster/a1b2c3-1234-5678-2134-abcd1234/part-00000.gz",
@@ -94,95 +186,91 @@ tests:
   Authentication","UserId":"Customer","AgentIdString":"","cid":"5ddb0407bef249c19c7a975f17979a1f","timestamp":"2021-05-26T17:21:03Z"}'
 fieldsToBeRemovedBeforeParsing: []
 $schema: https://schemas.humio.com/parser/v0.2.0
-script: |
+script: |-
   parseJson()
 
-  // Rename the case for fields as needed.
+  // Standardize names that might be slightly different.
   | case {
-      ExternalAPIType=*
-        | ExternalApiType:=rename(ExternalAPIType) ;
-      * ;
-    }
+    ExternalAPIType=*
+      | ExternalApiType:=rename(ExternalAPIType) ;
+    * ;
+  }
 
-  // Identify secondary data sources
+  // Identify secondary data sources.
   | case {
       // Used when pulling from FDR.
-      @path=/fdrv2\/(?<SecondaryEventType>[^\/]+)/ 
+      @path=/fdrv2\/(?<SecondaryEventType>[^\/]+)/
         | kind:="Secondary" ;
-      // Used when there is not enough information to identify secondary events directly. 
-      // appinfo events.
-      _time=* FileName=* AND FileVersion=*
+      // Determine others based on fields.
+      _time=* FileName=* FileVersion=*
         | kind:="Secondary"
         | SecondaryEventType:="appinfo" ;
-      // aid_master events.
       Time=* AgentLocalTime=* FirstSeen=*
         | kind:="Secondary"
         | SecondaryEventType:="aidmaster" ;
-      // managedassets events.  
       _time=* MAC=* GatewayMAC=* aid=*
         | kind:="Secondary"
         | SecondaryEventType:="managedassets" ;
-      // userinfo events.
       _time=* LastLoggedOnHost=* LogonTime=*
         | kind:="Secondary"
         | SecondaryEventType:="userinfo" ;
-      // unmanagedassets events.
       _time=* MAC=* discoverer_aid=* FirstDiscoveredDate=*
         | kind:="Secondary"
         | SecondaryEventType:="notmanaged" ;
       // Everything else gets tagged as primary.
-      * 
+      *
         | kind:="Primary" ;
   }
-  
+
   // identify appropriate time stamps
   | case {
-    // Match for "Time".
-    Time=* 
-      | case {
-          Time=/(?<ts>\d{10}\.(?:\d{3}){1,3})/ 
-            | findTimestamp(field=ts) 
-            | drop(ts) ;
-          Time=/(?<ts>\d{10})\./ 
-            | findTimestamp(field=ts) 
-            | drop(ts) ;
-        * 
-          | findTimestamp(field=Time) ;
-        } ;
 
-    // Match for "_time".
-    _time=* 
-      | case {
-          _time=/(?<ts>\d{10}\.(?:\d{3}){1,3})/ 
-            | findTimestamp(field=ts) 
-            | drop(ts) ;
-          _time=/(?<ts>\d{10})\./. 
-            | findTimestamp(field=ts) 
-            | drop(ts) ;
-          * 
-            | findTimestamp(field=_time);
-        } ;
+    // Look for "Time".
+    Time=* | case {
+      Time=/(?<ts>\d{10}\.(?:\d{3}){1,3})/
+        | findTimestamp(field=ts)
+        | drop(ts) ;
+      Time=/(?<ts>\d{10})\./
+        | findTimestamp(field=ts)
+        | drop(ts) ;
+      *
+        | findTimestamp(field=Time) ;
+    } ;
 
-    // Exception - Zero Trust Assessment.
+      // Look for "_time".
+      _time=*
+        | case {
+            _time=/(?<ts>\d{10}\.(?:\d{3}){1,3})/
+              | findTimestamp(field=ts)
+              | drop(ts) ;
+      _time=/(?<ts>\d{10})\./.
+        | findTimestamp(field=ts)
+        | drop(ts) ;
+      *
+        | findTimestamp(field=_time) ;
+    } ;
+
+    // Exception - Zero Trust Assessment
     event_type=ZeroTrustHostAssessment
       | findTimestamp(field=scores.modified_time) ;
 
-    // Exception - Mobile Key Store Status.
+    // Exception - Mobile Key Store Status
+    // MobileSafetyNetStatus
     event_simpleName=MobileKeyStoreStatus
       | findTimestamp(field=ContextTimeStamp_decimal) ;
-    event_simpleName=MobileSafetyNetStatus 
+    event_simpleName=MobileSafetyNetStatus
       | findTimestamp(field=ContextTimeStamp_decimal) ;
     name=MobileDetectionJsonData
       | findTimestamp(field=ContextTimeStamp_decimal) ;
 
-    // Exception - Mobile Detection.
-    EventType=MobileDetectionJsonData |
-      findTimestamp(field=ContextTimeStamp_decimal) ;
-    name=MobileDetectionJsonData |
-      findTimestamp(field=ContextTimeStamp_decimal) ;
+    // Exception - Mobile Detection
+    EventType=MobileDetectionJsonData
+      | findTimestamp(field=ContextTimeStamp_decimal) ;
+    name=MobileDetectionJsonData
+      | findTimestamp(field=ContextTimeStamp_decimal) ;
 
-    // Exception - Horizon.
-    EventType=OciImageScan* 
+    // Exception - Horizon
+    EventType=OciImageScan*
       | findTimestamp(field=EventOccurredAt) ;
 
     timestamp=*
@@ -190,14 +278,12 @@ script: |
 
     * ;
   }
-  
-  // Add a timestamp if it's not in the event. 
+
   | case {
-    @timestamp!=* 
-      | @timestamp:=now();
+    @timestamp!=*
+      | @timestamp:=now() ;
     * ;
   }
-
 tagFields:
 - cid
 - event_simpleName

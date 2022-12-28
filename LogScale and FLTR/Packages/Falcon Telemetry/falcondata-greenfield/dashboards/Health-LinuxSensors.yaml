@@ -32,7 +32,7 @@ widgets:
            Location="null, null" | Location := "-" ;
         * }
       | $"falcondata/enrich:ComputerName"()
-      | groupBy(["RemoteAddressIP4"], function=([count(aid, as="Connection Count"), collect([Location, ComputerName, LocalAddressIP4, aid])]), limit=10)
+      | groupBy(["RemoteAddressIP4"], function=([count(aid, as="Connection Count"), collect([Location, ComputerName, LocalAddressIP4, aid], limit=10000)]), limit=10)
       | rename("RemoteAddressIP4",as="Destination SSH")
       | select([aid, ComputerName, Location, LocalAddressIP4, "Destination SSH", "Connection Count"])
       | sort("Connection Count")
@@ -150,7 +150,7 @@ widgets:
       | case {
            LogonType=2  | LogonType := "Interactive" ;
            LogonType=10 | LogonType := "SSH" ;
-        * }| groupBy([aid, ComputerName], function=([count(aid, as="Logon Count"), collect(LogonType)]), limit=max)
+        * }| groupBy([aid, ComputerName], function=([count(aid, as="Logon Count"), collect(LogonType, limit=10000)]), limit=max)
     visualization: table-view
     start: 7d
     width: 4
