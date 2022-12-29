@@ -4,6 +4,29 @@ This document is written from a "How do I...?" perspective, e.g. wanting to add 
 
 https://library.humio.com/
 
+- [Summary](#summary)
+- [Examples](#examples)
+  - [Add a single field to `groupBy` results](#add-a-single-field-to-groupby-results)
+  - [Add additional fields to `groupBy` results](#add-additional-fields-to-groupby-results)
+  - [Add a `count` to `groupBy` results when using `collect`](#add-a-count-to-groupby-results-when-using-collect)
+  - [Pass a `groupBy` result to `timechart`](#pass-a-groupby-result-to-timechart)
+  - [Assign or create a dynamic field](#assign-or-create-a-dynamic-field)
+  - [Round a number to 2 decimal places](#round-a-number-to-2-decimal-places)
+  - [Do a `join` statement](#do-a-join-statement)
+  - [Deal with time zones](#deal-with-time-zones)
+  - [Compare the last 31-60 days to the previous 30 days](#compare-the-last-31-60-days-to-the-previous-30-days)
+    - [`case` method](#case-method)
+    - [`bucket` method](#bucket-method)
+  - [Add `ComputerName` or `UserName` to FDR search results](#add-computername-or-username-to-fdr-search-results)
+    - [Adding the `ComputerName`](#adding-the-computername)
+    - [Adding the UserName](#adding-the-username)
+  - [Add a dynamic URL to query results](#add-a-dynamic-url-to-query-results)
+  - [Pass two averages to a timechart](#pass-two-averages-to-a-timechart)
+  - [Do a regex extraction without filtering data](#do-a-regex-extraction-without-filtering-data)
+  - [Get markdown URLs to display as URLs instead of strings when using `groupBy`](#get-markdown-urls-to-display-as-urls-instead-of-strings-when-using-groupby)
+  - [Get the first and last event of a `groupBy`](#get-the-first-and-last-event-of-a-groupby)
+  - [Create a case-insensitive user input](#create-a-case-insensitive-user-input)
+
 # Examples
 
 ## Add a single field to `groupBy` results
