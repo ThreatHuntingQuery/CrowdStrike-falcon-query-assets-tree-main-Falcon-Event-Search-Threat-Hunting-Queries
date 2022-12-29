@@ -1,35 +1,31 @@
-# Summary
+# Summary <!-- omit from toc -->
 
 This document is written from a "How do I...?" perspective, e.g. wanting to add additional fields to a groupBy result. This document also assumes that you know the basics of the LogScale query language. The official LogScale documentation page can be found here:
 
 https://library.humio.com/
 
-- [Summary](#summary)
-- [Examples](#examples)
-  - [Add a single field to `groupBy` results](#add-a-single-field-to-groupby-results)
-  - [Add additional fields to `groupBy` results](#add-additional-fields-to-groupby-results)
-  - [Add a `count` to `groupBy` results when using `collect`](#add-a-count-to-groupby-results-when-using-collect)
-  - [Pass a `groupBy` result to `timechart`](#pass-a-groupby-result-to-timechart)
-  - [Assign or create a dynamic field](#assign-or-create-a-dynamic-field)
-  - [Round a number to 2 decimal places](#round-a-number-to-2-decimal-places)
-  - [Do a `join` statement](#do-a-join-statement)
-  - [Deal with time zones](#deal-with-time-zones)
-  - [Compare the last 31-60 days to the previous 30 days](#compare-the-last-31-60-days-to-the-previous-30-days)
-    - [`case` method](#case-method)
-    - [`bucket` method](#bucket-method)
-  - [Add `ComputerName` or `UserName` to FDR search results](#add-computername-or-username-to-fdr-search-results)
-    - [Adding the `ComputerName`](#adding-the-computername)
-    - [Adding the UserName](#adding-the-username)
-  - [Add a dynamic URL to query results](#add-a-dynamic-url-to-query-results)
-  - [Pass two averages to a timechart](#pass-two-averages-to-a-timechart)
-  - [Do a regex extraction without filtering data](#do-a-regex-extraction-without-filtering-data)
-  - [Get markdown URLs to display as URLs instead of strings when using `groupBy`](#get-markdown-urls-to-display-as-urls-instead-of-strings-when-using-groupby)
-  - [Get the first and last event of a `groupBy`](#get-the-first-and-last-event-of-a-groupby)
-  - [Create a case-insensitive user input](#create-a-case-insensitive-user-input)
+- [Add a single field to `groupBy` results](#add-a-single-field-to-groupby-results)
+- [Add additional fields to `groupBy` results](#add-additional-fields-to-groupby-results)
+- [Add a `count` to `groupBy` results when using `collect`](#add-a-count-to-groupby-results-when-using-collect)
+- [Pass a `groupBy` result to `timechart`](#pass-a-groupby-result-to-timechart)
+- [Assign or create a dynamic field](#assign-or-create-a-dynamic-field)
+- [Round a number to 2 decimal places](#round-a-number-to-2-decimal-places)
+- [Do a `join` statement](#do-a-join-statement)
+- [Deal with time zones](#deal-with-time-zones)
+- [Compare the last 31-60 days to the previous 30 days](#compare-the-last-31-60-days-to-the-previous-30-days)
+  - [`case` method](#case-method)
+  - [`bucket` method](#bucket-method)
+- [Add `ComputerName` or `UserName` to FDR search results](#add-computername-or-username-to-fdr-search-results)
+  - [Adding the `ComputerName`](#adding-the-computername)
+  - [Adding the UserName](#adding-the-username)
+- [Add a dynamic URL to query results](#add-a-dynamic-url-to-query-results)
+- [Pass two averages to a timechart](#pass-two-averages-to-a-timechart)
+- [Do a regex extraction without filtering data](#do-a-regex-extraction-without-filtering-data)
+- [Get markdown URLs to display as URLs instead of strings when using `groupBy`](#get-markdown-urls-to-display-as-urls-instead-of-strings-when-using-groupby)
+- [Get the first and last event of a `groupBy`](#get-the-first-and-last-event-of-a-groupby)
+- [Create a case-insensitive user input](#create-a-case-insensitive-user-input)
 
-# Examples
-
-## Add a single field to `groupBy` results
+# Add a single field to `groupBy` results
 
 Let's say you need to use `groupBy()` for aggregation, but also need to include fields such as the `aid`, `aip`, `event_simpleName`, etc. This is where the `stats()` and `collect()` functions come into play. 
 
@@ -43,7 +39,7 @@ The results look like this:
 
 <img src=./images/image-2022-11-30_10-16-22.png width=400>
 
-## Add additional fields to `groupBy` results
+# Add additional fields to `groupBy` results
 
 Instead of the example above, you'd like to collect multiple fields instead of just one. The correct way of doing this is by using an array:
 
@@ -55,7 +51,7 @@ Notice the `[ ... ]`? That says "pass all of these into the function, and displa
 
 <img src=./images/image-2022-11-30_10-29-57.png width=400>
 
-## Add a `count` to `groupBy` results when using `collect`
+# Add a `count` to `groupBy` results when using `collect`
 
 By default, groupBy() without a `function=` argument includes a `count()` function. The result is the `groupby()` results have a `_count` field that displays the total count for each aggregation. However, once you add a `function=` to that, the `count()` is no longer in the results. The solution? Simply add the `count()` function into an array.
 
@@ -67,7 +63,7 @@ The results now include count() and look like this:
 
 <img src=./images/image-2022-11-30_10-38-7.png width=400>
 
-## Pass a `groupBy` result to `timechart`
+# Pass a `groupBy` result to `timechart`
 
 The `groupBy()` function removes the `@timestamp` field by default. This generally doesn't matter unless you're trying to use something like `timechart()` which requires `@timestamp` to work correctly.
 
@@ -83,7 +79,7 @@ groupBy(ComputerName, function=[collect([UserName, DomainName]), selectLast(@tim
 | timechart(ComputerName)
 ```
 
-## Assign or create a dynamic field
+# Assign or create a dynamic field
 
 The documentation lists a few different methods. By far, the easiest way is to use the `:=` shorthand. The field before `:=` will be assigned the value of whatever is after it. This can be other fields, functions, strings, etc. For example, if bytes already has a byte count and you'd like to convert that to megabytes:
 
@@ -106,7 +102,7 @@ eventLength := length(@rawstring)
 
 Keep in mind there fields and values are dynamic. They do not exist outside of the query results, and will not be permanently added to the ingested logs. 
 
-## Round a number to 2 decimal places
+# Round a number to 2 decimal places
 
 The `format()` function is extremely powerful. It allows you to manipulate data using printf formatting. The `round()` function rounds to the nearest integer and does not include decimals. 
 
@@ -118,7 +114,7 @@ thisSize := format("%.2f", field = thisSize)
 
 `%.1f` would be 1 decimal place, `%.3f` would be 3 decimal places, etc.
 
-## Do a `join` statement
+# Do a `join` statement
 
 The `join()` function is generally used when you have two query results that you'd like to combine, and both results share some common value. There is also a `selfJoin()` and `selfJoinFilter()` function for certain situations, both described in the official documentation. Please note the field names can be different: it's the *value* of those fields that should be identical. Background on the example:
 
@@ -147,7 +143,7 @@ And a visualization of everything that was just described:
 
 <img src=./images/image-2022-11-30_17-6-18.png width=400>
 
-## Deal with time zones
+# Deal with time zones
 
 LogScale is able to deal with most time zone situations. Two major items to keep in mind:
 
@@ -173,9 +169,9 @@ parseTimestamp("MMM [ ]d HH:mm:ss", field=@timestamp, timezone="America/NewYork"
 
 This says "parse the `@timestamp` field in that particular format, and assume it's in the America/NewYork time zone". Plenty of examples are included in the default parsers. 
 
-## Compare the last 31-60 days to the previous 30 days
+# Compare the last 31-60 days to the previous 30 days
 
-### `case` method
+## `case` method
 
 This can be done by utilizing `case {}` statements and comparing the `@timestamp` field. You'll still need to do a 60-day query since the query will encompass all results. It'll look like this:
 
@@ -198,7 +194,7 @@ The end results looks like this:
 
 <img src=./images/image-2022-12-2_9-20-9.png width=400>
 
-### `bucket` method
+## `bucket` method
 
 This can also be accomplished via the `bucket()` function. The bucket size should be divided by the number of values you'd like to compare. For example, if you're looking at 3 30-day windows over 90 days, each bucket should be 30 days. Please note that you might need to lower the search timeframe if you end up with an extra bucket, e.g. change it to 89 days if you specify a 30-day bucket but end up with 4 buckets. The query looks like this:
 
@@ -209,11 +205,11 @@ thisSize := eventSize()
 
 <img src=./images/image-2022-12-2_9-26-37.png width=400>
 
-## Add `ComputerName` or `UserName` to FDR search results
+# Add `ComputerName` or `UserName` to FDR search results
 
 Not all FDR events include a `ComputerName` or `UserName` field by default. In those cases, we can add the fields at query time. Version 1.1.1 of the FDR package includes a scheduled search that creates a CSV lookup file every 3 hours. You can find this file by clicking on the `Files` link at the top of the LogScale page. You should see `fdr_aidmaster.csv` in the file list, assuming the scheduled search is running as expected.
 
-### Adding the `ComputerName`
+## Adding the `ComputerName`
 
 The CSV is used to look up the ComputerName from the aid via the match() function. You would simply add this to your query:
 
@@ -238,7 +234,7 @@ A more robust version can be saved as a search, and the saved search referenced 
 
 If that were saved as `AddComputerName`, then it could be called in a query by using `$"AddComputerName"()`.
 
-### Adding the UserName 
+## Adding the UserName 
 
 The `UserName` field can be added via a `join()` query. This will also show the last known user on the aid in question. Keep that in mind if there are multiple users over an extended timeframe, i.e. it will only be reporting the last user. 
 
@@ -254,7 +250,7 @@ default(field=UserName, value="NotMatched")
 | join({#event_simpleName=UserLogon | UserName!=/(\$$|^DWM-|LOCAL\sSERVICE|^UMFD-|^$)/}, field=aid, include=UserName, mode=left)
 ```
 
-## Add a dynamic URL to query results
+# Add a dynamic URL to query results
 
 The `format()` function can be used to create dynamic URLs, e.g. a URL that takes a value from the search results as an input. This saves the user from needing to copy and paste into another browser tab. For example:
 
@@ -264,7 +260,7 @@ format("[Link](https://example.com/%s)", field=repo, as=link)
 
 This says "generate a markdown URL that shows up as `link` in the results, with the `%s` being replaced by the value of the `repo` field".
 
-## Pass two averages to a timechart
+# Pass two averages to a timechart
 
 Let's say you have two fields you'd like to average and pass to a `timechart()` function. However, both functions will create an `_avg` field. This causes `timechart()` to generate an error about two events having the same field but different values. The solution is to rename the fields that are generated by the `avg()` function:
 
@@ -274,7 +270,7 @@ timechart(function=[avg(ConfigStateHash, as=avgConfigStateHash), avg(ConnectTime
 
 This creates two averages, `avgConfigStateHash` and `avgConnectTime`, and then passes them into the `timechart()` function. 
 
-## Do a regex extraction without filtering data
+# Do a regex extraction without filtering data
 
 LogScale allows you to dynamically create fields using named capture groups. For example, let's say you want to create the field `netFlag` from certain events, but still pass the results through that don't match. The solution is to add the `strict=false` flag to the `regex()` function. This means "extract if it matches, but still pass the data through even if it doesn't match" in the query. 
 
@@ -284,7 +280,7 @@ LogScale allows you to dynamically create fields using named capture groups. For
 | regex("net1?\s+(?<netFlag>\S+)\s+", field=CommandLine, flags=i, strict=false)
 ```
 
-## Get markdown URLs to display as URLs instead of strings when using `groupBy`
+# Get markdown URLs to display as URLs instead of strings when using `groupBy`
 
 Let's say you have a field that contains a markdown URL as the value. You want that displayed as a clickable URL in the `groupBy()` output. The solution is to remove the field from `collect()` and place it into a `selectLast()` instead. Otherwise, you end up collecting multiple URLs into the same field. 
 
@@ -294,7 +290,7 @@ Let's say you have a field that contains a markdown URL as the value. You want t
 
 <img src=./images/image-2022-12-15_13-12-39.png width=400>
 
-## Get the first and last event of a `groupBy`
+# Get the first and last event of a `groupBy`
 
 Let's say you're doing a `groupBy()` for a particular event, but you'd like to see the time of the first and last occurrence in the results. You'd do this:
 
@@ -306,7 +302,7 @@ groupBy(UserName, function=[max(@timestamp, as=lastSeen), min(@timestamp, as=fir
 
 Keep in mind that `@timestamp` is epoch, which means you can basically search for the "smallest" which is the oldest, or the "largest" which is the most recent. That query says "group the results by `UserName`, find the smallest/oldest timestamp, find the largest/newest timestamp, and then reformat the epoch times into something readable."
 
-## Create a case-insensitive user input
+# Create a case-insensitive user input
 
 User inputs can be created by putting a `?` in front of the input name, e.g. `?username` would create a username input. You'll see these in dashboards, but they can also be used in queries. The inputs are case-sensitive by default. This means that an input of "ADministrator" would not match "administrator", "Administrator, etc. The solution is to use the `test()` function and compare everything in lowercase. For example:
 
