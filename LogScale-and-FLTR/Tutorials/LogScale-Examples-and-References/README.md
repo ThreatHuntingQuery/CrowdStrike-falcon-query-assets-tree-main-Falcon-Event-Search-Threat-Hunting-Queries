@@ -341,17 +341,3 @@ Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `
   }
 // Check the last two strings, no reason to look at case. 
 | AgentIdString = ?aid AND CustomerIdString = ?cid
-
-## Adding an inclusive regex search
-
-You'd like an input of `credential` to match `Credentials in Files`, `Credentials in Registry`, `OS Credential Dumping`, etc. You'd also like to have `*` as a possible input. The problem is that `*` doesn't always play nice with regex. The solution? Assigned values and a `match{}` statement.
-
-```
-// Assign the input to a field. 
-| inputTechnique:=?Technique
-// First look for a "*" or blank input, otherwise attempt a regex match. 
-| inputTechnique match {
-    /(\*|^\s|^$)/ => Technique=* ;
-    * => regex(?Technique, field=Technique, flags=i) ;
-  }
-```
