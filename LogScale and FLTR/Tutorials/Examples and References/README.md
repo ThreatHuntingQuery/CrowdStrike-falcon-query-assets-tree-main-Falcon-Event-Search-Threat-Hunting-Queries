@@ -17,7 +17,7 @@ https://library.humio.com/
   - [`bucket` method](#bucket-method)
 - [Add `ComputerName` or `UserName` to FDR search results](#add-computername-or-username-to-fdr-search-results)
   - [Adding the `ComputerName`](#adding-the-computername)
-  - [Adding the UserName](#adding-the-username)
+  - [Adding the `UserName`](#adding-the-username)
 - [Add a dynamic URL to query results](#add-a-dynamic-url-to-query-results)
 - [Pass two averages to a timechart](#pass-two-averages-to-a-timechart)
 - [Do a regex extraction without filtering data](#do-a-regex-extraction-without-filtering-data)
@@ -234,7 +234,7 @@ A more robust version can be saved as a search, and the saved search referenced 
 
 If that were saved as `AddComputerName`, then it could be called in a query by using `$"AddComputerName"()`.
 
-## Adding the UserName 
+## Adding the `UserName` 
 
 The `UserName` field can be added via a `join()` query. This will also show the last known user on the aid in question. Keep that in mind if there are multiple users over an extended timeframe, i.e. it will only be reporting the last user. 
 
