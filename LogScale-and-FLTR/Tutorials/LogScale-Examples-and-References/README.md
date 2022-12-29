@@ -26,6 +26,8 @@ https://library.humio.com/
 - [Get markdown URLs to display as URLs instead of strings when using `groupBy`](#get-markdown-urls-to-display-as-urls-instead-of-strings-when-using-groupby)
 - [Get the first and last event of a `groupBy`](#get-the-first-and-last-event-of-a-groupby)
 - [Create a case-insensitive user input](#create-a-case-insensitive-user-input)
+  - [Single input](#single-input)
+  - [Multiple inputs](#multiple-inputs)
 
 # Add a single field to `groupBy` results
 
@@ -306,6 +308,8 @@ Keep in mind that `@timestamp` is epoch, which means you can basically search fo
 
 # Create a case-insensitive user input
 
+## Single input
+
 User inputs can be created by putting a `?` in front of the input name, e.g. `?username` would create a username input. You'll see these in dashboards, but they can also be used in queries. The inputs are case-sensitive by default. This means that an input of "ADministrator" would not match "administrator", "Administrator, etc. The solution is to use the `test()` function and compare everything in lowercase. For example:
 
 ```
@@ -319,6 +323,8 @@ test(lower(thisInput) == lower(UserName))
 ```
 
 Because we're comparing everything in lowercase, an input of "administrator" would match "Administrator", "ADMinistrator", "AdMiNiSTRATOR", etc. 
+
+## Multiple inputs
 
 Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `?aid`, and `?cid`. Let's say we only need `?ComputerName` to be case-insensitive. It'd look like this:
 
@@ -335,3 +341,17 @@ Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `
   }
 // Check the last two strings, no reason to look at case. 
 | AgentIdString = ?aid AND CustomerIdString = ?cid
+
+## Adding an inclusive regex search
+
+You'd like an input of `credential` to match `Credentials in Files`, `Credentials in Registry`, `OS Credential Dumping`, etc. You'd also like to have `*` as a possible input. The problem is that `*` doesn't always play nice with regex. The solution? Assigned values and a `match{}` statement.
+
+```
+// Assign the input to a field. 
+| inputTechnique:=?Technique
+// First look for a "*" or blank input, otherwise attempt a regex match. 
+| inputTechnique match {
+    /(\*|^\s|^$)/ => Technique=* ;
+    * => regex(?Technique, field=Technique, flags=i) ;
+  }
+```
