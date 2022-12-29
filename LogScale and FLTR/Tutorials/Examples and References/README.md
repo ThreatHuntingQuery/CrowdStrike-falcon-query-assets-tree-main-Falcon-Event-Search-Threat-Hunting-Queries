@@ -297,37 +297,18 @@ test(lower(thisInput) == lower(UserName))
 
 Because we're comparing everything in lowercase, an input of "administrator" would match "Administrator", "ADMinistrator", "AdMiNiSTRATOR", etc. 
 
+Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `?aid`, and `?cid`. Let's say we only need `?ComputerName` to be case-insensitive. It'd look like this:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```
+// Assign a different name for the variable. 
+| inputComputerName:=?ComputerName
+// If it's a "*" then keep it, if it's blank use a "*", otherwise do a case-insensitive match. 
+| case {
+    test(?ComputerName == "*")
+      | ComputerName = ?ComputerName ;
+    test(?ComputerName == "")
+      | ComputerName = * ;
+    test(lower(inputComputerName) == lower(ComputerName)) ;
+  }
+// Check the last two strings, no reason to look at case. 
+| AgentIdString = ?aid AND CustomerIdString = ?cid
