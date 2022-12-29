@@ -4,6 +4,8 @@ This document is written from a "How do I...?" perspective, e.g. wanting to add 
 
 https://library.humio.com/
 
+# Table of Contents <!-- omit from toc -->
+
 - [Add a single field to `groupBy` results](#add-a-single-field-to-groupby-results)
 - [Add additional fields to `groupBy` results](#add-additional-fields-to-groupby-results)
 - [Add a `count` to `groupBy` results when using `collect`](#add-a-count-to-groupby-results-when-using-collect)
