@@ -16,7 +16,7 @@ Here's a quick summary of the various folders in this repo:
 
 - Lookup Files: CSVs that can be used with the [match function](https://library.humio.com/humio-server/functions-match.html).
 
-- Packages: **unofficial** packages used by the SE team. These are primarily meant as learning examples. 
+- Unofficial Packages: **unofficial** packages used by the SE team. These are primarily meant as learning examples. 
 
 - Parsers: **unofficial** parsers used by the SE team. These are primarily meant as learning examples.
 
