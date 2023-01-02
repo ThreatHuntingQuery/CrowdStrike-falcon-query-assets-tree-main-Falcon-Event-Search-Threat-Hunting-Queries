@@ -8,20 +8,20 @@ Welcome to the LogScale space of the Falcon Query Assets repo, formerly known as
 
 Here's a quick summary of the various folders in this repo:
 
-- Alerts: these are custom alerts that can be leveraged in LogScale.
+- **Alerts**: these are custom alerts that can be leveraged in LogScale.
 
-- Dashboards: dashboards that can be imported ad-hoc. 
+- **Dashboards**: dashboards that can be imported ad-hoc. 
 
-- Functions: these can be saved as queries and used as [user functions](https://library.humio.com/humio-server/syntax-function.html#syntax-function-user).
+- **Functions**: these can be saved as queries and used as [user functions](https://library.humio.com/humio-server/syntax-function.html#syntax-function-user).
 
-- Lookup Files: CSVs that can be used with the [match function](https://library.humio.com/humio-server/functions-match.html).
+- **Lookup Files**: CSVs that can be used with the [match function](https://library.humio.com/humio-server/functions-match.html).
 
-- Unofficial Packages: **unofficial** packages used by the SE team. These are primarily meant as learning examples. 
+- **Unofficial Packages**: **unofficial** packages used by the SE team. These are primarily meant as learning examples. 
 
-- Parsers: **unofficial** parsers used by the SE team. These are primarily meant as learning examples.
+- **Parsers**: **unofficial** parsers used by the SE team. These are primarily meant as learning examples.
 
-- Queries: useful LogScale queries. These can range from Falcon data to applications to metrics. 
+- **Queries**: useful LogScale queries. These can range from Falcon data to applications to metrics. 
 
-- Transforms: examples of using LQL to transform fields and values. 
+- **Transforms**: examples of using LQL to transform fields and values. 
 
-- Tutorials: **unofficial** examples of using LQL. 
+- **Tutorials**: **unofficial** examples of using LQL. 
