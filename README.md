@@ -19,7 +19,7 @@ This page will be perpetually under construction.
 
 ## Major Release Log :shipit:
 
-- 2023-01-02 - Redesign of the page, along with a bunch of content to the [LogScale and FLTR sections](LogScale-and-FLTR/README.md)
+- 2023-01-02 - Redesign of the page, along with a bunch of content to the [LogScale and FLTR sections](LogScale-and-FLTR/README.md).
 
 - 2022-10-03 - [Added LogScale Hunting Guide](https://github.com/CrowdStrike/falcon-query-assets/wiki/Hunting-&-Investigation).
 
