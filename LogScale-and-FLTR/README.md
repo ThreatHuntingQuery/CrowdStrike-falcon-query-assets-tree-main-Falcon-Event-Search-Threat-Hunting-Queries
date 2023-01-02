@@ -16,12 +16,12 @@ Here's a quick summary of the various folders in this repo:
 
 - **Lookup Files**: CSVs that can be used with the [match function](https://library.humio.com/humio-server/functions-match.html).
 
-- **Unofficial Packages**: **unofficial** packages used by the SE team. These are primarily meant as learning examples. 
+- **Unofficial Packages**: :warning: packages used by the SE team. These are primarily meant as learning examples. This is not a replacement for the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html).
 
-- **Parsers**: **unofficial** parsers used by the SE team. These are primarily meant as learning examples.
+- **Parsers**: :warning: parsers used by the SE team. These are primarily meant as learning examples. This is not a replacement for the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html).
 
 - **Queries**: useful LogScale queries. These can range from Falcon data to applications to metrics. 
 
 - **Transforms**: examples of using LQL to transform fields and values. 
 
-- **Tutorials**: **unofficial** LQL tutorials. These are primarily meant as learning examples.
+- **Tutorials**: LQL tutorials. These are primarily meant as learning examples. This is not meant as a replacement for the [official documentation](https://library.humio.com)
