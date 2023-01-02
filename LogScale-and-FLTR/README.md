@@ -24,4 +24,4 @@ Here's a quick summary of the various folders in this repo:
 
 - **Transforms**: examples of using LQL to transform fields and values. 
 
-- **Tutorials**: **unofficial** examples of using LQL. 
+- **Tutorials**: **unofficial** LQL tutorials. These are primarily meant as learning examples.
