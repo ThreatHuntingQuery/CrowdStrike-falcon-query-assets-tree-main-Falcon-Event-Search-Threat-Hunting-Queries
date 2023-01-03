@@ -19,9 +19,11 @@ This page will be perpetually under construction.
 
 ## Major Release Log :shipit:
 
+- 2023-01-03 - Updated and enhanced the [LogScale Hunting and Investigations](./LogScale-and-FLTR/Tutorials/LogScale-Hunting-and-Investigations/README.md) guide. Also added the [LogScale Examples and References](./LogScale-and-FLTR/Tutorials/LogScale-Examples-and-References/README.md) guide.  
+
 - 2023-01-02 - Redesign of the page, along with a bunch of content to the [LogScale and FLTR sections](LogScale-and-FLTR/README.md).
 
-- 2022-10-03 - [Added LogScale Hunting Guide](https://github.com/CrowdStrike/falcon-query-assets/wiki/Hunting-&-Investigation).
+- 2022-10-03 - [Added LogScale Hunting Guide](./LogScale-and-FLTR/Tutorials/LogScale-Hunting-and-Investigations/README.md).
 
 - 2022-10-03 - Added hunting logic for ProxyNotShell [T1505.003].
 
