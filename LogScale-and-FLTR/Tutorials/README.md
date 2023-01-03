@@ -4,5 +4,5 @@ These are **unofficial** guides and tutorials for using LogScale. They are not m
 
 # Content
 
-- [Hunting and Investigation](./LogScale-Hunting-and-Investigations/README.md)
+- [Hunting and Investigations](./LogScale-Hunting-and-Investigations/README.md)
 - [Examples and References](./LogScale-Examples-and-References/README.md)
