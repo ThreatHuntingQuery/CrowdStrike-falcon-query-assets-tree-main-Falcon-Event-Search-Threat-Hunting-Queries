@@ -4,5 +4,5 @@ These are **unofficial** guides and tutorials for using LogScale. They are not m
 
 # Content
 
-- [LogScale Hunting and Investigation](https://github.com/CrowdStrike/falcon-query-assets/wiki/Hunting-&-Investigation).
+- [LogScale Hunting and Investigation](https://github.com/CrowdStrike/falcon-query-assets/wiki/Hunting-&-Investigation)
 - [LogScale Examples and References](LogScale-Examples-and-References/README.md)
