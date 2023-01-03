@@ -10,14 +10,13 @@ This guide contains information about how to hunt using Falcon and is tailored s
 
 # Table of Contents <!-- omit from toc -->
 
-- [Hunting in Falcon LTR](#hunting-in-falcon-ltr)
-  - [Overview](#overview)
-  - [Best practices](#best-practices)
-    - [Write specific queries](#write-specific-queries)
+- [Overview](#overview)
+- [Best practices](#best-practices)
+  - [Write specific queries](#write-specific-queries)
   - [ComputerName Lookups](#computername-lookups)
   - [Change views](#change-views)
   - [Filter out benign data](#filter-out-benign-data)
-- [Hunting Queries](#hunting-queries)
+- [Hunting queries](#hunting-queries)
 - [Hunting phishing attacks and malicious attachments](#hunting-phishing-attacks-and-malicious-attachments)
 - [Hunting configuration and compliance vulnerabilities](#hunting-configuration-and-compliance-vulnerabilities)
 - [Hunting firewall anomalies and vulnerabilities](#hunting-firewall-anomalies-and-vulnerabilities)
@@ -30,9 +29,9 @@ This guide contains information about how to hunt using Falcon and is tailored s
   - [Hunting Java exploits](#hunting-java-exploits)
 
 
-# Hunting in Falcon LTR
+# Hunting in Falcon LTR <!-- omit from toc -->
 
-## Overview
+# Overview
 
 Hunting with Falcon LTR is straightforward. By using either the pre-made dashboards and reports or by using custom queries on the Search page, you can search for specific events and data points across one, several, or all hosts running the Falcon sensor in your environment.
 
@@ -44,9 +43,9 @@ The data returned in an LTR Events Search query is from the timeframe selected i
 
 Before you start hunting with Falcon LTR, however, there are a few concepts and best practices that you should familiarize yourself with, beginning with the queries themselves.
 
-## Best practices
+# Best practices
 
-### Write specific queries
+## Write specific queries
 
 All queries in Falcon LTR are powered by the LogScale query language. This document focuses less on teaching you syntax and more on the various behaviors and activities you will be hunting. To learn more about LogScale and LogScale syntax, we recommend that you read the [official documentation](https://library.humio.com/).
 
@@ -203,7 +202,7 @@ We can make this more meaningful by filtering out a registry object that we know
 | sort(timestamp, order=asc, limit=1000)
 ```
 
-# Hunting Queries
+# Hunting queries
 
 Show me any instances of common reconnaissance tools on a host:
 
