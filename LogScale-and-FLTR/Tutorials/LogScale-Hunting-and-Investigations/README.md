@@ -178,7 +178,7 @@ Also make sure to add `ComputerName `to your output if leveraging something like
 
 You can view the results of any event search query with one click. You can choose `Events Table` (default), `pie`, `bar`, or `scatter` charts, and even `Heat Map`, `Event List`, `Time Chart`, `Sankey`, `World Map`, and `Single Value`. For the purposes of hunting, we recommend using the `Table` view to view the raw data. This is also the only way you will be able to access workflows.
 
-<img src=./images/views.png width=400>
+<img src=./images/views.png height=200>
 
 ## Filter out benign data
 
