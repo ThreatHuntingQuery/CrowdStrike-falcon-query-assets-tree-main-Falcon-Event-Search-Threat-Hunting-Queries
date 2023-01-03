@@ -35,11 +35,11 @@ This guide contains information about how to hunt using Falcon and is tailored s
 
 Hunting with Falcon LTR is straightforward. By using either the pre-made dashboards and reports or by using custom queries on the Search page, you can search for specific events and data points across one, several, or all hosts running the Falcon sensor in your environment.
 
-<img src=./images/search_ui.png width=400>
+<img src=./images/search_ui.png width=600>
 
 The data returned in an LTR Events Search query is from the timeframe selected in the Time Filter box in the UI. Most of the queries you run will need to be narrowed down to a smaller timeframe so that results are usable. You then use your search results to understand and evaluate security events happening in your environment.
 
-<img src=./images/time_interval.png width=400>
+<img src=./images/time_interval.png width=600>
 
 Before you start hunting with Falcon LTR, however, there are a few concepts and best practices that you should familiarize yourself with, beginning with the queries themselves.
 
@@ -67,7 +67,7 @@ Most of the queries in this document can simply be copied and pasted into Events
 
 This is an example of a user input:
 
-<img src=./images/user_input.png width=400>
+<img src=./images/user_entry.png width=600>
 
 In the example above, you should provide an "agent ID" (or "AID" for short), which is a unique ID given to each Falcon sensor. Adding the AID to the query limits the scope of your query to the sensor with that AID and greatly reduces the time and computational cost of your search.
 
@@ -81,7 +81,7 @@ The above query might end up looking like this:
 
 or:
 
-<img src=./images/dashboard_entry.png width=400>
+<img src=./images/dashboard_entry.png width=600>
 
 This is just one example, but shows how specificity matters when writing LogScale queries. The more specific you can be when writing a query, the fewer results you will have to sort through and the faster the query will run.
 
