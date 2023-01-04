@@ -4,7 +4,7 @@ Welcome to the Falcon Query Assets GitHub page. Here, we will publish useful que
 
 ## Contents :bookmark_tabs:	
 
-- [LogScale Tutorials](LogScale-and-FLTR/Tutorials/README.md)
+- [LogScale Tutorials](./LogScale-and-FLTR/Tutorials/)
 - Event field transforms for telemetry in Event Search (FQL) and Falcon LogScale (LQL) language.
 - Custom IOA Logic.
 - Useful lookup tables for Event Search and Falcon LogScale.
@@ -19,11 +19,11 @@ This page will be perpetually under construction.
 
 ## Major Release Log :shipit:
 
-- 2023-01-03 - Updated and enhanced the [LogScale Hunting and Investigations](./LogScale-and-FLTR/Tutorials/LogScale-Hunting-and-Investigations/README.md) guide. Also added the [LogScale Examples and References](./LogScale-and-FLTR/Tutorials/LogScale-Examples-and-References/README.md) guide.  
+- 2023-01-03 - Updated and enhanced the [LogScale Hunting and Investigations](./LogScale-and-FLTR/Tutorials/Hunting-and-Investigations/) guide. Also added the [LogScale Foundational Building Blocks](./LogScale-and-FLTR/Tutorials/Foundational-Building-Blocks/) guide.  
 
-- 2023-01-02 - Redesign of the page, along with a bunch of content to the [LogScale and FLTR sections](LogScale-and-FLTR/README.md).
+- 2023-01-02 - Redesign of the page, along with a bunch of content to the [LogScale and FLTR sections](./LogScale-and-FLTR/).
 
-- 2022-10-03 - [Added LogScale Hunting Guide](./LogScale-and-FLTR/Tutorials/LogScale-Hunting-and-Investigations/README.md).
+- 2022-10-03 - [Added LogScale Hunting Guide](./LogScale-and-FLTR/Tutorials/Hunting-and-Investigations/).
 
 - 2022-10-03 - Added hunting logic for ProxyNotShell [T1505.003].
 

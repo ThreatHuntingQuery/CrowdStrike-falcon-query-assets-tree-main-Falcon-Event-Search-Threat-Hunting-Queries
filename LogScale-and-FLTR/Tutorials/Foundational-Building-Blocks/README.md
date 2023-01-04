@@ -1,6 +1,8 @@
 # Summary <!-- omit from toc -->
 
-This document is written from a "How do I...?" perspective, e.g. wanting to add additional fields to a groupBy result. This document also assumes that you know the basics of the LogScale query language. The official LogScale documentation page can be found here:
+Greetings! This guide is composed of LogScale "foundational building blocks". They're meant to act as learning examples for the LogScale Query Language. 
+
+The official LogScale documentation page can be found here:
 
 https://library.humio.com/
 

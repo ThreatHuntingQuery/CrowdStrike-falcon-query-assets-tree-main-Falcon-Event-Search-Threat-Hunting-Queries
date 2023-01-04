@@ -12,8 +12,6 @@ Here's a quick summary of the various folders in this repo:
 
 - **Dashboards**: dashboards that can be imported ad-hoc. 
 
-- **Functions**: these can be saved as queries and used as [user functions](https://library.humio.com/humio-server/syntax-function.html#syntax-function-user).
-
 - **Lookup Files**: CSVs that can be used with the [match function](https://library.humio.com/humio-server/functions-match.html).
 
 - **Packages**: :warning: unofficial packages :warning: used by the SE team. These are primarily meant as learning examples. This is not a replacement for the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html).
@@ -24,4 +22,4 @@ Here's a quick summary of the various folders in this repo:
 
 - **Transforms**: examples of using LQL to transform fields and values. 
 
-- **Tutorials**: LQL tutorials. These are primarily meant as learning examples.
+- **Tutorials**: LQL guides and tutorials.

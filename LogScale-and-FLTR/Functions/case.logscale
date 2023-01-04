@@ -1,5 +1,0 @@
-| UserIsAdmin match {
-    "0" => isAdmin:="False" ;
-		"1" => isAdmin:="True" ;
-		* => * ;
-	}
