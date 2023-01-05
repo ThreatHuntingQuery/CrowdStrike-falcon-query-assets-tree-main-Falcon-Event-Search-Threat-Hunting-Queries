@@ -4,7 +4,7 @@ Welcome to the Falcon Query Assets GitHub page. Here, we will publish useful que
 
 ## Contents :bookmark_tabs:	
 
-- [LogScale Tutorials](./LogScale-and-FLTR/Tutorials/)
+- [LogScale Tutorials](./LogScale-and-FLTR/Tutorials/).
 - Event field transforms for telemetry in Event Search (FQL) and Falcon LogScale (LQL) language.
 - Custom IOA Logic.
 - Useful lookup tables for Event Search and Falcon LogScale.
