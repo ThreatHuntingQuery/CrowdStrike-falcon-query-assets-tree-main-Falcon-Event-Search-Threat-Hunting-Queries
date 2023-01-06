@@ -50,7 +50,7 @@ widgets:
         }
       | LogonTime := LogonTime*1000
       | LogonTime := formatTime("%Y-%m-%d %H:%M:%S", field=LogonTime, locale=en_US, timezone=Z)
-      | select([LogonTime, ComputerName, UserName, passwordAgeDays, UserSid, LogonTypeName, LogonDomain, LogonServer, RemoteAccount, UserIsAdmin])
+      | select([LogonTime, ClientComputerName, UserName, passwordAgeDays, UserSid, LogonTypeName, LogonDomain, LogonServer, RemoteAccount, UserIsAdmin])
     visualization: table-view
     start: 7d
     width: 12
