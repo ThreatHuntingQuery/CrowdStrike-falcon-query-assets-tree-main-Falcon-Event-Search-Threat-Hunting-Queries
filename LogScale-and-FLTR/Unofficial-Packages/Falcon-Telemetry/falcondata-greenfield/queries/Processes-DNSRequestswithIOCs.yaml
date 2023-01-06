@@ -27,7 +27,7 @@ queryString: |-
   | DomainName=?DomainName FileName=?FileName
 
   // Add the ComputerName.
-  | $"falcondata/enrich:ComputerName"()
+  | $"falcondata/zen:ComputerName"()
 
   // Do an IOC lookup on the domain and rename the field.
   | ioc:lookup(DomainName, type=domain, confidenceThreshold=unverified)

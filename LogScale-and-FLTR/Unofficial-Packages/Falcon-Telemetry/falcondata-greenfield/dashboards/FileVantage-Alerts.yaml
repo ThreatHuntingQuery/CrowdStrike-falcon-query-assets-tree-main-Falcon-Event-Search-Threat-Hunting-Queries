@@ -93,8 +93,8 @@ widgets:
         ObjectAccessOperationType = 3 | ObjectOperation:= "Delete";
         ObjectAccessOperationType = 4 | ObjectOperation:= "Set";
         ObjectAccessOperationType = 5 | ObjectOperation:= "Rename";}
-      | $"falcondata/enrich:ComputerName"()
-      | $"falcondata/enrich:UserName"()
+      | $"falcondata/zen:ComputerName"()
+      | $"falcondata/zen:UserName"()
       | select([@timestamp, PolicyRuleSeverity, aid, ComputerName, UserName, CommandLine, ImageFileName, ObjectChanged, ObjectOperation, ObjectName, ObjectNameNew])
     visualization: table-view
     start: 24h

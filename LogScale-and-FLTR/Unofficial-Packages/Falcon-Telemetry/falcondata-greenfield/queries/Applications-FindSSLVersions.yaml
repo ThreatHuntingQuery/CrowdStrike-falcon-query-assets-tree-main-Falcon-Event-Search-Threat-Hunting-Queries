@@ -17,4 +17,4 @@ queryString: |-
   | groupBy(aid, function=collect(opensslDetails, limit=10000), limit=max)
 
   // Add the ComputerName.
-  | $"falcondata/enrich:ComputerName"()
+  | $"falcondata/zen:ComputerName"()

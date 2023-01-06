@@ -13,7 +13,7 @@ widgets:
     queryString: |
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -44,7 +44,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -74,7 +74,7 @@ widgets:
       EventType = "Event_ExternalApiEvent"
       | ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -101,7 +101,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -131,7 +131,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -158,7 +158,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -187,7 +187,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -216,7 +216,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -245,7 +245,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -272,7 +272,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -301,7 +301,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName. 
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -330,7 +330,7 @@ widgets:
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
       // Add the ComputerName.
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
 
       // Check inputs and make ComputerName case-insensitive. 
       | inputComputerName:=?ComputerName
@@ -345,7 +345,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       // Add the UserName.
-      | $"falcondata/enrich:UserName"()
+      | $"falcondata/zen:UserName"()
       | select([ComputerName, UserName, DetectName, FilePath, FileName, SeverityName, Tactic, Technique, DetectDescription])
     visualization: table-view
     start: 24h

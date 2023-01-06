@@ -14,7 +14,7 @@ widgets:
     queryString: |-
       #event_simpleName="*FileWritten" AND SHA256HashData = ?SHA256
       | test(?ComputerName != "*")
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | ComputerName = ?ComputerName
       | regex("(?<FileName>[^/\\\]+$)", field=TargetFileName, strict=false)
       | FileName = ?FileName
@@ -30,7 +30,7 @@ widgets:
     height: 4
     queryString: |-
       #event_simpleName="ProcessRollup2" AND SHA256HashData = ?SHA256
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | regex("(?<FileName>[^/\\\]+$)", field=ImageFileName, strict=false)
       | FileName = ?FileName
       | count(field=ComputerName, distinct=true)
@@ -75,7 +75,7 @@ widgets:
       #event_simpleName="ProcessRollup2" AND SHA256HashData = ?SHA256
       | regex("(?<FileName>[^/\\\]+$)", field=ImageFileName, strict=false)
       | FileName = ?FileName
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | top(field=ComputerName, limit=25)
     start: 24h
     width: 4
@@ -91,7 +91,7 @@ widgets:
     height: 4
     queryString: |-
       #event_simpleName="*FileWritten" AND SHA256HashData = ?SHA256
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | regex("(?<FileName>[^/\\\]+$)", field=TargetFileName, strict=false)
       | FileName = ?FileName
       | count(field=ComputerName, distinct=true)
@@ -113,7 +113,7 @@ widgets:
       #event_simpleName="*FileWritten" AND SHA256HashData = ?SHA256
       | regex("(?<FileName>[^/\\\]+$)", field=TargetFileName, strict=false)
       | FileName = ?FileName
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | top(field=ComputerName,limit=25)
     start: 24h
     width: 4

@@ -31,7 +31,7 @@ queryString: |-
   | ioc[0].labels=*
 
   // Add the ComputerName and UserName.
-  | $"falcondata/enrich:ComputerName"()
+  | $"falcondata/zen:ComputerName"()
 
   // Format the output.
   | "Local IP":=rename(LocalAddressIP4)

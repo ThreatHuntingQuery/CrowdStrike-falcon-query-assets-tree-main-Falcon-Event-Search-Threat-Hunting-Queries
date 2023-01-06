@@ -13,7 +13,7 @@ queryString: |-
   // Returns Virus Total and Hybrid Analysis URLs that utilize the "SHA256HashData" field.
   //
   // To call this function if installed from the falcondata/enrich package:
-  // $"falcondata/enrich:urlVTHA"()
+  // $"falcondata/zen:urlVTHA"()
   //
   // To call this function in a query if you have it saved locally:
   // $"urlVTHA"()

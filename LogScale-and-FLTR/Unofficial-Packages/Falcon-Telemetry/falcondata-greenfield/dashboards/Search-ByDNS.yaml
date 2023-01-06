@@ -31,7 +31,7 @@ widgets:
           field=TargetProcessId, key=ContextProcessId, 
           include=[DomainName]
         )
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       // Remove entries that have no domain name or process start time.
       | DomainName = * AND ProcessStartTime = *
       | ComputerName = ?ComputerName
@@ -69,7 +69,7 @@ widgets:
 
       #event_simpleName="DnsRequest"
       | DomainName=?DomainName
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | groupBy(DomainName, function=[
           { selectLast([ContextTimeStamp, ComputerName]) | rename(ContextTimeStamp, as=LastLookup) | rename(ComputerName, as=LastLookupBy) },
           { select([ContextTimeStamp, ComputerName]) | head(1) | rename(ContextTimeStamp, as=FirstLookup) | rename(ComputerName, as=FirstLookupBy) | drop(@timestamp) },
@@ -116,7 +116,7 @@ widgets:
     queryString: |
       #event_simpleName=DnsRequest
       | test(?DomainName != "*")
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | DomainName = ?DomainName
       | ComputerName = ?ComputerName DomainName = ?DomainName
       | groupBy([DomainName, ComputerName], function=[
@@ -146,7 +146,7 @@ widgets:
        * they made.
        */
       #event_simpleName="DnsRequest"
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | DomainName=?DomainName
       | groupBy([ComputerName, DomainName], limit=max)
       | top(ComputerName, sum=_count, as="Total Lookups")
@@ -168,7 +168,7 @@ widgets:
       #event_simpleName=DnsRequest
       | test(?DomainName != "*")
       | aid=?aid
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | ComputerName=?ComputerName
       | count(ComputerName, distinct=true)
     start: 1d
@@ -190,7 +190,7 @@ widgets:
        * they made.
        */
       #event_simpleName=DnsRequest
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | DomainName = ?DomainName
       | groupBy([ComputerName, DomainName], limit=max)
       | top(ComputerName, sum=_count, as="Total Lookups")

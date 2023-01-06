@@ -17,7 +17,7 @@ queryString: |-
   | ImageFileName:=format("%.32s", field=ImageFileName)
 
   // Grab ComputerName
-  | $"falcondata/enrich:ComputerName"()
+  | $"falcondata/zen:ComputerName"()
 
   // Group it by ComputerName and ImageFileName, then grab all of the CommandLine entries for those groups.
   | groupBy([aid, ImageFileName], function=collect([ComputerName, CommandLine], limit=10000), limit=max)

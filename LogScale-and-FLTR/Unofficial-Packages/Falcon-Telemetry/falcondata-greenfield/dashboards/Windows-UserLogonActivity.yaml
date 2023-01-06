@@ -11,7 +11,7 @@ widgets:
     height: 4
     queryString: |-
       #event_simpleName=UserLogon event_platform=Win
-      | $"falcondata/enrich:LogonTypeName"()
+      | $"falcondata/zen:LogonTypeName"()
       | timeChart(LogonTypeName, function=count(UserSid))
     start: 7d
     width: 6
@@ -37,7 +37,7 @@ widgets:
       | ?UserIsAdmin ?UserName ?LogonType
       | passwordAge := (now()-(PasswordLastSet*1000))/1000/60/60/24
       | passwordAgeDays := round("passwordAge")
-      | $"falcondata/enrich:LogonTypeName"()
+      | $"falcondata/zen:LogonTypeName"()
       | case {
           UserIsAdmin = "0"  | UserIsAdmin := "No" ;
           UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;
@@ -66,7 +66,7 @@ widgets:
       | ?UserIsAdmin ?UserName ?LogonType
       | passwordAge := (now()-(PasswordLastSet*1000))/1000/60/60/24
       | passwordAgeDays := round("passwordAge")
-      | $"falcondata/enrich:LogonTypeName"()
+      | $"falcondata/zen:LogonTypeName"()
       | case {
           UserIsAdmin = "0"  | UserIsAdmin := "No" ;
           UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;
@@ -181,7 +181,7 @@ widgets:
       | ?UserIsAdmin ?UserName ?LogonType
       | passwordAge := (now()-(PasswordLastSet*1000))/1000/60/60/24
       | passwordAgeDays := round("passwordAge")
-      | $"falcondata/enrich:LogonTypeName"()
+      | $"falcondata/zen:LogonTypeName"()
       | case {
           UserIsAdmin = "0"  | UserIsAdmin := "No" ;
           UserIsAdmin = "1"  | UserIsAdmin := "Yes" ;

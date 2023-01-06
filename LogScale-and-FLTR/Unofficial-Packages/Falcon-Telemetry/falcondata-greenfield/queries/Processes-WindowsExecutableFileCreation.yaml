@@ -29,7 +29,7 @@ queryString: |-
   )
 
   // Add the ComputerName.
-  | $"falcondata/enrich:ComputerName"()
+  | $"falcondata/zen:ComputerName"()
 
   // Shorten the name for display purposes.
   | case {

@@ -42,7 +42,7 @@ widgets:
     queryString: |-
       EventType = "Event_ExternalApiEvent"
       | ExternalApiType = "Event_DetectionSummaryEvent"
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | top(ComputerName, as="Top ComputerNames")
     visualization: table-view
     start: 7d
@@ -70,7 +70,7 @@ widgets:
     height: 4
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
-      | $"falcondata/enrich:UserName"()
+      | $"falcondata/zen:UserName"()
       | top(UserName, as="Top UserNames")
     visualization: table-view
     start: 7d
@@ -165,8 +165,8 @@ widgets:
     height: 7
     queryString: |-
       ExternalApiType = "Event_DetectionSummaryEvent"
-      | $"falcondata/enrich:ComputerName"()
-      | $"falcondata/enrich:UserName"()
+      | $"falcondata/zen:ComputerName"()
+      | $"falcondata/zen:UserName"()
       | select([ComputerName, UserName, DetectName, FilePath, FileName, SeverityName, Tactic, Technique, DetectDescription])
     visualization: table-view
     start: 7d

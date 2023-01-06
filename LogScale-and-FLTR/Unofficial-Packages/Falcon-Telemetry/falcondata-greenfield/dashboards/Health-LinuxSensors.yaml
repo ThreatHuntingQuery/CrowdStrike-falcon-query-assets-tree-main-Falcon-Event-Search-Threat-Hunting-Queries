@@ -31,7 +31,7 @@ widgets:
       | case {
            Location="null, null" | Location := "-" ;
         * }
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | groupBy(["RemoteAddressIP4"], function=([count(aid, as="Connection Count"), collect([Location, ComputerName, LocalAddressIP4, aid], limit=10000)]), limit=10)
       | rename("RemoteAddressIP4",as="Destination SSH")
       | select([aid, ComputerName, Location, LocalAddressIP4, "Destination SSH", "Connection Count"])
@@ -77,7 +77,7 @@ widgets:
     height: 4
     queryString: |-
       #event_simpleName=NetworkListenIP4 event_platform=Lin
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | groupBy([aid, ComputerName, FileName, LocalAddressIP4, LocalPort], limit=max)
       | match(file="falcondata/enrich/service-names-port-numbers.csv", field=LocalPort, include=ServiceName, ignoreCase=true, strict=false)
       | sort(field=LocalPort, order=asc, limit=10)
@@ -109,7 +109,7 @@ widgets:
           isInUserMode=0 AND isInRFM=1 | Status := "RFM" ;
           * ;
         }
-      | $"falcondata/enrich:urlFalconAid"()
+      | $"falcondata/zen:urlFalconAid"()
       | OSVersionString = /^Linux\s(?<hostName>\S+)\s(?<kernelVersion>\S+)\s/i
       | select([aid, hostName, aip.country, kernelVersion, AgentVersion, Status, "Host Management"])
     visualization: table-view
@@ -146,7 +146,7 @@ widgets:
     height: 4
     queryString: |
       #event_simpleName=UserLogon event_platform=Lin UID=0
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | case {
            LogonType=2  | LogonType := "Interactive" ;
            LogonType=10 | LogonType := "SSH" ;

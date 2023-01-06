@@ -11,8 +11,8 @@ queryString: |-
   #event_simpleName=SuspiciousDnsRequest
 
   // Add ComputerName and UserName details.
-  | $"falcondata/enrich:ComputerName"()
-  | $"falcondata/enrich:UserName"()
+  | $"falcondata/zen:ComputerName"()
+  | $"falcondata/zen:UserName"()
 
   // Group by the ComputerName and collect the rest.
   | groupBy(aid, function=collect([ComputerName, UserName, DomainName], limit=10000), limit=max) 

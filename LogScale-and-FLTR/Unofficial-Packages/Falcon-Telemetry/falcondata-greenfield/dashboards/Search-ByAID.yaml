@@ -52,7 +52,7 @@ widgets:
           include=[LocalAddressIP4, LocalPort]
         )
       | regex("(?<FileName>[^/\\\]+$)", field=ImageFileName, strict=false)
-      | $"falcondata/enrich:ComputerName"()
+      | $"falcondata/zen:ComputerName"()
       | LocalAddressIP4=* AND LocalPort=* AND ImageFileName=*
       | select([aid, ComputerName, ImageFileName, LocalAddressIP4, LocalPort])
     visualization: table-view
@@ -128,7 +128,7 @@ widgets:
       | test(?aid != "*")
       | aid=?aid AND #cid = ?cid
       | ipLocation(field=aip, as=aip)
-      | $"falcondata/enrich:ComputerName"() 
+      | $"falcondata/zen:ComputerName"() 
       | groupby([ComputerName, AgentVersion, aip, aip.country, aip.city, BiosManufacturer, BiosVersion, ChassisManufacturer, SystemManufacturer, SystemProductName, aid], limit=max)
       | drop(_count)
     visualization: table-view

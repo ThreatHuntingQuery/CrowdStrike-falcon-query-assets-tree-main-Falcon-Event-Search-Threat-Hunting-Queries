@@ -37,10 +37,10 @@ queryString: |-
   | IOC:=rename(ioc[0].labels)
 
   // Add a link to Process Explorer.
-  | $"falcondata/enrich:urlFalconPid"()
+  | $"falcondata/zen:urlFalconPid"()
 
   // Add the ComputerName.
-  | $"falcondata/enrich:ComputerName"()
+  | $"falcondata/zen:ComputerName"()
 
   // Format the output.
   | select([@timestamp, aid, ComputerName, TargetProcessId, FileName, RemoteIP, Country, "Process Explorer", IOC])
