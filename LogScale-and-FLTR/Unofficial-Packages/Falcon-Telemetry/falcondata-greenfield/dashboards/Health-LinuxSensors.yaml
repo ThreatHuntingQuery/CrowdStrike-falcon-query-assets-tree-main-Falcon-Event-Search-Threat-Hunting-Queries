@@ -79,7 +79,7 @@ widgets:
       #event_simpleName=NetworkListenIP4 event_platform=Lin
       | $"falcondata/zen:ComputerName"()
       | groupBy([aid, ComputerName, FileName, LocalAddressIP4, LocalPort], limit=max)
-      | match(file="falcondata/enrich/service-names-port-numbers.csv", field=LocalPort, include=ServiceName, ignoreCase=true, strict=false)
+      | match(file="falcondata/zen/service-names-port-numbers.csv", field=LocalPort, include=ServiceName, ignoreCase=true, strict=false)
       | sort(field=LocalPort, order=asc, limit=10)
       | drop(_count)
     visualization: table-view

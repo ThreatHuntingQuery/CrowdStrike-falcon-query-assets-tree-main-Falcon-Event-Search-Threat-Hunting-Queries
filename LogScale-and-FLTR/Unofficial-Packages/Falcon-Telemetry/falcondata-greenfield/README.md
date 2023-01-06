@@ -8,7 +8,7 @@ Custom queries and dashboards Falcon telemetry.
 
 # Install
 
-This package is dependent on the `falcondata/enrich` package. Please ensure `falcondata/enrich` is installed prior to installing this package. 
+This package is dependent on the `falcondata/zen` package. Please ensure `falcondata/zen` is installed prior to installing this package. 
 
 # Description
 

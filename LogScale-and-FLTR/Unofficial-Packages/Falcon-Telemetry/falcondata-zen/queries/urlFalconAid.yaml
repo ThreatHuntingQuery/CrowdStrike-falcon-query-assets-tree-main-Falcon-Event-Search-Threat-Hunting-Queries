@@ -12,7 +12,7 @@ timeInterval:
 queryString: |-
   // Returns CrowdStrike-specific URLs that utilize the "aid" field.
   //
-  // To call this function if installed from the falcondata/enrich package:
+  // To call this function if installed from the falcondata/zen package:
   // $"falcondata/zen:urlFalconAid"()
   //
   // To call this function in a query if you have it saved locally:

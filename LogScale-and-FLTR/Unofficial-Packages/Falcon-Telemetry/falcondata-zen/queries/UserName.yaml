@@ -12,7 +12,7 @@ timeInterval:
 queryString: |-
   // Function for looking up the UserName from an event.
   //
-  // To call this function in a query if you have it saved as part of a package, e.g. falcondata/enrich:
+  // To call this function in a query if you have it saved as part of a package, e.g. falcondata/zen:
   // $"falcondata/zen:UserName"()
   //
   // To call this function in a query if you have it saved locally:

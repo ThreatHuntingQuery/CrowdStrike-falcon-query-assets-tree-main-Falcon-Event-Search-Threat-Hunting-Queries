@@ -12,7 +12,7 @@ timeInterval:
 queryString: |-
   // Returns the human-readanle name of LogonType values.
   //
-  // To call this function if installed from the falcondata/enrich package:
+  // To call this function if installed from the falcondata/zen package:
   // $"falcondata/zen:LogonTypeName"()
   //
   // To call this function in a query if you have it saved locally:

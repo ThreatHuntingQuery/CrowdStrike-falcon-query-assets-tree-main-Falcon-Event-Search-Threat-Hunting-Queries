@@ -12,7 +12,7 @@ timeInterval:
 queryString: |-
   // This function includes the ComputerName from an aid.
   //
-  // To call this function in a query if you have it saved as part of a package, e.g. falcondata/enrich:
+  // To call this function in a query if you have it saved as part of a package, e.g. falcondata/zen:
   // $"falcondata/zen:ComputerName"()
   //
   // To call this function in a query if you have it saved locally:
