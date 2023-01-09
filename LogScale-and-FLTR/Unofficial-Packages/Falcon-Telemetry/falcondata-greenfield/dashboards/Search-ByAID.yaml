@@ -1,0 +1,247 @@
+name: Search - By AID
+updateFrequency: never
+timeSelector: {}
+sharedTimeInterval:
+  enabled: true
+  isLive: false
+  start: 7d
+widgets:
+  8bd1a02b-e8d9-471a-9f50-5bc4ec8bf499:
+    x: 0
+    y: 36
+    height: 4
+    queryString: |-
+      #event_simpleName=ScheduledTaskRegistered
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | select([UserName, TaskName, TaskExecCommand, TaskExecArguments])
+    visualization: table-view
+    start: 24h
+    width: 12
+    title: List of Scheduled Tasks
+    type: query
+  df473744-13a0-423c-9ffd-2631b70009e0:
+    x: 8
+    y: 11
+    height: 4
+    queryString: |-
+      #event_simpleName=PeFileWritten
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | count(SHA256HashData, distinct=true)
+    start: 24h
+    width: 4
+    options:
+      color-method: static
+      default: {}
+      use-colorised-thresholds: false
+    visualization: single-value
+    title: Unique Executables Written
+    type: query
+  430d57e9-b25b-420c-8e1b-21fc2046c6a3:
+    x: 4
+    y: 40
+    height: 4
+    queryString: |
+      #event_simpleName=ProcessRollup2
+      | aid=?aid
+      | test(?aid != "*")
+      | join(
+          { #event_simpleName=NetworkListenIP4 LocalPort!=0 },
+          field=TargetProcessId, key=ContextProcessId,
+          include=[LocalAddressIP4, LocalPort]
+        )
+      | regex("(?<FileName>[^/\\\]+$)", field=ImageFileName, strict=false)
+      | $"falcondata/zen:ComputerName"()
+      | LocalAddressIP4=* AND LocalPort=* AND ImageFileName=*
+      | select([aid, ComputerName, ImageFileName, LocalAddressIP4, LocalPort])
+    visualization: table-view
+    start: 7d
+    width: 8
+    title: List of Listening Processes
+    type: query
+  3751426d-87f7-45ec-85dc-652e16eef774:
+    x: 0
+    y: 15
+    height: 7
+    queryString: |-
+      #event_simpleName=ProcessRollup2
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | sankey(source=ParentBaseFileName, target=ImageFileName)
+    start: 24h
+    width: 12
+    options:
+      series: {}
+    visualization: sankey
+    title: 'Processes: ParentBaseFileName -> ImageFileName'
+    type: query
+  2296f7d9-25e0-4dd4-8b60-25c00bdb46a1:
+    x: 5
+    y: 22
+    height: 5
+    queryString: |-
+      #event_simpleName=NetworkConnectIP4
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | worldMap(ip=RemoteAddressIP4)
+    visualization: world-map
+    start: 24h
+    width: 7
+    title: Geographic Connection Destinations
+    type: query
+  134ff519-c089-4efa-aa8e-32c06b1327c9:
+    x: 4
+    y: 27
+    height: 5
+    queryString: |-
+      #event_simpleName=ServiceStarted AND event_platform=Win
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | select([@timestamp, UserName, ServiceDisplayName, CommandLine])
+    visualization: table-view
+    start: 24h
+    width: 8
+    title: List of Started Services
+    type: query
+  e3a9d2e6-7833-4281-ae13-6fc588596bbb:
+    x: 0
+    y: 32
+    height: 4
+    queryString: |-
+      #event_simpleName=ProcessRollup2
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | regex(field=ImageFileName, regex="(?<FileName>[^/\\\]+$)")
+      | select([@timestamp, FileName, CommandLine, ParentBaseFileName])
+    visualization: table-view
+    start: 24h
+    width: 12
+    title: List of Processes
+    type: query
+  fbb84b70-9e0d-42b3-ad1a-86e67a28dcb1:
+    x: 0
+    y: 2
+    height: 3
+    queryString: |-
+      #event_simpleName=AgentOnline
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | ipLocation(field=aip, as=aip)
+      | $"falcondata/zen:ComputerName"() 
+      | groupby([ComputerName, AgentVersion, aip, aip.country, aip.city, BiosManufacturer, BiosVersion, ChassisManufacturer, SystemManufacturer, SystemProductName, aid], limit=max)
+      | drop(_count)
+    visualization: table-view
+    start: 7d
+    width: 12
+    title: Host Information
+    type: query
+  538450b2-4613-4ea4-895b-2e28fc4572a0:
+    x: 0
+    y: 27
+    height: 5
+    queryString: |-
+      #event_simpleName=DnsRequest
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | top(DomainName)
+      | rename(_count, as="Total Requests")
+    visualization: table-view
+    start: 24h
+    width: 4
+    title: Top DNS Requests
+    type: query
+  ae0c6647-8e97-4c26-ac39-6cda26c134c5:
+    x: 0
+    y: 5
+    height: 6
+    queryString: |-
+      ExternalApiType=Event_DetectionSummaryEvent
+      | test(?aid != "*")
+      | AgentIdString = ?aid AND CustomerIdString = ?cid
+      | groupby([UserName, FileName, DetectName, DetectDescription, SeverityName], function=[count(as="Total Detections")], limit=max)
+    visualization: table-view
+    start: 24h
+    width: 6
+    title: Total Detections
+    type: query
+  8a2df0ba-ce56-43bc-97f2-c0a7baed6585:
+    x: 0
+    y: 11
+    height: 4
+    queryString: |-
+      #event_simpleName=UserLogon
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | case { LogonType="2" | Logon_Type:="Interactive"; LogonType="3" | Logon_Type:="Network";
+      LogonType="4" | Logon_Type:="Batch"; LogonType="5" | Logon_Type:="Service";
+      LogonType="6" | Logon_Type:="Proxy"; LogonType="7" | Logon_Type:="Unlock";
+      LogonType="8" | Logon_Type:="Network clear text"; LogonType="9" | Logon_Type:="New Credentials";
+      LogonType="10" | Logon_Type:="RDP"; LogonType="11" | Logon_Type:="Cached Credentials";
+      LogonType="12" | Logon_Type:="Auditing"; LogonType="13" | Logon_Type:="Unlock Workstation";*}
+      | select([@timestamp, UserName, LogonDomain, Logon_Type, UserIsAdmin])
+    visualization: table-view
+    start: 24h
+    width: 8
+    title: User Logon Events
+    type: query
+  b89d56ee-7e80-4f51-a1a9-b8c6cf92939a:
+    x: 0
+    y: 40
+    height: 4
+    queryString: |-
+      #event_simpleName=PackedExecutableWritten
+      | test(?aid != "*")
+      | #cid = ?cid AND aid=?aid
+      | count()
+    start: 24h
+    width: 4
+    options:
+      color-method: static
+      default: {}
+      use-colorised-thresholds: false
+    visualization: single-value
+    title: Total Packed Executable Written
+    type: query
+  note-1671481558493-0:
+    x: 3
+    y: 0
+    height: 2
+    text: Add an aid to the `aid` parameter above for the widgets to display results.
+    width: 6
+    title: Workflow Note
+    type: note
+  a469227a-2755-4855-8927-6cd1ad919ebc:
+    x: 0
+    y: 22
+    height: 5
+    queryString: |
+      #event_simpleName=NetworkConnectIP4
+      | test(?aid != "*")
+      | aid=?aid AND #cid = ?cid
+      | !cidr(RemoteAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "127.0.0.0/8", "169.254.0.0/16", "0.0.0.0/32"])
+      | ipLocation(field=RemoteAddressIP4, as=RemoteAddressIP4)
+      | top([RemoteAddressIP4, RemoteAddressIP4.country])
+      | rename(_count, as="Total Connections")
+    visualization: table-view
+    start: 24h
+    width: 5
+    title: Top Network Connections by IP and Country
+    type: query
+  87690ec2-e046-4b80-ae0a-cd686cb3c856:
+    x: 6
+    y: 5
+    height: 6
+    queryString: |-
+      EventType=Event_ExternalApiEvent
+      | test(?aid != "*")
+      | AgentIdString = ?aid #cid = ?cid
+      | sankey(target=Tactic, source=Technique)
+    start: 24h
+    width: 6
+    options:
+      series: {}
+    visualization: sankey
+    title: 'Detections: Tactic -> Technique'
+    type: query
+$schema: https://schemas.humio.com/dashboard/v0.4.0

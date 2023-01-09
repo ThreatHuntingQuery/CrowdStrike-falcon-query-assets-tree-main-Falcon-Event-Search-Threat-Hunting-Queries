@@ -1,3 +1,0 @@
-// Remove decimal place from timestamp field and convert to humand-readable time.
-| PasswordLastSet := PasswordLastSet*1000
-| PasswordLastSet := formatTime("%Y-%m-%d %H:%M:%S", field=PasswordLastSet, locale=en_US, timezone=Z)

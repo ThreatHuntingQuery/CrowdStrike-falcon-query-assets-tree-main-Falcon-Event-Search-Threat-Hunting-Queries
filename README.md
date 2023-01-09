@@ -1,10 +1,10 @@
 ## Welcome :pineapple:	
 
-Welcome to the Falcon Query Assets GitHub page. Here, we will publish useful queries, transforms, and tips that help CrowdStrike customers write custom hunting syntax and better leverage the Falcon telemetry stream.
+Welcome to the Falcon Query Assets GitHub page. Here, we will publish useful queries, transforms, and tips that help CrowdStrike customers write custom hunting syntax and better leverage the Falcon telemetry stream. 
 
 ## Contents :bookmark_tabs:	
 
-- LogScale [Hunting Guide](https://github.com/CrowdStrike/falcon-query-assets/wiki/Hunting-&-Investigation).
+- [LogScale Tutorials](./LogScale-and-FLTR/Tutorials/).
 - Event field transforms for telemetry in Event Search (FQL) and Falcon LogScale (LQL) language.
 - Custom IOA Logic.
 - Useful lookup tables for Event Search and Falcon LogScale.
@@ -19,7 +19,11 @@ This page will be perpetually under construction.
 
 ## Major Release Log :shipit:
 
-- 2022-10-03 - [Added LogScale Hunting Guide](https://github.com/CrowdStrike/falcon-query-assets/wiki/Hunting-&-Investigation).
+- 2023-01-03 - Updated and enhanced the [LogScale Hunting and Investigations](./LogScale-and-FLTR/Tutorials/Hunting-and-Investigations/) guide. Also added the [LogScale Foundational Building Blocks](./LogScale-and-FLTR/Tutorials/Foundational-Building-Blocks/) guide.  
+
+- 2023-01-02 - Redesign of the page, along with a bunch of content to the [LogScale and FLTR sections](./LogScale-and-FLTR/).
+
+- 2022-10-03 - [Added LogScale Hunting Guide](./LogScale-and-FLTR/Tutorials/Hunting-and-Investigations/).
 
 - 2022-10-03 - Added hunting logic for ProxyNotShell [T1505.003].
 

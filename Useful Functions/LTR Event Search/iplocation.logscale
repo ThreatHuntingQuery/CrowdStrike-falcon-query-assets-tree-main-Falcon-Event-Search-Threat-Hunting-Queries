@@ -1,2 +1,0 @@
-// Get GeoIP data for field aip.
-| ipLocation(field=aip)

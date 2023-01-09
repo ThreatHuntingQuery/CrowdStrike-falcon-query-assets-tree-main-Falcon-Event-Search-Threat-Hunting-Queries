@@ -1,5 +1,0 @@
-// Match statement to replace UserIsAdmin decimal values with humand-readable values.
-| UserIsAdmin match {
-    1 => UserIsAdmin := "True" ;
-    0 => UserIsAdmin := "False" ;
-}
