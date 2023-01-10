@@ -4,10 +4,6 @@ This package is **unofficial** and is not a replacement for the [LogScale Packag
 
 # Description
 
-Custom enrichment functions for Falcon telemetry.
-
-# Description
-
 This package includes enrichment functions and lookups that can be leveraged by Falcon data content packages. It should be installed in the Falcon data **view** prior to installing any Falcon data content packages. 
 
 # Install
