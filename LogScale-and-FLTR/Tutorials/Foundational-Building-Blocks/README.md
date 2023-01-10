@@ -1,6 +1,6 @@
 # Summary
 
-Greetings! This guide is composed of LogScale "foundational building blocks". They're meant to act as learning examples for the LogScale Query Language. 
+Greetings! This guide is composed of "foundational building blocks" and is meant to act as learning examples for the LogScale Query Language. 
 
 The official LogScale documentation page can be found here:
 
