@@ -1,5 +1,8 @@
-#event_simpleName=ProcessRollup2 event_platform=Win ImageFileName=/.*\\(net1?\.exe)/
-| CommandLine=/.*\s+(group|user|localgroup)\s+.*/
-| table([timestamp, aid, UserSid, ParentBaseFileName, ImageFileName, CommandLine])
-| sort(field=timestamp, order=asc)
+// [T1087.001] Account Discovery - Local Accounts
+
+#event_simpleName=ProcessRollup2 
+| event_platform=Win ImageFileName=/\\(net1?\.exe)/
+| CommandLine=/\s+(group|user|localgroup)\s+/
+| select([timestamp, aid, UserSid, ParentBaseFileName, ImageFileName, CommandLine])
+| sort(field=timestamp, order=asc, limit=10000)
 | timestamp := formatTime("%Y-%m-%d %H:%M:%S", field=timestamp, locale=en_US, timezone=Z)
