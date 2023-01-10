@@ -4,7 +4,9 @@ This package is **unofficial** and is not a replacement for the [LogScale Packag
 
 # Description
 
-Standalone parser for Falcon telemetry. You likely do not need this.   
+Standalone parser for Falcon telemetry. 
+
+:warning: You likely do not need this package. :warning:
 
 # Description
 
