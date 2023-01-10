@@ -1,4 +1,4 @@
-# Summary <!-- omit from toc -->
+# Summary
 
 Greetings! This guide is composed of LogScale "foundational building blocks". They're meant to act as learning examples for the LogScale Query Language. 
 
@@ -6,30 +6,9 @@ The official LogScale documentation page can be found here:
 
 https://library.humio.com/
 
-# Table of Contents <!-- omit from toc -->
+The table of contents can be found by clicking on the 3-dot menu at the top-left of this document. 
 
-- [Add a single field to `groupBy` results](#add-a-single-field-to-groupby-results)
-- [Add additional fields to `groupBy` results](#add-additional-fields-to-groupby-results)
-- [Add a `count` to `groupBy` results when using `collect`](#add-a-count-to-groupby-results-when-using-collect)
-- [Pass a `groupBy` result to `timechart`](#pass-a-groupby-result-to-timechart)
-- [Assign or create a dynamic field](#assign-or-create-a-dynamic-field)
-- [Round a number to 2 decimal places](#round-a-number-to-2-decimal-places)
-- [Do a `join` statement](#do-a-join-statement)
-- [Deal with time zones](#deal-with-time-zones)
-- [Compare the last 31-60 days to the previous 30 days](#compare-the-last-31-60-days-to-the-previous-30-days)
-  - [`case` method](#case-method)
-  - [`bucket` method](#bucket-method)
-- [Add `ComputerName` or `UserName` to FDR search results](#add-computername-or-username-to-fdr-search-results)
-  - [Adding the `ComputerName`](#adding-the-computername)
-  - [Adding the `UserName`](#adding-the-username)
-- [Add a dynamic URL to query results](#add-a-dynamic-url-to-query-results)
-- [Pass two averages to a timechart](#pass-two-averages-to-a-timechart)
-- [Do a regex extraction without filtering data](#do-a-regex-extraction-without-filtering-data)
-- [Get markdown URLs to display as URLs instead of strings when using `groupBy`](#get-markdown-urls-to-display-as-urls-instead-of-strings-when-using-groupby)
-- [Get the first and last event of a `groupBy`](#get-the-first-and-last-event-of-a-groupby)
-- [Create a case-insensitive user input](#create-a-case-insensitive-user-input)
-  - [Single input](#single-input)
-  - [Multiple inputs](#multiple-inputs)
+# Building Blocks
 
 ## Add a single field to `groupBy` results
 
@@ -343,3 +322,85 @@ Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `
   }
 // Check the last two strings, no reason to look at case. 
 | AgentIdString = ?aid AND CustomerIdString = ?cid
+
+# Function Examples
+
+## Convert decimal value of Status to hex value
+
+```
+| Status_hex := format(field=Status, "%x")
+```
+
+## Exclude RFC1819 and non-routable IP addresses
+
+```
+| !cidr(LocalAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "127.0.0.0/8", "169.254.0.0/16", "0.0.0.0/32"])
+| !cidr(RemoteAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "127.0.0.0/8", "169.254.0.0/16", "0.0.0.0/32"])
+```
+
+## Extract IP address from the field CommandLine
+
+```
+| regex("(?<ip>[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})\:(?<port>\d{2,5})", field=CommandLine)
+```
+
+## Create link to Process Explorer in CrowdStrike Falcon
+
+```
+// Create Link to Process Explorer in Falcon (US-1)
+| "Process Explorer" := format("[Process Explorer](https://falcon.crowdstrike.com/investigate/process-explorer/%s/%s)", field=["aid", "TargetProcessId"])
+
+// Create Link to Process Explorer in Falcon (US-2)
+| "Process Explorer" := format("[Process Explorer](https://falcon.us-2.crowdstrike.com/investigate/process-explorer/%s/%s)", field=["aid", "TargetProcessId"])
+
+// Create Link to Process Explorer in Falcon (EU)
+| "Process Explorer" := format("[Process Explorer](https://falcon.eu-1.crowdstrike.com/investigate/process-explorer/%s/%s)", field=["aid", "TargetProcessId"])
+
+// Create Link to Process Explorer in Falcon (GOV)
+| "Process Explorer" := format("[Process Explorer](https://falcon.laggar.gcw.crowdstrike.com/investigate/process-explorer/%s/%s)", field=["aid", "TargetProcessId"])
+```
+
+## Remove decimal place from timestamp field and convert to human-readable time
+
+```
+| PasswordLastSet := PasswordLastSet*1000
+| PasswordLastSet := formatTime("%Y-%m-%d %H:%M:%S", field=PasswordLastSet, locale=en_US, timezone=Z)
+```
+
+## Get GeoIP data for the field aip
+
+```
+| ipLocation(field=aip)
+```
+
+## Match statement to replace UserIsAdmin decimal values with human-readable values
+
+```
+| UserIsAdmin match {
+    1 => UserIsAdmin := "True" ;
+    0 => UserIsAdmin := "False" ;
+  }
+```
+
+## Replace the decimal value of UserIsAdmin with human-readable values
+
+```
+| replace(field=UserIsAdmin, regex="1", with="True")
+| replace(field=UserIsAdmin, regex="0", with="False")
+```
+
+## Create shorthand process lineage in the field processLineage
+
+```
+| default(field=GrandParentBaseFileName, value="Unknown")
+| format(format="%s > %s > %s", field=[GrandParentBaseFileName,  ParentBaseFileName, FileName], as="processLineage")
+```
+
+## Get GeoIP data for RDP user logins and place on world map with magnitude
+
+```
+#event_simpleName=UserLogon LogonType=10 RemoteAddressIP4=* 
+| !cidr(RemoteAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "127.0.0.0/8", "169.254.0.0/16", "0.0.0.0/32"])
+| ipLocation(aip)
+| worldMap(ip=aip, magnitude=count(aid))
+```

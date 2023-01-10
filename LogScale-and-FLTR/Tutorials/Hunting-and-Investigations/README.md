@@ -1,35 +1,16 @@
-# Hunting and Investigation <!-- omit from toc -->
+# Hunting and Investigation
 
 This hunting guide teaches you how to hunt for adversaries, suspicious activities, suspicious processes, and vulnerabilities using Falcon telemetry in Falcon Long-Term Repository (FLTR). Falcon LTR is powered by the Falcon LogScale technology, formerly known as Humio.
 
 Falcon LTR contains a suite of powerful search tools that allow you to analyze, explore, and hunt for suspicious or malicious activity in your environment. These tools include the pre-made search dashboards, as well as the ability to run custom queries on the LTR Event Search page. This guide focuses mainly on using custom queries to hunt, leveraging the LogScale Platform.
 
-# Before You Begin <!-- omit from toc -->
+The table of contents can be found by clicking on the 3-dot menu at the top-left of this document. 
+
+# Before You Begin
 
 This guide contains information about how to hunt using Falcon and is tailored specifically towards users running the Falcon sensor on Windows devices. However, a lot of the ideas and concepts also apply to users running the Falcon sensor on Mac or Linux. Depending on the sensor platform, however, the names and descriptions of certain events as well as custom query syntax will vary. We recommend that you read and refer to the `Events Data Dictionary` to learn more about specific events and their variations across platforms. The `Events Data Dictionary` also contains additional custom queries not found in this document that could be useful when hunting.
 
-# Table of Contents <!-- omit from toc -->
-
-- [Overview](#overview)
-- [Best practices](#best-practices)
-  - [Write specific queries](#write-specific-queries)
-  - [ComputerName Lookups](#computername-lookups)
-  - [Change views](#change-views)
-  - [Filter out benign data](#filter-out-benign-data)
-- [Hunting queries](#hunting-queries)
-- [Hunting phishing attacks and malicious attachments](#hunting-phishing-attacks-and-malicious-attachments)
-- [Hunting configuration and compliance vulnerabilities](#hunting-configuration-and-compliance-vulnerabilities)
-- [Hunting firewall anomalies and vulnerabilities](#hunting-firewall-anomalies-and-vulnerabilities)
-- [Hunting suspicious network connections](#hunting-suspicious-network-connections)
-- [Hunting anomalous behavior](#hunting-anomalous-behavior)
-- [Hunting anomalies related to scheduled tasks](#hunting-anomalies-related-to-scheduled-tasks)
-- [Hunting suspicious registry changes](#hunting-suspicious-registry-changes)
-- [Hunting Java malware, trojans, and exploits](#hunting-java-malware-trojans-and-exploits)
-  - [Hunting Java malware and trojans](#hunting-java-malware-and-trojans)
-  - [Hunting Java exploits](#hunting-java-exploits)
-
-
-# Hunting in Falcon LTR <!-- omit from toc -->
+# Hunting in Falcon LTR
 
 # Overview
 
