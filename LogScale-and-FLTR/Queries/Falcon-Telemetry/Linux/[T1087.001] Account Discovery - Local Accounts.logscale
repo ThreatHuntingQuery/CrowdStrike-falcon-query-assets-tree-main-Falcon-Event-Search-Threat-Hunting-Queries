@@ -1,4 +1,4 @@
-// [T1087.001] Account Discovery - Local Accounts.logscale
+// [T1087.001] Account Discovery - Local Accounts
 
 #event_simpleName=ProcessRollup2
 | event_platform=Lin
