@@ -1,3 +1,5 @@
+:grey_exclamation: The table of contents can be found by clicking on the 3-dot menu at the top-left of this document. :grey_exclamation:
+
 # Summary
 
 Greetings! This guide is composed of "foundational building blocks" and is meant to act as learning examples for the LogScale Query Language. 
@@ -5,8 +7,6 @@ Greetings! This guide is composed of "foundational building blocks" and is meant
 The official LogScale documentation page can be found here:
 
 https://library.humio.com/
-
-The table of contents can be found by clicking on the 3-dot menu at the top-left of this document. 
 
 # Building Blocks
 
