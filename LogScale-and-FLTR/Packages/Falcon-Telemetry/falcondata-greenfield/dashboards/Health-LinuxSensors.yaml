@@ -34,8 +34,7 @@ widgets:
       | $"falcondata/zen:ComputerName"()
       | groupBy(["RemoteAddressIP4"], function=([count(aid, as="Connection Count"), collect([Location, ComputerName, LocalAddressIP4, aid], limit=10000)]), limit=10)
       | rename("RemoteAddressIP4",as="Destination SSH")
-      | select([aid, ComputerName, Location, LocalAddressIP4, "Destination SSH", "Connection Count"])
-      | sort("Connection Count")
+      | table([aid, ComputerName, Location, LocalAddressIP4, "Destination SSH", "Connection Count"], sortby="Connection Count", limit=10000)
     visualization: table-view
     start: 7d
     width: 8
