@@ -6,3 +6,4 @@ These are guides and tutorials for using LogScale, based on common questions enc
 
 - [Hunting and Investigations](./Hunting-and-Investigations/)
 - [Foundational Building Blocks](./Foundational-Building-Blocks/)
+- [Function Samples](./Function-Samples/)
