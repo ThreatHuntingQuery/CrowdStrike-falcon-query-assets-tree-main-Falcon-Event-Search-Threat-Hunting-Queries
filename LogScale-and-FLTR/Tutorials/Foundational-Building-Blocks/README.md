@@ -344,7 +344,7 @@ Notice that a `limit` needs to be set, otherwise it reverts to the default limit
 // Pass the results to something else. 
 ```
   
-For reference on a particular sample data set, the `table()` function uses 18.6K work units on that querty, while the `select()` function only uses 809 work units. 
+On a particular sample data set, the `table()` function uses 18.6K work units on that query, while the `select()` function only uses 809 work units. 
 
 
 # Function Examples
