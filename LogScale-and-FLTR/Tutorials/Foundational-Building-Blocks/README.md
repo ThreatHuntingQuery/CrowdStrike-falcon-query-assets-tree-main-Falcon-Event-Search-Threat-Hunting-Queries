@@ -326,7 +326,7 @@ Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `
 
 ## Get lots of data into a table format
 
-There are two ways of getting data into a table format: `table()` and `select()`. The `table()` function has more transform options, e.g. `sortby`, `reverse`, `type`, etc. However, it also requires that a `limit` parameter is passed since the function is transformative. 
+There are two ways of getting data into a table format: `table()` and `select()`. The `table()` function has more transformative options, e.g. `sortby`, `reverse`, `type`, etc. However, it also requires that a `limit` parameter is passed since it's an aggregrate function. 
   
 For example, let's say you just want to create a table with a few fields and pass it to the next part of the query:
 
