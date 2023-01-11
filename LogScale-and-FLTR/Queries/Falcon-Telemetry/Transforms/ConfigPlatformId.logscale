@@ -1,5 +1,4 @@
-ConfigBuild=*
-| ConfigBuild = /\d+\.(?<ConfigPlatformId>\d+)\.\d+\.\d+/
+| regex("\d+\.(?<ConfigPlatformId>\d+)\.\d+\.\d+", field=ConfigBuild, strict=false)
 | case {
     ConfigPlatformId = 1 | ConfigPlatformId := "Windows x86";
     ConfigPlatformId = 2 | ConfigPlatformId := "Windows x64";
@@ -15,7 +14,7 @@ ConfigBuild=*
     ConfigPlatformId = 1024 | ConfigPlatformId := "Kubernetes 64" ;
     ConfigPlatformId = 2048 | ConfigPlatformId := "PPC-64" ;
     ConfigPlatformId = 4096 | ConfigPlatformId := "PPC-64LE" ;
-    *; 
+    * ; 
 }
 
 // Find Cloud Workload Protection, aka CWP. 
