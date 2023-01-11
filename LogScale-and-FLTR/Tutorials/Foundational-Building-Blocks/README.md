@@ -324,7 +324,7 @@ Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `
 | AgentIdString = ?aid AND CustomerIdString = ?cid
 ```
 
-## Get lots of data into a table format.
+## Get lots of data into a table format
 
 There are two ways of getting data into a table format: `table()` and `select()`. The `table()` function has more transform options, e.g. `sortby`, `reverse`, `type`, etc. However, it also requires that a `limit` parameter is passed since the function is transformative. 
   
