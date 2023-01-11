@@ -1,4 +1,4 @@
-:grey_exclamation: The table of contents can be found by clicking on the 3-dot menu at the top-left of this document. :grey_exclamation:
+:exclamation: The table of contents can be found by clicking on the 3-dot menu at the top-left of this document. :exclamation:
 
 # Summary
 
