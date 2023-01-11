@@ -1,10 +1,10 @@
+:exclamation: The table of contents can be found by clicking on the 3-dot menu at the top-left of this document. :exclamation:
+
 # Hunting and Investigation
 
 This hunting guide teaches you how to hunt for adversaries, suspicious activities, suspicious processes, and vulnerabilities using Falcon telemetry in Falcon Long-Term Repository (FLTR). Falcon LTR is powered by the Falcon LogScale technology, formerly known as Humio.
 
 Falcon LTR contains a suite of powerful search tools that allow you to analyze, explore, and hunt for suspicious or malicious activity in your environment. These tools include the pre-made search dashboards, as well as the ability to run custom queries on the LTR Event Search page. This guide focuses mainly on using custom queries to hunt, leveraging the LogScale Platform.
-
-The table of contents can be found by clicking on the 3-dot menu at the top-left of this document. 
 
 # Before You Begin
 
