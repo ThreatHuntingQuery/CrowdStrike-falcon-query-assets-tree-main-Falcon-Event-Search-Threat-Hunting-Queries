@@ -323,25 +323,3 @@ Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `
 // Check the last two strings, no reason to look at case. 
 | AgentIdString = ?aid AND CustomerIdString = ?cid
 ```
-
-## Get lots of data into a table format
-
-There are two ways of getting data into a table format: `table()` and `select()`. The `table()` function has more output options, e.g. `sortby`, `reverse`, `type`, etc. However, it also requires that a `limit` parameter is passed since it's an aggregrate function. 
-  
-For example, let's say you just want to create a table with a few fields and pass it to the next part of the query:
-
-```
-// Search for something.
-| table([aid, #cid], limit=20000)
-// Pass the results to something else. 
-```
-  
-Notice that a `limit` needs to be set, otherwise it reverts to the default limit. If a simple table is all you're looking to accomplish, the `select()` function is much more efficient. The `select()` function is only a transform and doesn't have the same limits. In this instance, you'd simply swap the two functions in the query, minus the `limit`:
-
-```
-// Search for something.
-| select([aid, #cid])
-// Pass the results to something else. 
-```
-  
-On a particular sample data set, the `table()` function uses 18.6K work units on that query, while the `select()` function only uses 809 work units. 
