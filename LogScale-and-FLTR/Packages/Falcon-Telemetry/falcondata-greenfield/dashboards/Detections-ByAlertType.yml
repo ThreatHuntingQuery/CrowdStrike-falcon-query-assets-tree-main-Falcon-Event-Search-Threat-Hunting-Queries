@@ -1,4 +1,4 @@
-name: Detections - By Type
+name: Detections - By Alert Type
 updateFrequency: never
 timeSelector: {}
 sharedTimeInterval:
@@ -11,12 +11,15 @@ widgets:
     y: 0
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | timechart(function=count(as="Total Detections"))
     start: 7d
     width: 12
     options:
       connect-points: false
+      imputation: none
       series: {}
     visualization: time-chart
     title: Detection Rate
@@ -26,7 +29,9 @@ widgets:
     y: 8
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | sankey(target=Tactic, source=Technique)
     start: 7d
     width: 6
@@ -40,8 +45,10 @@ widgets:
     y: 20
     height: 4
     queryString: |-
-      EventType = "Event_ExternalApiEvent"
-      | ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | EventType=Event_ExternalApiEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | $"falcondata/zen:ComputerName"()
       | top(ComputerName, as="Top ComputerNames")
     visualization: table-view
@@ -54,7 +61,9 @@ widgets:
     y: 4
     height: 4
     queryString: |-
-      SeverityName=?Severity and Technique=?Technique and Tactic=?Tactic and ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | top(Tactic, as="Top Tactics")
     start: 7d
     width: 4
@@ -69,7 +78,9 @@ widgets:
     y: 20
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | $"falcondata/zen:UserName"()
       | top(UserName, as="Top UserNames")
     visualization: table-view
@@ -82,7 +93,9 @@ widgets:
     y: 4
     height: 4
     queryString: |-
-      SeverityName=?Severity and Technique=?Technique and Tactic=?Tactic and ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | top(Technique, as="Top Techniques")
     start: 7d
     width: 4
@@ -96,7 +109,9 @@ widgets:
     y: 8
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | sankey(target=Technique, source=SeverityName)
     start: 7d
     width: 6
@@ -110,7 +125,9 @@ widgets:
     y: 4
     height: 4
     queryString: |-
-      SeverityName=?Severity and Technique=?Technique and Tactic=?Tactic and ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | top(SeverityName, as="Top Severities")
     start: 7d
     width: 4
@@ -124,7 +141,9 @@ widgets:
     y: 20
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | top(DetectDescription, as="Top Detections")
     visualization: table-view
     start: 7d
@@ -136,7 +155,9 @@ widgets:
     y: 12
     height: 8
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       |sankey(target=FileName, source=ParentImageFileName)
     start: 7d
     width: 6
@@ -150,7 +171,9 @@ widgets:
     y: 12
     height: 8
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | sankey(target=ParentImageFileName, source=GrandparentImageFileName)
     start: 7d
     width: 6
@@ -164,7 +187,9 @@ widgets:
     y: 24
     height: 7
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
+      | SeverityName=?Severity Technique=?Technique Tactic=?Tactic
       | $"falcondata/zen:ComputerName"()
       | $"falcondata/zen:UserName"()
       | select([ComputerName, UserName, DetectName, FilePath, FileName, SeverityName, Tactic, Technique, DetectDescription])
@@ -176,25 +201,34 @@ widgets:
 $schema: https://schemas.humio.com/dashboard/v0.4.0
 parameters:
   Severity:
-    defaultValue: '*'
     label: Severity
     order: 1
-    type: text
+    values:
+    - Informational
+    - Medium
+    - Critical
+    - High
+    - Low
+    - '*'
+    type: list
+    defaultValue: '*'
   Tactic:
     label: Tactic
-    query: top(Tactic)
-    timeInterval: 1y
+    query: '#kind=Primary | ExternalApiType=Event_DetectionSummaryEvent | groupBy(Tactic,
+      limit=100)'
+    timeInterval: 7d
     useDashboardTimeIfSet: true
     type: query
     defaultValue: '*'
-    order: 3
+    order: 1
     valueField: Tactic
   Technique:
     label: Technique
-    query: top(Technique)
-    timeInterval: 1y
+    query: '#kind=Primary | ExternalApiType=Event_DetectionSummaryEvent | groupBy(Technique,
+      limit=100) | sort(limit=100)'
+    timeInterval: 7d
     useDashboardTimeIfSet: true
     type: query
     defaultValue: '*'
-    order: 2
+    order: 1
     valueField: Technique

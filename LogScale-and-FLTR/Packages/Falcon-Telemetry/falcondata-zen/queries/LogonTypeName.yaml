@@ -10,7 +10,7 @@ timeInterval:
   isLive: false
   start: 1d
 queryString: |-
-  // Returns the human-readanle name of LogonType values.
+  // Returns the human-readable name of LogonType values.
   //
   // To call this function if installed from the falcondata/zen package:
   // $"falcondata/zen:LogonTypeName"()
@@ -18,7 +18,6 @@ queryString: |-
   // To call this function in a query if you have it saved locally:
   // $"LogonTypeName"()
 
-  // Transform to convert LogonType decimal to human-readable value.
   | LogonType match {
       "2"  => LogonTypeName:="Interactive" ;
       "3"  => LogonTypeName:="Network" ;

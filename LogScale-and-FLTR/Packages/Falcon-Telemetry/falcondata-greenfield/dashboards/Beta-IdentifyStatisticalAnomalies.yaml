@@ -87,18 +87,13 @@ parameters:
     label: Anomaly Factor
     order: 1
     values:
-    - '6'
-    - '10'
-    - '3'
-    - '8'
-    - '2'
-    - '7'
     - '1'
-    - '9'
+    - '2'
+    - '3'
     - '4'
     - '5'
     type: list
-    defaultValue: '5'
+    defaultValue: '3'
   EventSimpleName:
     label: Event Name
     query: top(#event_simpleName)
