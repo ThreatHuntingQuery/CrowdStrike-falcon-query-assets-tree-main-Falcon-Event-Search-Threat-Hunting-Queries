@@ -8,7 +8,7 @@ Custom queries and dashboards Falcon telemetry.
 
 # Install
 
-This package is dependent on the `falcondata/zen` package. Please ensure `falcondata/zen` is installed prior to installing this package. 
+This is meant to be installed in a **view** of the Falcon telemetry data, *not* the repo. This package is also dependent on the `falcondata/zen` package. Please ensure `falcondata/zen` is installed in the view prior to installing this package. 
 
 # Description
 
