@@ -347,6 +347,6 @@ Instead, you'd like the `severity` aligned with the `detectionName` in the query
 | sort("Total Events", limit=10000)
 ```
 
-The `format()` line says "pad the first value until it's 18 characters wide. You now end up with this:
+The `format()` line says "pad the first value until it's 18 characters wide". You now end up with this:
 
 <img src=./images/image-2023-01-17_16-47-53.png width=400>
