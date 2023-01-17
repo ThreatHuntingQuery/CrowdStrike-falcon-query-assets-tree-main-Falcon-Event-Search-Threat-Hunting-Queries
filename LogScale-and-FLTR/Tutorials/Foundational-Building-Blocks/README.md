@@ -321,3 +321,32 @@ Another example of this is when we have multiple inputs, e.g. `?ComputerName`, `
 // Check the last two strings, no reason to look at case. 
 | AgentIdString = ?aid AND CustomerIdString = ?cid
 ```
+
+## Create a fixed-width column using `format`
+
+It's common to use `collect()` as a function with `groupBy()` to grab other values. However, you'll occasionally hit a situation where one doesn't line up with the other, e.g. there are only two `severity` values but a dozen `detectName` values. For example:
+
+```
+#kind=Primary
+| eventType=K8SDetectionEvent
+| groupBy(resourceName, function=[collect(["Detection Type", clusterName], limit=10000), count(as="Total Events")], limit=max)
+```
+
+This results in output similar to this:
+
+<img src=./images/image-2023-01-17_16-42-40.png width=400>
+
+Instead, you'd like the `severity` aligned with the `detectionName` in the query results. This is where `format()` can be used to add "left-aligned right-padded" columns that combine the two values:
+
+```
+#kind=Primary
+| eventType=K8SDetectionEvent
+// The first value is the severity padded to 18 spaces, followed by the detectionName. 
+| "Detection Type":=format("%-18s %s", field=[severity, detectionName])
+| groupBy(resourceName, function=[collect(["Detection Type", clusterName], limit=10000), count(as="Total Events")], limit=max)
+| sort("Total Events", limit=10000)
+```
+
+The `format()` line says "pad the first value until it's 18 characters wide. You now end up with this:
+
+<img src=./images/image-2023-01-17_16-47-53.png width=400>
