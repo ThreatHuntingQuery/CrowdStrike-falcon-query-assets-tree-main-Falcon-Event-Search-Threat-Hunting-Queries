@@ -2,9 +2,7 @@
 
 # Summary
 
-Greetings! This guide is composed of "foundational building blocks" and is meant to act as learning examples for the LogScale Query Language. 
-
-The official LogScale documentation page can be found here:
+Greetings! This guide is composed of "foundational building blocks" and is meant to act as learning examples for the LogScale Query Language. The official LogScale documentation page can be found here:
 
 https://library.humio.com/
 
