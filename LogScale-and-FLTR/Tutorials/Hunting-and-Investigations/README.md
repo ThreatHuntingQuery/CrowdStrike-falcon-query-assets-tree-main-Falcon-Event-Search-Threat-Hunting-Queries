@@ -139,7 +139,7 @@ In the event you are starting with a `ComputerName`, and need to lookup the `aid
 #event_simpleName=AgentOnline 
 | ComputerName=?ComputerName
 | head(5)
-| select([@timestamp, aid, ComputerName, aip])
+| table([@timestamp, aid, ComputerName, aip], limit=5)
 ```
 
 The above query returns the 5 most recent `AgentOnline` events which can be useful in the event you have multiple machines with the same hostname. For the purposes of this document, most queries will be executed by leveraging `aid`, and will exclude `ComputerName` lookups. For any query you'd like to add the lookup, add the following line:
@@ -192,7 +192,7 @@ Show me any instances of common reconnaissance tools on a host:
 | aid=?aid 
 | ImageFileName=/(\/|\\)(?<FileName>\w*\.?\w*)$/
 | FileName = /^(net|ipconfig|whoami|quser|ping|netstat|tasklist|hostname|at)\.exe$/i
-| select([aid, UserName, ParentBaseFileName, ImageFileName, CommandLine])
+| table([aid, UserName, ParentBaseFileName, ImageFileName, CommandLine], limit=1000)
 ```
 
 Show me any instances where multiple recon commands were executed by the same parent process:
@@ -234,7 +234,7 @@ Show me any powershell.exe downloads:
 #event_simpleName=ProcessRollup2 
 | ImageFileName=/\\powershell\.exe/i CommandLine=/(Invoke-WebRequests|Net\.WebClient|Start-BitsTransfer)/i
 | join({#event_simpleName=UserIdentity | groupBy([aid, AuthenticationId, UserName], limit=max)}, field=AuthenticationId, include=UserName)
-| select([aid, UserName, ImageFileName, CommandLine])
+| table([aid, UserName, ImageFileName, CommandLine], limit=1000)
 ```
 
 Show me any encoded PowerShell commands:
@@ -243,7 +243,7 @@ Show me any encoded PowerShell commands:
 #event_simpleName=ProcessRollup2 
 | ImageFileName=/\\powershell\.exe/i CommandLine=/\s-[e^]{1,2}[ncodema^]+\s/i
 | join({#event_simpleName=UserIdentity | groupBy([aid, AuthenticationId, UserName], limit=max)}, field=AuthenticationId, include=UserName)
-| select([aid, UserName, ImageFileName, CommandLine])
+| table([aid, UserName, ImageFileName, CommandLine], limit=1000)
 ```
 
 Show me a list of processes that executed from the Recycle Bin:
@@ -260,7 +260,7 @@ Processes generally shouldn’t be executing from user spaces. These paths cover
 #event_simpleName=ProcessRollup2 OR #event_simpleName=SyntheticProcessRollup2
 | ImageFileName=/(\\Desktop\\|\\AppData\\)/
 | join({#event_simpleName=UserIdentity | groupBy([aid, AuthenticationId, UserName], limit=max)}, field=AuthenticationId, include=UserName)
-| select([aid, UserName, ImageFileName, SHA256HashData]) 
+| table([aid, UserName, ImageFileName, SHA256HashData], limit=1000) 
 ```
 
 Show me a list of processes executing from browser file paths. Similar to the previous query, processes typically shouldn’t be running from these locations:
@@ -270,7 +270,7 @@ Show me a list of processes executing from browser file paths. Similar to the pr
 ImageFileName=/(\\AppData\\Local\\Microsoft\\Windows\\Temporary.Internet.Files\\[^\/|\\]*\.exe|.*\\AppData\\Local\\Mozilla\\Firefox\\Profiles\\[^\/|\\]*\.exe|\\AppData\\Local\\Google\\Chrome\\[^\/|\\]*\.exe|\\Downloads\\[^\/|\\]*\.exe)/i
 | aid=?aid 
 | ImageFileName=/(?<FileName>[^\\/|\\\\]*)$/
-| select([aid, ImageFileName, FileName, SHA256HashData])
+| table([aid, ImageFileName, FileName, SHA256HashData], limit=1000)
 ```
 
 Show me the responsible process for starting a service:
@@ -278,7 +278,7 @@ Show me the responsible process for starting a service:
 ```
 #event_simpleName=ProcessRollup2
 | join({#event_simpleName=ServiceStarted}, key=RpcClientProcessId, field=SourceProcessId, include=ServiceDisplayName)
-| select([aid, ImageFileName, ServiceDisplayName])
+| table([aid, ImageFileName, ServiceDisplayName], limit=1000)
 ```
 
 Show me binaries running as a service that do not originate from "System32":
@@ -286,7 +286,7 @@ Show me binaries running as a service that do not originate from "System32":
 ```
 #event_simpleName=ServiceStarted 
 | ImageFileName!=/\\System32\\/i 
-| select([aid, ServiceDisplayName, ImageFileName, CommandLine, ComputerName])
+| table([aid, ServiceDisplayName, ImageFileName, CommandLine, ComputerName], limit=1000)
 ```
 
 If hunting for anomalous activity, look for services that do not originate from "Windows\System32" location. Remember to escape the directory backslashes ("\") with another backslash.
@@ -304,7 +304,7 @@ Show me an expected service running from an unexpected location:
       | match(file="fdr_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true);
     * | default(field=ComputerName, value=NotMatched);
   }
-| select([aid, ComputerName, ServiceDisplayName, ImageFileName, CommandLine, ClientComputerName, RemoteAddressIP4, RemoteAddressIP6])
+| table([aid, ComputerName, ServiceDisplayName, ImageFileName, CommandLine, ClientComputerName, RemoteAddressIP4, RemoteAddressIP6], limit=1000)
 ```
 
 Certain malware and adversary tools might run as a service with specific names. To hunt for any of these services names, this query should allow for quick triage. 
@@ -319,7 +319,7 @@ Show me a specific service name:
       | match(file="fdr_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true);
     * | default(field=ComputerName, value=NotMatched);
   }
-| select([aid, ComputerName, ServiceDisplayName, ImageFileName, CommandLine, ClientComputerName, RemoteAddressIP4, RemoteAddressIP6])
+| table([aid, ComputerName, ServiceDisplayName, ImageFileName, CommandLine, ClientComputerName, RemoteAddressIP4, RemoteAddressIP6], limit=1000)
 ```
 
 In the table fields, the `ContextTimeStamp` will provide the system time of event creation which will be useful when correlating with the time frame of interest. The `RemoteAddressIP4` will provide the IP address of the remote machine that initiated the request (origin) and `ClientComputerName` will provide the NetBios name of the remote machine.
@@ -335,7 +335,7 @@ Show me all `CreateService` events:
       | match(file="fdr_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true);
     * | default(field=ComputerName, value=NotMatched);
   }
-| select([aid, ComputerName, ServiceDisplayName, ServiceImagePath, ClientComputerName, RemoteAddressIP4, RemoteAddressIP6])
+| table([aid, ComputerName, ServiceDisplayName, ServiceImagePath, ClientComputerName, RemoteAddressIP4, RemoteAddressIP6], limit=1000)
 ```
 
 If hunting for anomalous activity, look for services that do not originate from "Windows\System32" location. Remember to escape the directory backslashes ("\") with another backslash.
@@ -349,7 +349,7 @@ Show me non-System32 binaries running as a hosted service:
       | match(file="fdr_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true);
     * | default(field=ComputerName, value=NotMatched);
   }
-| select([aid, ServiceDisplayName, ImageFileName, ComputerName])
+| table([aid, ServiceDisplayName, ImageFileName, ComputerName], limit=1000)
 ```
 
 Show me a list of services that were stopped and on which hosts:
@@ -363,7 +363,7 @@ Use the next query to alert on when key services are stopped, such as Windows Fi
 
 ```
 #event_simpleName=HostedServiceStopped ServiceDisplayName=?service
-| select([aid, ServiceDisplayName])
+| table([aid, ServiceDisplayName], limit=1000)
 ```
 
 # Hunting phishing attacks and malicious attachments
@@ -379,7 +379,7 @@ Show me a list of attachments sent from Outlook in the past hour that have a fil
 | ImageFileName=/(\/|\\)(?<FileName>\w*\.?\w*)$/
 | FileName=/(winword|excel|powerpnt)\.exe/i
 | CommandLine=/Outlook\\(?<ShortFile>\w*\\.*)$/i 
-| select([@timestamp, aid, TargetProcessId, ShortFile, CommandLine])
+| table([@timestamp, aid, TargetProcessId, ShortFile, CommandLine], limit=1000
 ```
 
 Show me a list of links opened from Outlook in the last hour (Use Time Filter in UI):
@@ -427,7 +427,7 @@ Show me the responsible process for the `UserAccountCreated` event:
 ```
 #event_simpleName=ProcessRollup2 OR #event_simpleName=SyntheticProcessRollup2
 | join({#event_simpleName=UserAccountCreated}, key=RpcClientProcessId, field=TargetProcessId, include=[UserName])
-| select([aid, UserName, TargetProcessId, ImageFileName, CommandLine])
+| table([aid, UserName, TargetProcessId, ImageFileName, CommandLine], limit=1000)
 ```
 
 Older versions of common software can contain numerous vulnerabilities. You can search for hosts that are running older versions of software and mitigate the risk of having one of those vulnerabilities exploited. The following query will return the full file path of a specified piece of software which will indicate the software version.
@@ -458,7 +458,7 @@ Show me all `FirewallSetRule` events:
 
 ```
 #event_simpleName=FirewallSetRule
-| select([aid, FirewallRule])
+| table([aid, FirewallRule], limit=1000)
 ```
 
 Show me all `FirewallSetRule` events grouped by host:
@@ -479,7 +479,7 @@ Rules set (with FirewallRule key/value extraction). The following query lists al
 | regex(field=FirewallRule, regex="Dir=(?<Dir>(.*?))\|", strict=false)
 | regex(field=FirewallRule, regex="Desc=(?<Desc>(.*?))\|", strict=false)
 | regex(field=FirewallRule, regex="Name=(?<Name>(.*?))\|", strict=false)
-| select([aid, App, Name, Desc, Active, Dir, Profile])
+| table([aid, App, Name, Desc, Active, Dir, Profile], limit=1000)
 ```
 
 Show me the responsible process:
@@ -487,7 +487,7 @@ Show me the responsible process:
 ```
 #event_simpleName=ProcessRollup2
 | join({#event_simpleName=FirewallSetRule}, key=ContextProcessId, field=TargetProcessId, include=[FirewallRule, FirewallRuleId])
-| select([aid, FirewallRule, FirewallRuleId, ImageFileName, CommandLine])
+| table([aid, FirewallRule, FirewallRuleId, ImageFileName, CommandLine], limit=1000)
 ```
 
 It might also be useful to identify critical firewall rules in your environment and monitor them for deletion (especially outside of normal change control hours). These queries will show you which firewall rule was deleted and the process responsible.
@@ -496,7 +496,7 @@ Show me all `FirewallDeleteRule` events:
 
 ```
 #event_simpleName=FirewallDeleteRule
-| select([aid, FirewallRuleId])
+| table([aid, FirewallRuleId], limit=1000)
 ```
 
 Show me all `FirewallDeleteRule` events grouped by host:
@@ -511,7 +511,7 @@ Show me all responsible processes:
 ```
 #event_simpleName=ProcessRollup2
 | join({#event_simpleName=FirewallDeleteRule}, key=ContextProcessId, field=TargetProcessId, include=[FirewallRule, FirewallRuleId])
-| select([aid, FirewallRuleId, ImageFileName, CommandLine])
+| table([aid, FirewallRuleId, ImageFileName, CommandLine], limit=1000)
 ```
 
 The `FirewallChangeOption` event indicates that a firewall configuration option has been changed, such as enabling or disabling the firewall. The data will indicate the initial process (command-line tool, custom utility, or GUI application) or remote address/hostname that resulted in this action. It might be useful to see how often this occurs in your environment and by what process. Baselining allows for quicker triage on the edge cases where the activity is not expected.
@@ -526,7 +526,7 @@ Show me all `FirewallChangeOption` events (with human-readable profile descripti
     "2" => FirewallProfile := "Standard" ;
     "3" => FirewallProfile := "Public" ;
     * => *}
-| select([aid, FirewallOption, FirewallProfile, FirewallOptionNumericValue])
+| table([aid, FirewallOption, FirewallProfile, FirewallOptionNumericValue], limit=1000)
 ```
 
 Show me the responsible process for the firewall change:
@@ -560,7 +560,7 @@ Show me a list of outbound network connections on a specific port:
 #event_simpleName=NetworkConnect* 
 | RemotePort=?RemotePort aid=?aid
 | !cidr(RemoteAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "127.0.0.0/8", "169.254.0.0/16", "0.0.0.0/32"])
-| select([aid, LocalAddressIP4, LocalPort, RemoteAddressIP4, RemotePort])
+| table([aid, LocalAddressIP4, LocalPort, RemoteAddressIP4, RemotePort], limit=1000)
 ```
 
 Show me a list of infrequent connections on a specific port:
@@ -611,7 +611,7 @@ Uncommon processes making network connections or DNS requests:
 #event_simpleName=DnsRequest
 | aid=?aid 
 | join({#event_simpleName=ProcessRollup2 aid=?aid ImageFileName=/chrome\.exe/i}, key=TargetProcessId, field=ContextProcessId, include=[CommandLine, ImageFileName])
-| select([@timestamp, aid, timestamp, DomainName, ImageFileName, CommandLine])
+| table([@timestamp, aid, timestamp, DomainName, ImageFileName, CommandLine], limit=1000)
 ```
 
 Example for Notepad:
@@ -620,7 +620,7 @@ Example for Notepad:
 #event_simpleName=DnsRequest
 | aid=?aid
 | join({#event_simpleName=ProcessRollup2 aid=?aid ImageFileName=/notepad\.exe/i}, key=TargetProcessId, field=ContextProcessId, include=[CommandLine, ImageFileName])
-| select([@timestamp, aid, timestamp, DomainName, ImageFileName, CommandLine])
+| table([@timestamp, aid, timestamp, DomainName, ImageFileName, CommandLine], limit=1000)
 ```
 
 Uncommon processes making network connections to remote IP addresses on a specific host:
@@ -637,7 +637,7 @@ Show all Remote Desktop Protocol (RDP) connections observed on a specific host:
 ```
 #event_simpleName=UserIdentity
 | aid=?aid LogonType=10
-| select([@timestamp, UserName, UserPrincipal, LogonServer])
+| table([@timestamp, UserName, UserPrincipal, LogonServer], limit=1000)
 ```
 
 # Hunting anomalous behavior
@@ -661,7 +661,7 @@ Show me all deleted user accounts:
 ```
 #event_simpleName=UserAccountDeleted
 | aid=?aid 
-| select([aid, UserName, UserRid])
+| table([aid, UserName, UserId], limit=1000)
 ```
 
 When an adversary delivers a malicious file to a host, they’ll likely change or vary the file name so that it’s harder for analysts to find. This is a very common tactic used for phishing campaigns. Adversaries will use a different name for each file, but they will still follow some kind of a logical pattern, as the files are likely to be created programmatically. Thus, the file will not have the same name on each host, but we can nevertheless use an expression to hunt for them.
@@ -673,7 +673,7 @@ Hunt for a `CommandLine` query:
 | aid=?aid
 | CommandLine=/YOURVALUEHERE/i 
 | ImageFileName=/(\/|\\)(?<FileName>\w*\.?\w*)$/
-| select([aid, FileName, ImageFileName, CommandLine])
+| table([aid, FileName, ImageFileName, CommandLine], limit=1000)
 ```
 
 The same with a `FileName` query:
@@ -683,7 +683,7 @@ The same with a `FileName` query:
 | aid=?aid 
 | ImageFileName=/YOURVALUEHERE/i 
 | ImageFileName=/(\/|\\)(?<FileName>\w*\.?\w*)$/
-| select([aid, FileName, ImageFileName, CommandLine])
+| table([aid, FileName, ImageFileName, CommandLine], limit=1000)
 ```
 
 # Hunting anomalies related to scheduled tasks
@@ -722,7 +722,7 @@ Show me events triggered at log on:
 | parseXml(TaskXml)
 | Trigger:=rename(Task.Triggers.LogonTrigger.Enabled)
 | Trigger=* // Remove this line if you don't care if it's empty
-| select([aid, Trigger, TaskXml])
+| table([aid, Trigger, TaskXml], limit=1000)
 ```
 
 Show me events triggered at startup:
@@ -732,7 +732,7 @@ Show me events triggered at startup:
 | parseXml(TaskXml)
 | Trigger:=rename(Task.Triggers.BootTrigger.Enabled)
 | Trigger=* // Remove this line if you don't care if it's empty
-| select([aid, Trigger, TaskXml])
+| table([aid, Trigger, TaskXml], limit=1000)
 ```
 
 Show me events triggered at a specific time:
@@ -742,7 +742,7 @@ Show me events triggered at a specific time:
 | parseXml(TaskXml)
 | Trigger:=rename(Task.Triggers.TimeTrigger.Enabled)
 | Trigger=* // Remove this line if you don't care if it's empty
-| select([aid, Trigger, TaskXml])
+| table([aid, Trigger, TaskXml], limit=1000)
 ```
 
 Show me events that are scheduled:
@@ -752,7 +752,7 @@ Show me events that are scheduled:
 | parseXml(TaskXml)
 | Trigger:=rename(Task.Triggers.CalendarTrigger.Enabled)
 | Trigger=* // Remove this line if you don't care if it's empty
-| select([aid, Trigger, TaskXml])
+| table([aid, Trigger, TaskXml], limit=1000)
 ```
 
 Show me events triggered on an event:
@@ -762,7 +762,7 @@ Show me events triggered on an event:
 | parseXml(TaskXml)
 | Trigger:=rename(Task.Triggers.EventTrigger.Enabled)
 | Trigger=* // Remove this line if you don't care if it's empty
-| select([aid, Trigger, TaskXml])
+| table([aid, Trigger, TaskXml], limit=1000)
 ```
 
 Show me tasks scheduled by logon type:
@@ -772,7 +772,7 @@ Show me tasks scheduled by logon type:
 | parseXml(TaskXml)
 | LogonType:=rename(Task.Principals.Principal.LogonType)
 | LogonType=* // Remove this line if you don't care if it's empty
-| select([aid, LogonType, TaskXml])
+| table([aid, LogonType, TaskXml], limit=1000)
 ```
 
 Show me tasks scheduled by user ID:
@@ -781,7 +781,7 @@ Show me tasks scheduled by user ID:
 #event_simpleName=ScheduledTaskRegistered
 | parseXml(TaskXml)
 | UserId:=rename(Task.Principals.Principal.UserId)
-| select([aid, UserId, TaskXml])
+| table([aid, UserId, TaskXml], limit=1000)
 ```
 
 Show me tasks scheduled by run level:
@@ -791,7 +791,7 @@ Show me tasks scheduled by run level:
 | parseXml(TaskXml)
 | RunLevel:=rename(Task.Principals.Principal.RunLevel)
 | RunLevel=* // Remove this line if you don't care if it's empty
-| select([aid, RunLevel, TaskXml])
+| table([aid, RunLevel, TaskXml], limit=1000)
 ```
 
 Show me tasks scheduled with ComHandler:
@@ -801,7 +801,7 @@ Show me tasks scheduled with ComHandler:
 | parseXml(TaskXml)
 | ComHandlerData:=rename(Task.Actions.ComHandler.Data)
 | ComHandlerData=* // Remove this line if you don't care if it's empty
-| select([aid, ComHandlerData, TaskXml])
+| table([aid, ComHandlerData, TaskXml], limit=1000)
 ```
 
 Show me hidden scheduled tasks:
@@ -811,7 +811,7 @@ Show me hidden scheduled tasks:
 | parseXml(TaskXml)
 | Hidden:=rename(Task.Settings.Hidden)
 | Hidden=/true/i
-| select([aid, Hidden, TaskXml])
+| table([aid, Hidden, TaskXml], limit=1000)
 ```
 
 # Hunting suspicious registry changes
@@ -820,8 +820,7 @@ The Windows registry is a hierarchical database that stores the values of variab
 
 ```
 #event_simpleName=/Asep/
-| select([@timestamp, aid, RegObjectName]) 
-| sort(@timestamp, order=desc, limit=1000)
+| table([@timestamp, aid, RegObjectName], limit=1000) 
 ```
 
 # Hunting Java malware, trojans, and exploits
@@ -833,7 +832,7 @@ Show me DNS requests spawning from javaw.exe process (beaconing):
 ```
 #event_simpleName=DnsRequest
 | join({#event_simpleName=ProcessRollup2 ImageFileName=/javaw\.exe/i}, key=TargetProcessId, field=ContextProcessId, include=[CommandLine, ImageFileName])
-| select([@timestamp, aid, timestamp, DomainName, ImageFileName, CommandLine])
+| table([@timestamp, aid, timestamp, DomainName, ImageFileName, CommandLine], limit=1000)
 ```
 
 Show me .JAR files written to %AppData%:
@@ -841,7 +840,7 @@ Show me .JAR files written to %AppData%:
 ```
 #event_simpleName=JarFileWritten 
 | TargetFileName=/\\AppData\\/i
-| select([aid, @timestamp, TargetFileName, SHA256HashData])
+| table([aid, @timestamp, TargetFileName, SHA256HashData], limit=1000)
 ```
 
 Show me .JAR files executed from %AppData%:
@@ -849,7 +848,7 @@ Show me .JAR files executed from %AppData%:
 ```
 #event_simpleName=ProcessRollup2 
 | ImageFileName=/javaw.exe/i CommandLine=/appdata/i
-| select([aid, @timestamp, #event_simpleName, ImageFileName, SHA256HashData])
+| table([aid, @timestamp, #event_simpleName, ImageFileName, SHA256HashData], limit=1000)
 ```
 
 Show me ASEP for Java executables:
@@ -863,8 +862,8 @@ Show me ASEP for Java executables:
       | match(file="fdr_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true);
     * | default(field=ComputerName, value=NotMatched);
   } 
-| select([@timestamp, #event_simpleName, aid, ComputerName, ContextImageFileName, RegPostObjectName, RegObjectName, RegStringValue, RegValueName, TargetCommandLineParameters, TargetFileName])
-| sort(@timestamp, order=desc, limit=1000)
+| table([@timestamp, #event_simpleName, aid, ComputerName, ContextImageFileName, RegPostObjectName, RegObjectName, RegStringValue, RegValueName, TargetCommandLineParameters, TargetFileName], limit=1000)
+| table(@timestamp, order=desc, limit=1000)
 ```
 
 ## Hunting Java exploits
@@ -879,7 +878,7 @@ This query is used exclusively for portable executable files. Show me the Java.e
       | match(file="fdr_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true);
     * | default(field=ComputerName, value=NotMatched);
   } 
-| select([@timestamp, cid, aid, Customer, ComputerName, #event_simpleName, UserName, ImageFileName, CommandLine, TargetFileName, FileName, MD5HashData, SHA256HashData, CommandHistory])
+| table([@timestamp, cid, aid, Customer, ComputerName, #event_simpleName, UserName, ImageFileName, CommandLine, TargetFileName, FileName, MD5HashData, SHA256HashData, CommandHistory], limit=1000)
 ```
 
 This `NewExecutableWritten` event is generated when an executable file extension is written, whether or not it is truly an executable file type. Any file that ends with a known executable file extension (such as .exe, .bat, .scr) generates this event.
@@ -887,7 +886,7 @@ This `NewExecutableWritten` event is generated when an executable file extension
 ```
 #event_simpleName=NewExecutableWritten
 | join({#event_simpleName=ProcessRollup2 ImageFileName=/java\.exe/i}, key=TargetProcessId, field=ContextProcessId, include=[CommandLine, ImageFileName, Sha256HashData])
-| select([@timestamp, cid, aid, Customer, #event_simpleName, ImageFileName, CommandLine, TargetFileName, FileName, MD5HashData, SHA256HashData, CommandHistory])
+| table([@timestamp, cid, aid, Customer, #event_simpleName, ImageFileName, CommandLine, TargetFileName, FileName, MD5HashData, SHA256HashData, CommandHistory], limit=1000)
 ```
 
 Hunt for child process of "whoami" spawning underneath Java.exe process. You can substitute "whoami" for any recon commands:
@@ -896,8 +895,7 @@ Hunt for child process of "whoami" spawning underneath Java.exe process. You can
 #event_simpleName=ProcessRollup2
 | ImageFileName=/java\.exe/i
 | join({#event_simpleName=CommandHistory ImageFileName=/whoami\.exe/i}, key=TargetProcessId, field=ParentProcessId, include=CommandHistory)
-| select([@timestamp, cid, aid, Customer, #event_simpleName, ImageFileName, CommandLine, TargetFileName, FileName, MD5HashData, SHA256HashData, CommandHistory])
-| sort(@timestamp, limit=1000)
+| table([@timestamp, cid, aid, Customer, #event_simpleName, ImageFileName, CommandLine, TargetFileName, FileName, MD5HashData, SHA256HashData, CommandHistory], limit=1000)
 ```
 
 
