@@ -13,7 +13,7 @@ widgets:
     queryString: |-
       #event_simpleName=PodInfo
       | count(PodServiceAccountName, distinct=true)
-    start: 1y
+    start: 7d
     width: 4
     options:
       default: {}
@@ -43,7 +43,7 @@ widgets:
       | groupBy(resourceName, function=[collect(["Detection Type", clusterName], limit=10000), count(as="Total Events")], limit=max)
       | sort("Total Events", limit=10000)
     visualization: table-view
-    start: 1y
+    start: 7d
     width: 12
     title: Detection Events
     type: query
@@ -56,7 +56,7 @@ widgets:
       | eventType=K8SDetectionEvent
       | groupBy(detectionName, limit=max)
     visualization: pie-chart
-    start: '2023-01-10T20:40:28.142Z'
+    start: 7d
     width: 4
     title: Pod Detections by Name
     type: query
@@ -69,7 +69,7 @@ widgets:
       | join({#event_simpleName=OsVersionInfo}, field=aid, include=AgentVersion)
       | groupBy(aid, function=selectLast([AgentVersion, PodName, PodNamespace, PodHostname]), limit=max)
     visualization: table-view
-    start: 1d
+    start: 7d
     width: 12
     title: Sensor List
     type: query
@@ -153,7 +153,7 @@ widgets:
       | eventType=K8SDetectionEvent
       | groupBy(severity, limit=max)
     visualization: pie-chart
-    start: '2023-01-10T20:40:28.142Z'
+    start: 7d
     width: 4
     title: Pod Detections by Severity
     type: query

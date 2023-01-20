@@ -13,7 +13,7 @@ widgets:
       | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" Tactic!=/^custom/i Tactic!=""
       | Tactic = * AND Technique = *
       | groupBy([Tactic, Technique], function=stats([count(AgentIdString, as="Detection Count")]))
-    start: 30d
+    start: 7d
     width: 12
     options:
       colorPalette: greenRed
@@ -32,7 +32,7 @@ widgets:
       | top([FileName, Tactic, Technique], limit=25)
       | rename("_count", as="Detection Count")
     visualization: table-view
-    start: 30d
+    start: 7d
     width: 7
     title: Top 25 Triggering Files by Tactic & Technique
     type: query
@@ -43,7 +43,7 @@ widgets:
     queryString: |
       | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent"
       | groupBy([Tactic], function=stats([count(AgentIdString, as="Detection Count")]))
-    start: 30d
+    start: 7d
     width: 4
     options:
       legend: false
@@ -59,7 +59,7 @@ widgets:
       | top([ComputerName, Technique], limit=25)
       | rename("_count", as="Detection Count")
     visualization: table-view
-    start: 30d
+    start: 7d
     width: 6
     title: Top 25 Endpoints by Technique
     type: query
@@ -71,7 +71,7 @@ widgets:
       | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent"
       | groupBy([Tactic, Technique, Severity], function=stats([count(AgentIdString, as="detectCount")]))
       | sankey(source="Tactic",target="Technique", weight=sum(Severity))
-    start: 30d
+    start: 7d
     width: 8
     options:
       series: {}
@@ -87,7 +87,7 @@ widgets:
     queryString: |
       | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent"
       | groupBy([Technique], function=stats([count(AgentIdString, as="Detection Count")]))
-    start: 30d
+    start: 7d
     width: 4
     options:
       legend: false
@@ -104,7 +104,7 @@ widgets:
       | top([ComputerName, Tactic], limit=25)
       | rename("_count", as="Detection Count")
     visualization: table-view
-    start: 30d
+    start: 7d
     width: 6
     title: Top 25 Endpoints by Tactic
     type: query
@@ -117,7 +117,7 @@ widgets:
       | Tactic != "" AND Technique = *
       | groupBy([Tactic, Technique], function=stats([count(AgentIdString, as="detectCount")]))
       | rename("detectCount",as="Detection Count")
-    start: 30d
+    start: 7d
     width: 12
     options:
       series: {}
@@ -139,7 +139,7 @@ widgets:
       | sort(detectCount, order=desc)
       | rename("_count", as="Detection Count")
     visualization: table-view
-    start: 30d
+    start: 7d
     width: 5
     title: Top 25 Tactic & Technique Combinations
     type: query
@@ -151,7 +151,7 @@ widgets:
       | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" Tactic!=/custom\s.*/i Tactic!=""
       | groupBy([Tactic, @timestamp], function=stats([count(AgentIdString, as="Detection Count")]))
       | bucket(field="Tactic")
-    start: 30d
+    start: 7d
     width: 12
     options:
       colorPalette: monoPeach

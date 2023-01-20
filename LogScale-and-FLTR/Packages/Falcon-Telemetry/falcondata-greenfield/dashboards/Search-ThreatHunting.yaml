@@ -50,7 +50,7 @@ widgets:
       | sort(_count)
       | Total:=rename(_count)
     visualization: table-view
-    start: 30d
+    start: 7d
     width: 4
     title: Suspicious Events
     type: query
@@ -64,7 +64,7 @@ widgets:
       | ipLocation(field=RemoteAddressIP4)
       | top(RemoteAddressIP4.country, as="Total")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 3
     title: Top Country Destinations
     type: query
@@ -100,7 +100,7 @@ widgets:
       | "Total":=rename(_count)
       | sort(ScriptEntropy, limit=20)
     visualization: table-view
-    start: 30d
+    start: 7d
     width: 8
     title: Potential Script Obfuscation
     type: query
@@ -113,7 +113,7 @@ widgets:
       | !cidr(RemoteAddressIP4, subnet=["224.0.0.0/4", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "127.0.0.0/8", "169.254.0.0/16", "0.0.0.0/32"])
       | top(RemoteAddressIP4, as="Total")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 3
     title: Top IP Destinations
     type: query

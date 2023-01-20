@@ -20,7 +20,7 @@ widgets:
       | FileName = ?FileName
       | select([@timestamp, aid, ComputerName, TargetFileName])
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 8
     title: File Write Details - Must Specify ComputerName
     type: query
@@ -34,7 +34,7 @@ widgets:
       | regex("(?<FileName>[^/\\\]+$)", field=ImageFileName, strict=false)
       | FileName = ?FileName
       | count(field=ComputerName, distinct=true)
-    start: 24h
+    start: 7d
     width: 4
     options:
       color-method: static
@@ -53,7 +53,7 @@ widgets:
       | regex("(?<FileName>[^/\\\]+$)", field=ImageFileName, strict=false)
       | FileName = ?FileName
       | timeChart(function=count(as="Hosts", field=aid, distinct=true))
-    start: 24h
+    start: 7d
     width: 6
     options:
       series: {}
@@ -77,7 +77,7 @@ widgets:
       | FileName = ?FileName
       | $"falcondata/zen:ComputerName"()
       | top(field=ComputerName, limit=25)
-    start: 24h
+    start: 7d
     width: 4
     options:
       legendLabelOverflow: truncate
@@ -95,7 +95,7 @@ widgets:
       | regex("(?<FileName>[^/\\\]+$)", field=TargetFileName, strict=false)
       | FileName = ?FileName
       | count(field=ComputerName, distinct=true)
-    start: 24h
+    start: 7d
     width: 4
     options:
       color-method: static
@@ -115,7 +115,7 @@ widgets:
       | FileName = ?FileName
       | $"falcondata/zen:ComputerName"()
       | top(field=ComputerName,limit=25)
-    start: 24h
+    start: 7d
     width: 4
     options:
       legendLabelOverflow: truncate
@@ -141,7 +141,7 @@ widgets:
       | regex("(?<FileName>[^/\\\]+$)", field=ImageFileName, strict=false)
       | FileName = ?FileName
       | timeChart(function=count(as="Activity"))
-    start: 24h
+    start: 7d
     width: 6
     options:
       series: {}
@@ -181,7 +181,7 @@ widgets:
       | drop(@timestamp)
       | table([SHA256HashData, FileName, "Total Hosts", FirstExecutedOn, FirstExecutionDateTime, LastExecutedOn, LastExecutionDateTime], limit=199, sortby="Total Hosts")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 12
     title: Execution History - Must Specify FileName or SHA256
     type: query
@@ -202,7 +202,7 @@ widgets:
       | FileName = ?FileName
       | table([@timestamp, aid, ImageFileName, CommandLine], limit=20000)
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 8
     title: File Execution Details - Must Specify FileName or SHA256
     type: query

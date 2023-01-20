@@ -41,7 +41,7 @@ widgets:
       // Present the results.
       | select([ProcessStartTime, pid, DomainName, ComputerName, aid, ImageFileName, MD5HashData, SHA256HashData])
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 12
     title: Process and Domain Details
     type: query
@@ -82,7 +82,7 @@ widgets:
       | table([DomainName, NumberOfHosts, FirstLookup, FirstLookupBy, LastLookup, LastLookupBy], limit=200, sortby=NumberOfHosts)
       | rename(NumberOfHosts, as="Total Hosts")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 6
     title: Domain Lookup Summary
     type: query
@@ -131,7 +131,7 @@ widgets:
       | FirstLookup := formatTime(field=FirstLookup, format="%Y/%m/%d %H:%M:%S")
       | table([DomainName, "Total Lookups", ComputerName, FirstLookup, LastLookup], limit=200, sortby="Total Lookups")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 7
     title: Lookup Details
     type: query
@@ -151,7 +151,7 @@ widgets:
       | groupBy([ComputerName, DomainName], limit=max)
       | top(ComputerName, sum=_count, as="Total Lookups")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 3
     title: Domain Lookups by Host
     type: query
@@ -171,7 +171,7 @@ widgets:
       | $"falcondata/zen:ComputerName"()
       | ComputerName=?ComputerName
       | count(ComputerName, distinct=true)
-    start: 1d
+    start: 7d
     width: 5
     options:
       ct: []
@@ -195,7 +195,7 @@ widgets:
       | groupBy([ComputerName, DomainName], limit=max)
       | top(ComputerName, sum=_count, as="Total Lookups")
     visualization: bar-chart
-    start: 24h
+    start: 7d
     width: 3
     title: Domain Lookups by Host
     type: query

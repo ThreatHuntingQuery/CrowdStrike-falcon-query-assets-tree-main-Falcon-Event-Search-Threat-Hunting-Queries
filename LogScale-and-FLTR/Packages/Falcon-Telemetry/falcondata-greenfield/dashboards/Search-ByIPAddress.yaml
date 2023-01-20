@@ -20,7 +20,7 @@ widgets:
       | ComputerName=?ComputerName
       | groupBy([ComputerName, RemoteAddressIP4], limit=max)
       | top(ComputerName, sum=_count)
-    start: 1h
+    start: 7d
     width: 6
     options:
       series: {}
@@ -117,7 +117,7 @@ widgets:
       | top(ComputerName, sum=_count)
       | rename(_sum, as="Total Connections")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 6
     title: IP Connections by Host
     type: query

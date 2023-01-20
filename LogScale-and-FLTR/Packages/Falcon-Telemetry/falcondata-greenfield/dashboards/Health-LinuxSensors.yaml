@@ -112,7 +112,7 @@ widgets:
       | OSVersionString = /^Linux\s(?<hostName>\S+)\s(?<kernelVersion>\S+)\s/i
       | select([aid, hostName, aip.country, kernelVersion, AgentVersion, Status, "Host Management"])
     visualization: table-view
-    start: 1d
+    start: 7d
     width: 12
     title: Linux Endpoints
     type: query

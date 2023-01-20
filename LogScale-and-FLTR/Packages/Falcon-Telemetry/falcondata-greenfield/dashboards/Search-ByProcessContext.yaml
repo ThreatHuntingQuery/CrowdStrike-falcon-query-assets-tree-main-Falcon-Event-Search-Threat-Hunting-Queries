@@ -16,7 +16,7 @@ widgets:
       | groupBy([#event_simpleName, TargetFileName], limit=max)
       | rename(_count, as="Total")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 12
     title: Files Deleted
     type: query
@@ -27,7 +27,7 @@ widgets:
     queryString: |-
       test(?ProcessId != "*")
       | ContextProcessId = ?ProcessId aid = ?aid
-    start: 24h
+    start: 7d
     width: 12
     options:
       columns: '[{"type":"field","fieldName":"@timestamp","format":"timestamp","width":210},{"type":"field","fieldName":"#event_simpleName","format":"text","width":253},{"type":"field","fieldName":"@rawstring","format":"logline"}]'
@@ -49,7 +49,7 @@ widgets:
       | ShortCommandLine:=format("%.64s...", field=CommandLine)
       | groupBy([aid, TargetProcessId], function=collect([ComputerName, ImageFileName, ShortCommandLine], limit=10000), limit=max)
     visualization: table-view
-    start: 1d
+    start: 7d
     width: 12
     title: Processes by Host
     type: query
@@ -71,7 +71,7 @@ widgets:
       test(?ProcessId != "*")
       | (#event_simpleName=NetworkConnectIP4 OR #event_simpleName=NetworkConnectIP6) ContextProcessId = ?ProcessId aid = ?aid
       | groupBy([RemoteAddressIP4, RemoteAddressIP6], limit=max)
-    start: 24h
+    start: 7d
     width: 4
     options:
       series: {}
@@ -92,7 +92,7 @@ widgets:
       Protocol=58 | eval(aProtocol="IPv6-ICMP");*}
       | select([@timestamp, aid, aProtocol, LocalAddressIP4, LocalAddressIP6, LocalPort, RemoteAddressIP4, RemoteAddressIP6, RemotePort])
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 12
     title: Network Events
     type: query
@@ -104,7 +104,7 @@ widgets:
       test(?ProcessId != "*")
       | ContextProcessId = ?ProcessId
       | groupBy([aid, #event_simpleName], limit=max)
-    start: 24h
+    start: 7d
     width: 4
     options:
       series: {}
@@ -121,7 +121,7 @@ widgets:
       | groupBy(DomainName, limit=max)
       | rename(_count, as="Total")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 4
     title: DNS Requests
     type: query
@@ -135,7 +135,7 @@ widgets:
       | groupBy([#event_simpleName, TargetFileName], limit=max)
       | rename(_count, as="Total")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 12
     title: Files Written
     type: query
@@ -149,7 +149,7 @@ widgets:
       | groupBy(ImageFileName, limit=max)
       | rename(_count, as="Total")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 12
     title: Image Hash Events
     type: query

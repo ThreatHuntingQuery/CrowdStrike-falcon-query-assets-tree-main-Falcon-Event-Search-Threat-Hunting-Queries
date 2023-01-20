@@ -28,7 +28,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | timechart(function=count(as="Total Detections"))
-    start: 24h
+    start: 7d
     width: 12
     options:
       connect-points: false
@@ -59,7 +59,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | sankey(target=Tactic, source=Technique)
-    start: 24h
+    start: 7d
     width: 6
     options:
       series: {}
@@ -90,7 +90,7 @@ widgets:
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | top(ComputerName, as="Top Hosts")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 4
     title: Detections by Host
     type: query
@@ -116,7 +116,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | top(Tactic, as="Top Tactics")
-    start: 24h
+    start: 7d
     width: 4
     options:
       innerRadius: 28
@@ -147,7 +147,7 @@ widgets:
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | top(UserName, as="Top Users")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 4
     title: Detections by User
     type: query
@@ -173,7 +173,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | top(Technique, as="Top Techniques")
-    start: 24h
+    start: 7d
     width: 4
     options:
       series: {}
@@ -202,7 +202,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | sankey(target=Technique, source=SeverityName)
-    start: 24h
+    start: 7d
     width: 6
     options:
       series: {}
@@ -231,7 +231,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | top(SeverityName, as="Top Severities")
-    start: 24h
+    start: 7d
     width: 4
     options:
       series: {}
@@ -261,7 +261,7 @@ widgets:
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | top(DetectDescription, as="Top Detections")
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 4
     title: Detection by Attack
     type: query
@@ -287,7 +287,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | sankey(target=FileName, source=ParentImageFileName)
-    start: 24h
+    start: 7d
     width: 6
     options:
       series: {}
@@ -316,7 +316,7 @@ widgets:
       // Check the remaining inputs. 
       | AgentIdString = ?aid AND CustomerIdString = ?cid
       | sankey(target=ParentImageFileName, source=GrandparentImageFileName)
-    start: 24h
+    start: 7d
     width: 6
     options:
       series: {}
@@ -348,7 +348,7 @@ widgets:
       | $"falcondata/zen:UserName"()
       | select([ComputerName, UserName, DetectName, FilePath, FileName, SeverityName, Tactic, Technique, DetectDescription])
     visualization: table-view
-    start: 24h
+    start: 7d
     width: 12
     title: Detection Table
     type: query
