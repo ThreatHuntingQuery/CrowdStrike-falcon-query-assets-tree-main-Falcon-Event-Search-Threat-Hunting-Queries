@@ -6,18 +6,10 @@ Welcome to the LogScale space of the Falcon Query Assets repo, formerly known as
 
 Here's a quick summary of the various folders in this repo:
 
-- **Alerts**: these are custom alerts that can be leveraged in LogScale.
+- **Log-Shippers**: these are configuration files for varios log shippers, e.g. Falcon LogScale Collector, FluentD, Vector, etc. 
 
-- **Dashboards**: dashboards that can be imported ad-hoc. 
+- **Packages**: packages used by the SE team. These are primarily meant as learning examples. This is not a replacement for the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html).
 
-- **Lookup Files**: CSVs that can be used with the [match function](https://library.humio.com/humio-server/functions-match.html).
+- **Tutorials**: LogScale guides and tutorials.
 
-- **Packages**: :warning: unofficial packages :warning: used by the SE team. These are primarily meant as learning examples. This is not a replacement for the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html).
-
-- **Parsers**: :warning: unofficial parsers :warning: used by the SE team. These are primarily meant as learning examples. This is not a replacement for the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html).
-
-- **Queries**: useful LogScale queries. These can range from Falcon data to applications to metrics. 
-
-- **Transforms**: examples of using LQL to transform fields and values. 
-
-- **Tutorials**: LQL guides and tutorials.
+- **Vendor-Content**: queries, dashboards, alerts, etc grouped by vendor. These are primarily meant as learning examples. This is not a replacement for existing contents in the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html).
