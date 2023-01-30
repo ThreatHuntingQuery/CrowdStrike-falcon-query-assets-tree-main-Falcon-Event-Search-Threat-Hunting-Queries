@@ -45,7 +45,7 @@ widgets:
       | format(format="Policy Rule Name: %s %nTactic: %s %nTechnique: %s %nObjective: %s %n", field=["Policy Rule Name", Tactic, Techinque, Objective], as="Extra Context")
 
       // Display columns with all formatting included
-      | select([Severity, @timestamp, DetectName, "Account Name", "Account Domain", "Source endpoint name", "Link", "Extra Context"])
+      | table([Severity, @timestamp, DetectName, "Account Name", "Account Domain", "Source endpoint name", "Link", "Extra Context"], limit=1000)
     visualization: table-view
     start: 7d
     width: 12

@@ -85,7 +85,7 @@ widgets:
       | join(
           {#event_simpleName=NetworkListenIP4 LocalPort!=0},
           field=TargetProcessId, key=ContextProcessId,
-          include=[LocalAddressIP4, LocalPort]
+          include=[LocalAddressIP4, LocalPort], limit=100000
         )
       | regex("(?<FileName>[^/\\\]+$)", field=ImageFileName, strict=false)
       | $"falcondata/zen:ComputerName"()

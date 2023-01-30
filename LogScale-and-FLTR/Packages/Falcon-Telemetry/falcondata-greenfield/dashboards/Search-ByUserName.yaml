@@ -28,7 +28,7 @@ widgets:
       | groupBy(aid, function=[collect([ComputerName, #event_simpleName], limit=100000), count(as="Total Events")], limit=max)
       | "Distinct Events":=rename(#event_simpleName)
       | sort("Total Events", limit=1000)
-      | select([aid, ComputerName, "Distinct Events", "Total Events"])
+      | table([aid, ComputerName, "Distinct Events", "Total Events"], limit=1000)
     visualization: table-view
     start: 7d
     width: 6
@@ -85,7 +85,7 @@ widgets:
 
       // These fields must exist.
       | Tactic=* AND Technique=*
-      | select([aid, ComputerName, DetectName, Tactic, Technique, Objective, CommandLine])
+      | table([aid, ComputerName, DetectName, Tactic, Technique, Objective, CommandLine], limit=1000)
     visualization: table-view
     start: 7d
     width: 12
@@ -169,7 +169,7 @@ widgets:
       | $"falcondata/zen:ComputerName"()
 
       // Grab the output.
-      | select([aid, ComputerName, @timestamp, #event_simpleName, TaskName, TaskExecCommand])
+      | table([aid, ComputerName, @timestamp, #event_simpleName, TaskName, TaskExecCommand], limit=1000)
     visualization: table-view
     start: 7d
     width: 6

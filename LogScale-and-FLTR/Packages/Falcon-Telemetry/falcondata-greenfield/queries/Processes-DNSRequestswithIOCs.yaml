@@ -14,7 +14,7 @@ queryString: |-
   | join(
       { #event_simpleName=DnsRequest }, 
       field=TargetProcessId, key=ContextProcessId, 
-      include=[DomainName]
+      include=[DomainName], limit=100000
     )
 
   // Filter out non-DNS names.

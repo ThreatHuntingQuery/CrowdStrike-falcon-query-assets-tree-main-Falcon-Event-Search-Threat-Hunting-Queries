@@ -108,7 +108,7 @@ widgets:
       | join(
           {#event_simpleName="DnsRequest"},
           field=TargetProcessId, key=ContextProcessId,
-          include=[DomainName]
+          include=[DomainName], limit=100000
         )
       // Extract the filename.
       | regex("(?<FileName>[^\\/|\\\\]*)$", field=ImageFileName, strict=false)
