@@ -20,5 +20,5 @@ queryString: |-
   
   // Grab the UserName. This excludes any of the generic Windows usernames.
   default(field=UserName, value="NotMatched")
-  | join({#event_simpleName=UserLogon OR #event_simpleName=UserIdentity}, field=aid, include=UserName, mode=left)
+  | join({#event_simpleName=UserLogon OR #event_simpleName=UserIdentity}, field=aid, include=UserName, limit=100000, mode=left)
   | UserName!=/(\$$|^DWM-|^LOCAL\sSERVICE$|^UMFD-|^$|^SYSTEM$|^ANONYMOUS\sLOGON$|^NT\sAUTHORITY\\SYSTEM$)/

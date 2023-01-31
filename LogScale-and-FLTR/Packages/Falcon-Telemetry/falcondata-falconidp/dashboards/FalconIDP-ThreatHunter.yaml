@@ -26,7 +26,7 @@ widgets:
       | "Added Privileges":=rename(AddedPrivileges)
 
       // Display subset of fields
-      | select([@timestamp, "Account Name", "Account Domain", DetectName, "Added Privileges", "Source endpoint name", "Link"])
+      | table([@timestamp, "Account Name", "Account Domain", DetectName, "Added Privileges", "Source endpoint name", "Link"], limit=1000)
     visualization: table-view
     start: 7d
     width: 12

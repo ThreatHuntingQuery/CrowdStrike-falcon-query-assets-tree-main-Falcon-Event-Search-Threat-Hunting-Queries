@@ -9,10 +9,14 @@ visualization:
 $schema: https://schemas.humio.com/query/v0.1.0
 timeInterval:
   isLive: false
-  start: 30d
+  start: 7d
 queryString: |-
+  // These events don't have an #event_simpleName tag.
+  // Excluding the tag is almost as fast, i.e. "everything without this tag".
+  #event_simpleName!=* #kind=Primary
+
   // Find MITRE events and ignore any custom tactics.
-  | EventType="Event_ExternalApiEvent" ExternalApiType="Event_DetectionSummaryEvent" Tactic!=/custom\s.*/i Tactic!=""
+  | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent Tactic!=/custom\s.*/i Tactic!=""
 
   // Group it by tactic than get a count.
   | groupBy([Tactic, @timestamp], function=count(AgentIdString), limit=max)

@@ -1,8 +1,9 @@
-name: Falcon Data aidmaster Scheduled Search
+name: Falcon aidmaster 0-9 Schedule
 description: ''
 enabled: true
 queryString: |-
   #kind=Secondary OR #event_simpleName=AgentOnline OR #event_simpleName=HostnameChanged
+  | aid=/^[0-9]/
   | groupBy(aid, function=selectLast(ComputerName), limit=max)
 backfillLimit: 0
 schedule: H */3 * * *
@@ -11,4 +12,4 @@ $schema: https://schemas.humio.com/scheduledsearch/v0.1.0
 timeZone: UTC+00:00
 queryStart: 30d
 actionNameReferences:
-- Falcon Data aidmaster CSV
+- Falcon aidmaster 0-9 Upload
