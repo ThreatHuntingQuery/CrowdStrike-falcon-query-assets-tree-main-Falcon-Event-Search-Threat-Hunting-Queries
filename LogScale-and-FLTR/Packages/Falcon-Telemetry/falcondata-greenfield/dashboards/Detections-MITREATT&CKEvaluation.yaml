@@ -11,7 +11,8 @@ widgets:
     y: 0
     height: 8
     queryString: |
-      EventType=Event_ExternalApiEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent
       | ExternalApiType=Event_DetectionSummaryEvent
       | Tactic!=/^custom/i
       | Tactic!=""
@@ -33,7 +34,8 @@ widgets:
     y: 37
     height: 8
     queryString: |
-      EventType=Event_ExternalApiEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent
       | ExternalApiType=Event_DetectionSummaryEvent
       | top([FileName, Tactic, Technique], limit=25)
       | rename("_count", as="Detection Count")
@@ -47,7 +49,8 @@ widgets:
     y: 21
     height: 4
     queryString: |
-      EventType=Event_ExternalApiEvent | ExternalApiType=Event_DetectionSummaryEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent | ExternalApiType=Event_DetectionSummaryEvent
       | groupBy([Tactic], function=count(AgentIdString, as="Detection Count"), limit=max)
     start: 7d
     width: 4
@@ -61,7 +64,8 @@ widgets:
     y: 29
     height: 8
     queryString: |
-      EventType=Event_ExternalApiEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent
       | ExternalApiType=Event_DetectionSummaryEvent
       | top([ComputerName, Technique], limit=25)
       | rename("_count", as="Detection Count")
@@ -75,7 +79,8 @@ widgets:
     y: 21
     height: 8
     queryString: |-
-      EventType=Event_ExternalApiEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent
       | ExternalApiType=Event_DetectionSummaryEvent
       | groupBy([Tactic, Technique, Severity], function=count(AgentIdString, as="detectCount"), limit=max)
       | sankey(source="Tactic", target="Technique", weight=sum(Severity))
@@ -93,7 +98,8 @@ widgets:
     y: 25
     height: 4
     queryString: |
-      EventType=Event_ExternalApiEvent | ExternalApiType=Event_DetectionSummaryEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent | ExternalApiType=Event_DetectionSummaryEvent
       | groupBy(Technique, function=count(AgentIdString, as="Detection Count"), limit=max)
     start: 7d
     width: 4
@@ -108,7 +114,8 @@ widgets:
     y: 29
     height: 8
     queryString: |
-      EventType=Event_ExternalApiEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent
       | ExternalApiType=Event_DetectionSummaryEvent
       | top([ComputerName, Tactic], limit=25)
       | rename("_count", as="Detection Count")
@@ -122,7 +129,8 @@ widgets:
     y: 8
     height: 6
     queryString: |
-      EventType=Event_ExternalApiEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent
       | ExternalApiType=Event_DetectionSummaryEvent
       | Tactic!=/(^custom|machine\slearning)/i
       | Tactic!=""
@@ -146,7 +154,8 @@ widgets:
     y: 37
     height: 8
     queryString: |
-      EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent
       | top([Tactic, Technique], limit=25)
       | rename("_count", as="Detection Count")
     visualization: table-view
@@ -159,7 +168,8 @@ widgets:
     y: 14
     height: 7
     queryString: |
-      EventType=Event_ExternalApiEvent
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent
       | ExternalApiType=Event_DetectionSummaryEvent
       | Tactic!=/custom\s.*/i
       | Tactic!=""

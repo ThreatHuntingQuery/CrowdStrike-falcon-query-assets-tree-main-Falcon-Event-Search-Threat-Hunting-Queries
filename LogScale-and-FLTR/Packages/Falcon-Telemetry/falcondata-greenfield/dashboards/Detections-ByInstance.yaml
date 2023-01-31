@@ -11,7 +11,8 @@ widgets:
     y: 0
     height: 4
     queryString: |
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -42,7 +43,8 @@ widgets:
     y: 8
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -71,8 +73,9 @@ widgets:
     y: 20
     height: 4
     queryString: |-
-      EventType = "Event_ExternalApiEvent"
-      | ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -99,7 +102,8 @@ widgets:
     y: 4
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -129,7 +133,8 @@ widgets:
     y: 20
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -156,7 +161,8 @@ widgets:
     y: 4
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -185,7 +191,8 @@ widgets:
     y: 8
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -214,7 +221,8 @@ widgets:
     y: 4
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -243,7 +251,8 @@ widgets:
     y: 20
     height: 4
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -270,7 +279,8 @@ widgets:
     y: 12
     height: 8
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -299,7 +309,8 @@ widgets:
     y: 12
     height: 8
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 
@@ -328,7 +339,8 @@ widgets:
     y: 24
     height: 7
     queryString: |-
-      ExternalApiType = "Event_DetectionSummaryEvent"
+      #event_simpleName!=* #kind=Primary
+      | ExternalApiType=Event_DetectionSummaryEvent
       // Add the ComputerName.
       | $"falcondata/zen:ComputerName"()
 

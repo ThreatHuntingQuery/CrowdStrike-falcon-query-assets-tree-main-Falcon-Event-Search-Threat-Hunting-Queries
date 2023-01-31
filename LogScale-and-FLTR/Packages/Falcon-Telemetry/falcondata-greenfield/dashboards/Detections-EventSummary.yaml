@@ -13,7 +13,8 @@ widgets:
       correlates with the configured prevention policy for the target endpoint.
     height: 4
     queryString: |
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | PatternDispositionDescription=/(?<preventStatus>^(Prevention|Detection))(\,|\/).*/i
       | groupBy("preventStatus", limit=max)
     start: 7d
@@ -33,7 +34,8 @@ widgets:
       contain multiple behaviors).'
     height: 4
     queryString: |-
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | count(AgentIdString,  as="Total Behaviors")
     start: 7d
     width: 3
@@ -64,8 +66,9 @@ widgets:
     y: 8
     height: 4
     queryString: |-
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
-      | UserName != "N/A"
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
+      | UserName!="N/A"
       | groupBy([UserName], function=([count(DetectId, distinct=true, as="Detection Count"), max(Severity, as=maxSev)]))
       | sort(["Detection Count", UserName], order=desc, limit=5)
       | maxSev match {
@@ -89,7 +92,8 @@ widgets:
     description: Falcon action taken by detection severity.
     height: 4
     queryString: |
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | PatternDispositionDescription=/(?<preventStatus>^(Prevention|Detection))(\,|\/).*/i
       | sankey(source="preventStatus",target="SeverityName", weight=count(DetectId, distinct=true))
     start: 7d
@@ -109,7 +113,8 @@ widgets:
     y: 8
     height: 4
     queryString: |+
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | top(["MachineDomain"], limit=5)
       | sort(field="_count", order=desc)
       | rename("MachineDomain",as="Domain")
@@ -126,7 +131,8 @@ widgets:
     y: 8
     height: 4
     queryString: |-
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | LocalIP=/(?<endpointSubnet>\d{1,3}\.\d{1,3}\.\d{1,3})\.\d{1,3}/i
       | top(["endpointSubnet"], limit=5)
       | sort(field="_count", order=desc)
@@ -144,7 +150,8 @@ widgets:
     description: Unique Falcon Agent ID values with endpoint detections.
     height: 4
     queryString: |-
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | count(AgentIdString, distinct=true, as="Total Endpoints")
     start: 7d
     width: 3
@@ -178,7 +185,8 @@ widgets:
       setting been enabled. '
     height: 4
     queryString: |+
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       //| PatternDispositionDescription=/(?<preventStatus>^(Prevention|Detection))(\,|\/).*/i
       //| preventStatus != "Prevention"
       | PatternDispositionDescription=/would\shave/i
@@ -198,7 +206,8 @@ widgets:
     y: 12
     height: 5
     queryString: |-
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | DetectId=/\S+\:(?<aid>\S+)\:(?<detectID>\S+)$/i
       | groupBy([aid, ComputerName, detectID, DetectId, FalconHostLink], function=([max(Severity, as=maxSev), sum(Severity, as=SeveritySum)]))
       | sort(field=SeveritySum, order=desc, limit=10)
@@ -229,7 +238,8 @@ widgets:
     description: Total number of unique endpoint detections.
     height: 4
     queryString: |-
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | count(DetectId, distinct=true, as="Total Detections")
     start: 7d
     width: 3
@@ -261,7 +271,8 @@ widgets:
     description: Detection count by maximum severity.
     height: 4
     queryString: |-
-      | EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent" ?ComputerName ?aid ?MachineDomain
+      | #event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent ?ComputerName ?aid ?MachineDomain
       | groupBy([DetectId], function=(max(Severity, as=Severity)), limit=max)
       | groupBy([Severity], function=(count(DetectId, as="Total Detections")), limit=max)
       | NumberSeverity:=Severity
@@ -298,7 +309,8 @@ $schema: https://schemas.humio.com/dashboard/v0.4.0
 parameters:
   ComputerName:
     label: Hostname
-    query: '| EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent"
+    query: '#event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent
       | groupBy(ComputerName)'
     timeInterval: 1d
     useDashboardTimeIfSet: true
@@ -308,7 +320,8 @@ parameters:
     valueField: ComputerName
   MachineDomain:
     label: Domain
-    query: '| EventType = "Event_ExternalApiEvent" ExternalApiType = "Event_DetectionSummaryEvent"
+    query: '#event_simpleName!=* #kind=Primary
+      | EventType=Event_ExternalApiEvent ExternalApiType=Event_DetectionSummaryEvent
       | groupBy(MachineDomain)'
     timeInterval: 1d
     useDashboardTimeIfSet: true
