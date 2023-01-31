@@ -1,0 +1,9 @@
+| eval ScriptingLanguageId=case(
+    ScriptingLanguageId_decimal = 1, "Unknown",
+    ScriptingLanguageId_decimal = 2, "PowerShell",
+    ScriptingLanguageId_decimal = 3, "Visual Basic for Applications",
+    ScriptingLanguageId_decimal = 4, "Visual Basic Script",
+    ScriptingLanguageId_decimal = 5, "JScript",
+    ScriptingLanguageId_decimal = 6, ".NET",
+    ScriptingLanguageId_decimal = 7, "Excel 4 Macro"
+)

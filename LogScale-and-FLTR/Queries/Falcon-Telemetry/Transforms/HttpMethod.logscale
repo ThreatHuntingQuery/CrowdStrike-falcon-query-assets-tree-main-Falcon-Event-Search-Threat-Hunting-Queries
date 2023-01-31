@@ -1,0 +1,13 @@
+// Transform to convert HttpMethod decimal to human-readable value.
+| case {
+        HttpMethod = "0"  | HttpMethod := "UNKNOWN" ;
+        HttpMethod = "1"  | HttpMethod := "GET" ;
+        HttpMethod = "2"  | HttpMethod := "HEAD" ;
+        HttpMethod = "3"  | HttpMethod := "POST" ; 
+        HttpMethod = "4"  | HttpMethod := "PUT" ; 
+        HttpMethod = "5"  | HttpMethod := "DELETE" ; 
+        HttpMethod = "6"  | HttpMethod := "OPTIONS" ; 
+        HttpMethod = "7"  | HttpMethod := "CONNECT" ; 
+        HttpMethod = "8"  | HttpMethod := "TRACE" ; 
+        HttpMethod = "9"  | HttpMethod := "PATCH" ; 
+        * }

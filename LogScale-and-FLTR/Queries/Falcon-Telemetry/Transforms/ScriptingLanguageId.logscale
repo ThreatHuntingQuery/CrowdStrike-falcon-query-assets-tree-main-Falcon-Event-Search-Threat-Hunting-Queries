@@ -1,0 +1,10 @@
+// Transform to convert ScriptingLanguageId decimal to human-readable value.
+| case {
+        ScriptingLanguageId = "1" | ScriptingLanguageId := "Unknown" ;
+        ScriptingLanguageId = "2" | ScriptingLanguageId := "PowerShell" ;
+        ScriptingLanguageId = "3" | ScriptingLanguageId := "Visual Basic for Applications" ;
+        ScriptingLanguageId = "4" | ScriptingLanguageId := "Visual Basic Script" ;
+        ScriptingLanguageId = "5" | ScriptingLanguageId := "JScript" ;
+        ScriptingLanguageId = "6" | ScriptingLanguageId := ".NET" ;
+        ScriptingLanguageId = "7" | ScriptingLanguageId := "Excel 4 Macro" ;
+        * }
