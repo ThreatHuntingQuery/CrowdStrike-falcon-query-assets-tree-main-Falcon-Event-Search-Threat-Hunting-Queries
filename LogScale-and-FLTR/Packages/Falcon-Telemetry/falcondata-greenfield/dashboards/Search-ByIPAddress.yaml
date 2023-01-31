@@ -46,7 +46,7 @@ widgets:
       | FirstLookup := FirstLookup*1000
       | LastLookup := formatTime(field=LastLookup, format="%Y/%m/%d %H:%M:%S")
       | FirstLookup := formatTime(field=FirstLookup, format="%Y/%m/%d %H:%M:%S")
-      | select([RemoteAddressIP4, NumberOfHosts, FirstLookup, LastLookup])
+      | table([RemoteAddressIP4, NumberOfHosts, FirstLookup, LastLookup], limit=1000)
     visualization: table-view
     start: 7d
     width: 6
@@ -71,7 +71,7 @@ widgets:
       | FirstLookup := FirstLookup*1000
       | LastLookup := formatTime(field=LastLookup, format="%Y/%m/%d %H:%M:%S")
       | FirstLookup := formatTime(field=FirstLookup, format="%Y/%m/%d %H:%M:%S")
-      | select([RemoteAddressIP4, ComputerName, FirstLookup, LastLookup, "Total Connections"])
+      | table([RemoteAddressIP4, ComputerName, FirstLookup, LastLookup, "Total Connections"], limit=1000)
     visualization: table-view
     start: 7d
     width: 6
@@ -85,7 +85,7 @@ widgets:
         #event_simpleName=ProcessRollup2
       | ImageFileName=*
       | aid=*
-      | join(max=10000, field=[TargetProcessId], key=ContextProcessId, include=[_count], mode=inner, query={
+      | join(max=10000, field=[TargetProcessId], key=ContextProcessId, include=[_count], limit=100000, mode=inner, query={
           #event_simpleName=NetworkConnectIP4
         | groupBy([RemoteAddressIP4], function=[
           { count(RemoteAddressIP4, distinct=true) | _count > 0 },
@@ -95,7 +95,7 @@ widgets:
       | groupby([ImageFileName], function=[sum(_count, as="Total IPs"), { tail(1) | selectLast(aid) }], limit=max)
       | "Total IPs" > 0
       | sort("Total IPs", order=descending, limit=100)
-      | select([ImageFileName, aid, "Total IPs"])
+      | table([ImageFileName, aid, "Total IPs"], limit=1000)
     visualization: table-view
     start: 7d
     width: 12

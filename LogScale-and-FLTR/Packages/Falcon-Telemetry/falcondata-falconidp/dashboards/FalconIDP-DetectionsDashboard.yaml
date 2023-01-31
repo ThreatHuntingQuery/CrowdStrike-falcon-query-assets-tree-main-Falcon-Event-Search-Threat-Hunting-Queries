@@ -101,7 +101,7 @@ widgets:
       // | Source:=rename(SourceEndpointHostName)
 
       // Display columns with all defined formatting
-      | select([Severity, Tactic, Technique, "Link"])
+      | table([Severity, Tactic, Technique, "Link"], limit=1000)
     visualization: table-view
     start: 7d
     width: 6
@@ -256,7 +256,7 @@ widgets:
       | Source:=rename(SourceEndpointHostName)
 
       // Display columns with all defined formatting
-      | select([Severity, DetectName, @timestamp, "Account Name", Source, "Link"])
+      | table([Severity, DetectName, @timestamp, "Account Name", Source, "Link"], limit=1000)
     visualization: table-view
     start: 7d
     width: 12

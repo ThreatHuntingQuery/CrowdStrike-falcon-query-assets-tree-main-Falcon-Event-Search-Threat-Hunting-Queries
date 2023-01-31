@@ -1,0 +1,4 @@
+$schema: https://schemas.humio.com/action/v0.4.0
+fileName: falcondata_aidmaster_a-f.csv
+name: Falcon aidmaster a-f Upload
+type: upload-file

@@ -66,7 +66,7 @@ widgets:
     height: 5
     queryString: |-
       #event_simpleName=PodInfo
-      | join({#event_simpleName=OsVersionInfo}, field=aid, include=AgentVersion)
+      | join({#event_simpleName=OsVersionInfo}, field=aid, include=AgentVersion, limit=100000)
       | groupBy(aid, function=selectLast([AgentVersion, PodName, PodNamespace, PodHostname]), limit=max)
     visualization: table-view
     start: 7d
@@ -79,7 +79,7 @@ widgets:
     height: 5
     queryString: |-
       #event_simpleName=PodInfo
-      | join({#event_simpleName=OsVersionInfo}, field=aid, include=OSVersionString)
+      | join({#event_simpleName=OsVersionInfo}, field=aid, include=OSVersionString, limit=100000)
       | groupBy(aid, function=selectLast(OSVersionString), limit=max)
       | OSVersionString = /^Linux\s(?<hostName>\S+)\s(?<kernelVersion>\S+)\s/i
       | kernelVersion=/(?<kernelBranch>\d+\.\d+)\./

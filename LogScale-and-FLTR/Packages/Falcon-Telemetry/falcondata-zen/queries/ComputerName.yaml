@@ -22,9 +22,12 @@ queryString: |-
   | case {
       // Identify any events that have an aid but not a ComputerName.
       // Neither of these overwrite the value if it already exists.
-      aid=* AND ComputerName!=*
+      aid=/^0-9/ AND ComputerName!=*
         // Grab the ComputerName from the aidmaster file.
-        | match(file="falcondata_aidmaster.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true);
-        // Assign the value NotMatched to anything else.
-      * | default(field=ComputerName, value=NotMatched);
+        | match(file="falcondata_aidmaster_0-9.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true) ;
+      aid=/^a-f/ AND ComputerName!=*
+        // Grab the ComputerName from the aidmaster file.
+        | match(file="falcondata_aidmaster_a-f.csv", field=aid, include=ComputerName, ignoreCase=true, strict=true) ;
+      // Assign the value NotMatched to anything else.
+      * | default(field=ComputerName, value=NotMatched) ;
     }
