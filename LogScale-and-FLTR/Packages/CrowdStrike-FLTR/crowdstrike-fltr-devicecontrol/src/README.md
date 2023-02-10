@@ -1,7 +1,3 @@
-
-
-This package is not a replacement for the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html). It is primarily used by the CrowdStrike SE team as learning examples. 
-
 ## CrowdStrike Falcon Device Control
 This package contains dashboards that highlight Falcon Device Control events. For more information on the CrowdStrike Device Control, please visit the following:
 
