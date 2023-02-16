@@ -1,3 +1,8 @@
+:bangbang :We've moved! :bangbang:
+
+The new site for LogScale Community Content can be found here:
+https://github.com/crowdstrike/logscale-community-content
+
 # Welcome
 
 Welcome to the LogScale space of the Falcon Query Assets repo, formerly known as Humio. Here we'll include useful queries, dashboards, tutorials, etc for LogScale. These are not meant as replacements for the [official documentation](https://library.humio.com) or the [LogScale Package Marketplace](https://library.humio.com/humio-server/packages-marketplace.html). The majority of the content has been developed by the CrowdStrike SE team. 
