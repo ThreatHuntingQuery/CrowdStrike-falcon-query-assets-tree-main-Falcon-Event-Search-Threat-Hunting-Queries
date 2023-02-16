@@ -1,4 +1,4 @@
-:bangbang :We've moved! :bangbang:
+:bangbang: We've moved! :bangbang:
 
 The new site for LogScale Community Content can be found here:
 https://github.com/crowdstrike/logscale-community-content
