@@ -1,7 +1,7 @@
 // Transform to convert SubStatus decimal to human-readable value.
 // Values defined here: https://docs.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4625
 | case {
-		SubStatus = "0"  		  | SubStatus := "Status OK." ;
+	SubStatus = "0"           | SubStatus := "Status OK." ;
         SubStatus = "3221225572"  | SubStatus := "User logon with misspelled or bad user account" ;
         SubStatus = "3221225578"  | SubStatus := "User logon with misspelled or bad password" ;
         SubStatus = "3221225581"  | SubStatus := "The cause is either a bad username or authentication information" ;
